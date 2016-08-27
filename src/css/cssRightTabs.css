@@ -1,0 +1,35 @@
+#rightTabs ul {
+	position: absolute;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 5%;
+	margin: 0px;
+	padding: 0px;
+}
+
+#rightTabs ul li {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+	float: left;
+}
+
+#theAttr,#theEffect,#theEvent {
+	position: absolute;
+	top: 5%;
+	left: 0%;
+	width: 100%;
+	height: 95%;
+	background: #ff0000;
+	margin: 0px;
+	padding: 0px 0px 0px 2px;
+}
+
+#theEffect {
+	background: #00ceff;
+}
+
+#theEvent {
+	background: #9dff00;
+}

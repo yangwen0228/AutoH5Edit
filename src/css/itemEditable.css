@@ -1,0 +1,72 @@
+
+.resizepoint {
+	position: absolute;
+	width: 6px;
+	height: 6px;
+	background: #FFF;
+	border: 1px solid #333;
+}
+
+.resizepoint.tl {
+ top: -8px;
+ left: -8px;
+ cursor: nw-resize;
+}
+.resizepoint.tc {
+ top: -8px;
+ left: 50%;
+ margin-left: -4px;
+ cursor: n-resize;
+}
+.resizepoint.tr {
+ top: -8px;
+ right: -8px;
+ cursor: ne-resize;
+}
+
+.resizepoint.ml {
+ top: 50%;
+ margin-top: -4px;
+ left: -8px;
+ cursor: w-resize;
+}
+.resizepoint.mr {
+ top: 50%;
+ margin-top: -4px;
+ right: -8px;
+ cursor: e-resize;
+}
+
+.resizepoint.bl {
+ bottom: -8px;
+ left: -8px;
+ cursor: sw-resize;
+}
+.resizepoint.bc {
+ bottom: -8px;
+ left: 50%;
+ margin-left: -4px;
+ cursor: s-resize;
+}
+.resizepoint.br {
+ bottom: -8px;
+ right: -8px;
+ cursor: se-resize;
+}
+
+
+
+.rotatePoint {
+	position: absolute;
+	top: -60px;
+	left: 50%;
+	width: 8px;
+	height: 8px;
+	margin-left: -5px;
+	background: #00ff00;
+	border: 1px solid #333;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	cursor: url("../img/rotate.png"),auto;
+}

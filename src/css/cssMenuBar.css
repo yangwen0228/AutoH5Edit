@@ -1,0 +1,38 @@
+#leftMenu {
+	position: absolute;
+	top: 0%;
+	left: 0%;
+	width: 25%;
+	height: 100%;
+	background: #00ff00;
+}
+
+#pageMenu {
+	position: absolute;
+	top: 0%;
+	left: 35%;
+	width: 45%;
+	height: 100%;
+	background: #00ff00;
+}
+
+#rightMenu {
+	position: absolute;
+	top: 0%;
+	right: 0%;
+	width: 15%;
+	height: 100%;
+	background: #00ff00;
+}
+
+.btMenu {
+	height: 100%;
+	margin: 0px 0px 0px 0px;
+}
+
+#rightMenu .btMenu {
+	height: 100%;
+	float: right;
+}
+
+

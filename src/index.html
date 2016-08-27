@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>AutoWebpage</title>
+	<link rel="stylesheet" href="lib/swiper/css/swiper-3.3.1.min.css">
+	<link rel="stylesheet" href="lib/swiper/css/animate.min.css">
+	<link rel="stylesheet" href="lib/jqueryui/jquery-ui.min.css">
+	<link rel="stylesheet" href="lib/jqueryui/jquery-ui.structure.min.css">
+	<link rel="stylesheet" href="lib/jqueryui/jquery-ui.theme.min.css">
+	<link rel="stylesheet" href="css/cssMain.css">
+	<link rel="stylesheet" href="css/cssMenuBar.css">
+	<link rel="stylesheet" href="css/csseEditArea.css">
+	<link rel="stylesheet" href="css/cssLeftTab.css">
+	<link rel="stylesheet" href="css/cssRightTabs.css">
+	<link rel="stylesheet" href="css/itemEditable.css">
+	<script type="text/javascript" src="lib/swiper/js/swiper-3.3.1.min.js"></script>
+	<script type="text/javascript" src="lib/swiper/js/swiper.animate1.0.2.min.js"></script>
+	<script type="text/javascript" src="lib/jquery/jquery-2.2.3.min.js"></script>
+	<script type="text/javascript" src="lib/jqueryui/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="js/startMain.js"></script>
+	<script type="text/javascript" src="js/startMain/uiFunction.js"></script>
+	<script type="text/javascript" src="js/startMain/flowAreaLT.js"></script>
+	<script type="text/javascript" src="js/startMain/tempAreaLT.js"></script>
+	<script type="text/javascript" src="js/startMain/ftArea/flowPage.js"></script>
+	<script type="text/javascript" src="js/startMain/ftArea/tempSlide.js"></script>
+	<script type="text/javascript" src="js/startMain/ftArea/ftElems/imgElem.js"></script>
+	<script type="text/javascript" src="js/startMain/ftArea/ftElems/textElem.js"></script>
+</head>
+
+<body>
+	<div class="mainPage" id="mainPage">
+		<div class="menuBar" id="menuBar">
+			<div class="leftMenu" id="leftMenu">
+				<button class="btMenu">新建</button>
+				<button class="btMenu">打开</button>
+				<button class="btMenu">保存</button>
+			</div>
+			<div class="pageMenu" id="pageMenu">
+				<button class="btMenu" id="NewPic">图片</button>
+				<button class="btMenu">文字</button>
+				<button class="btMenu">音乐</button>
+				<button class="btMenu">特效</button>
+				<button class="btMenu">表单</button>
+			</div>
+			<div class="rightMenu" id="rightMenu">
+				<button class="btMenu">回收站</button>
+			</div>
+		</div>
+		<div class="leftTabs" id="leftTabs">
+			<ul>
+				<li><a href="#templateTabs">模板栏目</a></li>
+				<li><a href="#flowArea">缩略概览</a></li>
+			</ul>
+			<div class="templateTabs" id="templateTabs">
+				<ul>
+					<li><a href="#shareTemplate">共享模板</a></li>
+					<li><a href="#localTemplate">本地模板</a></li>
+				</ul>
+				<div class="shareTemplate" id="shareTemplate">
+					
+				</div>
+				<div class="localTemplate" id="localTemplate">
+
+				</div>
+			</div>
+			<div class="flowArea" id="flowArea">
+				<div class="flowHead" id="flowHead">
+				</div>
+				<div class="flowContent" id="flowContent">
+<!--
+<div class="flowPage">
+	<div>
+		<img src="img/02-01.jpg" alt="" class="">
+	</div>
+	<div>
+		<p class="editTxt">不仅仅设计</p>
+	</div>
+	<div>
+		<p class="editTxt">仅仅设计</p>
+	</div>
+</div>
+<div class="flowPage">
+	<div>
+	</div>
+	<div>
+		<p class="editTxt">不仅仅设计</p>
+	</div>
+	<div>
+		<p class="editTxt">仅仅设计</p>
+	</div>
+</div>
+<div class="flowPage">
+</div>
+-->
+				</div>
+				<div class="flowFoot" id="flowFoot">
+					<button class="addPage" id="addPage">添加一页</button>
+				</div>
+			</div>
+		</div>
+		<div class="centerArea" id="centerArea">
+			<div class="editArea" id="editArea">
+				<div class="editTopBar" id="editTopBar">
+					<button class="btEditTop">
+						<img src="img/hylinkNO.png" alt="">
+					</button>
+					<button class="btEditTop">
+						<img src="img/down.png" alt="">
+					</button>
+					<button class="btEditTop">
+						<img src="img/top.png" alt="">
+					</button>
+					<button class="btEditTop">
+						<img src="img/redo.png" alt="">
+					</button>
+					<button class="btEditTop">
+						<img src="img/undo.png" alt="">
+					</button>
+					<button class="btEditTop">
+						<img src="img/lock.png" alt="">
+					</button>
+					<button class="btEditTop">
+						<img src="img/lock.png" alt="">
+					</button>
+				</div>
+				<div class="editPage" id="editPage">
+					<div class="editImg" id="img_1" draggable="false">
+<!--						<img src="E:/FrontSide/WorkNow/0 test/22/02-01.jpg" alt="">-->
+					</div>
+				</div>
+				<div class="editLeftBar" id="editLeftBar">
+					<button class="btEditLeft"><span>隐藏组</span></button>
+					<button class="btEditLeft"><span>锁定组</span></button>
+					<button class="btEditLeft"><span>关联界面</span></button>
+					<button class="btEditLeft"><span>调试界面</span></button>
+					<button class="btEditLeft"><span>界面属性</span></button>
+					<button class="btEditLeft"><span>文字文字</span></button>
+				</div>
+			</div>
+		</div>
+		<div class="rightTabs" id="rightTabs">
+			<ul>
+				<li><a href="#theAttr">属性</a></li>
+				<li><a href="#theEffect">效果</a></li>
+				<li><a href="#theEvent">事件</a></li>
+			</ul>
+			<div class="theAttr" id="theAttr">111111111
+
+			</div>
+			<div class="theEffect" id="theEffect">2222222222
+
+			</div>
+			<div class="theEvent" id="theEvent">3333333333
+
+			</div>
+		</div>
+		<div class="statusBar" id="statusBar">
+			
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		AWP.StartMain()
+	</script>
+</body>
+
+</html>
