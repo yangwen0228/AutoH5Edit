@@ -72,6 +72,10 @@ AWP.FlowArea = function() {
 		
 		
 	}
+	pubObj.deletePage = function(pageObj) {
+		
+		
+	}
 	pubObj.beforePage = function(pageObj) {
 		
 		

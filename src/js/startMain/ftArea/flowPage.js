@@ -32,6 +32,11 @@ AWP.FTArea.FlowPage = function(pageId, pagePositon) {
 		
 	}
 	
+	pubObj.syncBack = function() {
+		
+		
+	}
+	
 	pubObj.addImg = function() {
 		
 		
