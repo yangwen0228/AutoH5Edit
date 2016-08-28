@@ -8,11 +8,9 @@ var AWP = AWP || {}
 AWP.StartMain = function() {
 	
 	let myDispFunc = new AWP.DisplayFunc()
-	myDispFunc.dispJqueryUI()
 	
 	let myFlowArea = new AWP.FlowArea()
-	myFlowArea.bindEvent()
-	myFlowArea.displayHeadContent()
+
 	
 	
 	

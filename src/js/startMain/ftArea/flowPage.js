@@ -8,28 +8,23 @@ AWP.FTArea.FlowPage = function(pageId, pagePositon) {
 	
 	let pubObj = this
 	let PriObj = {}
-	pubObj.Position = pagePositon, pubObj.PageId = pageId;
+	pubObj.Position = pagePositon, pubObj.PageId = pageId
+	PriObj.ImgObjArray;
 	
 	(function() {
-		// if (brotherId === "end") {
-			// let pageText = '\n<div class="flowPage" id="' + pubObj.PageId +'">\n</div>\n'
-			// $("#flowContent").append(pageText)
-		// } else {
-			// let pageText = '\n<div class="flowPage" id="' + pubObj.PageId +'">\n</div>\n'
-			// $("#"+brotherId).after(pageText)
-		// }
+		
 	}())
 	
-	PriObj.BindEvent = function() {
-		
-		
-	}
 	pubObj.dispInEditPage = function() {
 		
 		let htmlText = $("#"+pubObj.PageId).html()
-		$("#editPage").empty().html(htmlText)
+		$("#EditPage").empty().html(htmlText)
 		
+		$("#NewPic").off("click")
+		$("#NewPic").on("click", PriObj.AddImg)
 		
+		$("#NewText").off("click")
+		$("#NewText").on("click", PriObj.AddText)
 	}
 	
 	pubObj.syncBack = function() {
@@ -37,17 +32,21 @@ AWP.FTArea.FlowPage = function(pageId, pagePositon) {
 		
 	}
 	
-	pubObj.addImg = function() {
+	PriObj.AddImg = function() {
 		
-		
+console.log(pubObj.PageId)
 	}
 	
-	pubObj.addText = function() {
+	PriObj.AddText = function() {
 		
-		
+console.log(pubObj.PageId)
 	}
 	
 	pubObj.test = function() {
 		
-	}
+	};
+	
+	(function() {
+		
+	}())
 }

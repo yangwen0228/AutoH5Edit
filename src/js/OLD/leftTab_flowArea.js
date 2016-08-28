@@ -9,7 +9,7 @@ let LTFlowArea = function() {
 	
 	selfObj.displayHeadContent = function() {
 		
-		let pageNumber = $("#flowContent").children("div").length
+		let pageNumber = $("#FlowContent").children("div").length
 		let dispText = "第" + GSelePage + "页" + "/共" + pageNumber + "页"
 		$("#flowHead").text(dispText)
 	}

@@ -7,9 +7,9 @@
 var AWP = AWP || {}
 AWP.DisplayFunc = function() {
 	
-	let selfObj = {}
+	let PriObj = {}
 	
-	selfObj.dispJqueryUI = function() {
+	PriObj.dispJqueryUI = function() {
 		
 		$("#leftTabs").tabs()
 		$("#templateTabs").tabs()
@@ -20,7 +20,10 @@ AWP.DisplayFunc = function() {
 		$(".btEditLeft").button()
 		$(".addPage").button()
 // console.log("1234")
-	}
+	};
 	
-	return selfObj
+	(function() {
+		PriObj.dispJqueryUI()
+	}())
+	
 }
