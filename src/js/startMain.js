@@ -2,8 +2,7 @@
 	UI function
 	
 */
-// let AWP 
-// if (!AWP) { AWP = {} }
+
 var AWP = AWP || {}
 AWP.StartMain = function() {
 	

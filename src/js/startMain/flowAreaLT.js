@@ -9,50 +9,20 @@ AWP.FlowArea = function() {
 	let pubObj = this
 	let PriObj = {}
 	
-	PriObj.SelePage = 0, PriObj.SelePageId = "", PriObj.PageIdArray = [], PriObj.PageObjArray= []
+	pubObj.SelePageId = "",pubObj.SelePagePos = 0, pubObj.PageIdArray = [] 
+	PriObj.PageObjArray= []
 	
-	PriObj.DisplayHeadContent = function() {
+	pubObj.displayHeadContent = function() {
 		
-		let dispText = "第" + PriObj.SelePage + "页" + "/共" + PriObj.PageObjArray.length + "页"
+		let dispText = "第" + pubObj.SelePagePos + "页" + "/共" + pubObj.PageIdArray.length + "页"
 		$("#flowHead").text(dispText)
 	}
 	
-	PriObj.BindEvent = function(pageId, pageObj) {
-		$("#"+pageId).on("click", function() {
-			
-			if (PriObj.SelePageId != "") {
-				$("#"+PriObj.SelePageId).css("outline", "#00ff00 none thick")
-			}
-			PriObj.SelePageId = pageId
-			
-			$(this).css("outline", "#00ff00 solid thick")
-			PriObj.SelePage = pageObj.Position
-			PriObj.DisplayHeadContent()
-			
-			pageObj.dispInEditPage()
-		})
-	}
 	PriObj.AddPage = function() {
 		
-		let pageId = "page_1_1"
-		let pageArray = new Array()
-		while (PriObj.PageIdArray.indexOf(pageId) !== -1 ) {
-			pageArray = pageId.split("_")
-			pageArray[2] ++
-			pageId = pageArray.join("_")
-		}
+		let pageObj = new AWP.FTArea.FlowPage(pubObj, "end")
 		
-		let pagePositon = PriObj.PageIdArray.length + 1
-		let pageObj = new AWP.FTArea.FlowPage(pageId, pagePositon)
-		
-		let pageText = '\n<div class="flowPage" id="' + pageId +'">\n</div>\n'
-		$("#FlowContent").append(pageText)
-		
-		PriObj.PageIdArray.push(pageId)
 		PriObj.PageObjArray.push(pageObj)
-		PriObj.BindEvent(pageId ,pageObj)
-		
-		PriObj.DisplayHeadContent()
 	}
 	
 	pubObj.copyPage = function(pageObj) {
@@ -82,7 +52,7 @@ AWP.FlowArea = function() {
 	
 	(function() {
 		$("#AddPage").on("click", PriObj.AddPage)
-		PriObj.DisplayHeadContent()
+		pubObj.displayHeadContent()
 	}())
 }
 

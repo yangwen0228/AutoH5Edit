@@ -9,7 +9,7 @@ AWP.DisplayFunc = function() {
 	
 	let PriObj = {}
 	
-	PriObj.dispJqueryUI = function() {
+	PriObj.DispJqueryUI = function() {
 		
 		$("#leftTabs").tabs()
 		$("#templateTabs").tabs()
@@ -19,11 +19,30 @@ AWP.DisplayFunc = function() {
 		$(".btEditTop").button()
 		$(".btEditLeft").button()
 		$(".addPage").button()
-// console.log("1234")
+		
+		$("#NewPicDL").dialog({
+			buttons: [{
+				text: "确定",
+				click: function() {
+					$( this ).dialog( "close" )
+				}
+			}, {
+				text: "应用",
+				click: function() {
+					$( this ).dialog( "close" )
+				}
+			}, {
+				text: "关闭",
+				click: function() {
+					$( this ).dialog( "close" )
+				}
+			}]
+		})
+		
 	};
 	
 	(function() {
-		PriObj.dispJqueryUI()
+		PriObj.DispJqueryUI()
 	}())
 	
 }
