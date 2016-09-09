@@ -10,15 +10,15 @@
 
 // let editPage = new EAEditPage()
 
-let editPage = new function(){
+(function(imgId){
 	
-	let selfObj = this
+	// let selfObj = this
 	
-	selfObj.setImgEditable = function(imgId){
+	// selfObj.setImgEditable = function(imgId){
 		
-		if( GSeleItem != -1 ){
+		// if( GSeleItem != -1 ){
 			
-		}
+		// }
 		
 		GSeleItem = $("#"+imgId)
 		
@@ -114,6 +114,9 @@ let editPage = new function(){
 		})
 		
 		
+		
+		
+		
 		let rotatePoint = '<span class="rotatePoint"></span>'
 		GSeleItem.append(rotatePoint)
 		let rtElem = GSeleItem.children('.rotatePoint')
@@ -148,9 +151,9 @@ let editPage = new function(){
 		}).on('mouseup', function(){
 			rotateCt = false 
 		})
-	}
+	// }
 	
-}
+}("img_1"))
 
 
 

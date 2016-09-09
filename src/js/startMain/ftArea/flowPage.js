@@ -9,7 +9,7 @@ AWP.FTArea.FlowPage = function(parentObj, brotherObj) {
 	let pubObj = this
 	let PriObj = {}
 
-	pubObj.SeleElem = "0", pubObj.ImgIdArray = [], pubObj.TextIdArray = [], pubObj.Position = 0, pubObj.PageId = "0"
+	pubObj.SeleElemId = "", pubObj.ImgIdArray = [], pubObj.TextIdArray = [], pubObj.Position = 0, pubObj.PageId = "0"
 	PriObj.ElemObjArray = [];
 	
 	(function() {
@@ -53,6 +53,9 @@ AWP.FTArea.FlowPage = function(parentObj, brotherObj) {
 		
 		$("#NewText").off("click")
 		$("#NewText").on("click", PriObj.AddText)
+		
+		$("#NewAnim").off("click")
+		$("#NewAnim").on("click", PriObj.AddAnim)
 	}
 	
 	pubObj.syncBack = function() {
@@ -61,10 +64,37 @@ AWP.FTArea.FlowPage = function(parentObj, brotherObj) {
 	}
 	
 	PriObj.AddImg = function() {
-// console.log(pubObj.PageId)
-		let imgObj = new AWP.FTArea.FTElems.ImgElem(pubObj)
 		
-		PriObj.ElemObjArray.push(imgObj)
+		dialog.showOpenDialog({
+			title: "Select A File",
+			properties: ["openFile", "multiSelections"],
+			filters: [{ name: "Image File", extensions: ["png", "jpg"]}]
+		}, function(imgPathArray) {
+			for(let imgPath of imgPathArray) {
+// console.log(fileArray)
+				let imgObj = new AWP.FTArea.FTElems.ImgElem(pubObj, imgPath)
+				PriObj.ElemObjArray.push(imgObj)
+// console.log(PriObj.ElemObjArray)
+			}
+		})
+	}
+	
+	PriObj.AddAnim = function() {
+// console.log(pubObj.PageId)
+		$("#NewPicDL").dialog( "option", "buttons",[{
+			text: "确定",
+			click: function() {
+				
+				let imgObj = new AWP.FTArea.FTElems.ImgElem(pubObj)
+				PriObj.ElemObjArray.push(imgObj)
+				$( this ).dialog( "close" )
+			}
+		}, {
+			text: "关闭",
+			click: function() {
+				$( this ).dialog( "close" )
+			}
+		}]).dialog("open")
 	}
 	
 	PriObj.AddText = function() {

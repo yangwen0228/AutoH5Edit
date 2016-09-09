@@ -2,6 +2,10 @@
 	UI function
 	
 */
+const fs = require("fs")
+const path = require("path")
+const remote = require('electron').remote
+const dialog = remote.dialog
 
 var AWP = AWP || {}
 AWP.StartMain = function() {

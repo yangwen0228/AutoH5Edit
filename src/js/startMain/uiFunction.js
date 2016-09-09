@@ -21,22 +21,12 @@ AWP.DisplayFunc = function() {
 		$(".addPage").button()
 		
 		$("#NewPicDL").dialog({
-			buttons: [{
-				text: "确定",
-				click: function() {
-					$( this ).dialog( "close" )
-				}
-			}, {
-				text: "应用",
-				click: function() {
-					$( this ).dialog( "close" )
-				}
-			}, {
-				text: "关闭",
-				click: function() {
-					$( this ).dialog( "close" )
-				}
-			}]
+			title: "导入图片",
+			modal: true,
+			autoOpen: false,
+			position: { my: "top", at: "top", of: window },
+			width: 900,
+			height: 600
 		})
 		
 	};
