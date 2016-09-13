@@ -9,7 +9,7 @@ AWP.FTArea.FlowPage = function(parentObj, brotherObj) {
 	let pubObj = this
 	let PriObj = {}
 
-	pubObj.SeleElemId = "", pubObj.ImgIdArray = [], pubObj.TextIdArray = [], pubObj.Position = 0, pubObj.PageId = "0"
+	pubObj.SeleElemId = 0, pubObj.ImgIdArray = [], pubObj.TextIdArray = [], pubObj.Position = 0, pubObj.PageId = "0"
 	PriObj.ElemObjArray = [];
 	
 	(function() {
@@ -43,6 +43,13 @@ AWP.FTArea.FlowPage = function(parentObj, brotherObj) {
 		}
 	}())
 	
+	pubObj.syncBack = function() {
+		
+		if(parentObj.SelePageId == 0) { return }
+		
+		$("#EditPage").children().clone(true).appendTo("#"+parentObj.SelePageId)
+	}
+	
 	PriObj.DispInEditPage = function() {
 		
 		let htmlText = $("#"+pubObj.PageId).html()
@@ -58,11 +65,6 @@ AWP.FTArea.FlowPage = function(parentObj, brotherObj) {
 		$("#NewAnim").on("click", PriObj.AddAnim)
 	}
 	
-	pubObj.syncBack = function() {
-		
-		
-	}
-	
 	PriObj.AddImg = function() {
 		
 		dialog.showOpenDialog({
@@ -70,6 +72,9 @@ AWP.FTArea.FlowPage = function(parentObj, brotherObj) {
 			properties: ["openFile", "multiSelections"],
 			filters: [{ name: "Image File", extensions: ["png", "jpg"]}]
 		}, function(imgPathArray) {
+			
+			if(!imgPathArray) { return }
+			
 			for(let imgPath of imgPathArray) {
 // console.log(fileArray)
 				let imgObj = new AWP.FTArea.FTElems.ImgElem(pubObj, imgPath)
@@ -114,13 +119,30 @@ AWP.FTArea.FlowPage = function(parentObj, brotherObj) {
 			if (parentObj.SelePageId != "") {
 				$("#"+parentObj.SelePageId).css("outline", "#00ff00 none thick")
 			}
-			parentObj.SelePageId = pubObj.PageId
 // console.log(pubObj.PageId)
 			$(this).css("outline", "#00ff00 solid thick")
 			parentObj.SelePagePos = pubObj.Position
 			parentObj.displayHeadContent()
 			
+			pubObj.syncBack()
 			PriObj.DispInEditPage()
+			
+			parentObj.SelePageId = pubObj.PageId
 		})
 	}())
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

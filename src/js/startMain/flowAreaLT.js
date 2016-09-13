@@ -9,7 +9,7 @@ AWP.FlowArea = function() {
 	let pubObj = this
 	let PriObj = {}
 	
-	pubObj.SelePageId = "",pubObj.SelePagePos = 0, pubObj.PageIdArray = [] 
+	pubObj.SelePageId = 0,pubObj.SelePagePos = 0, pubObj.PageIdArray = [] 
 	PriObj.PageObjArray= []
 	
 	pubObj.displayHeadContent = function() {

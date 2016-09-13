@@ -28,20 +28,15 @@ AWP.FTArea.FTElems.ImgElem = function(parentObj, imgPath) {
 		parentObj.ImgIdArray.push(imgId)
 	}())
 	
-	PriObj.BindImgEditable = function() {
-		
-		// parentObj.SeleElemId
-		
-		// let GSeleItem = $("#"+imgId)
-		
-		GSeleItem.css("cursor", "move")
-		GSeleItem.attr("draggable", "false")
+	PriObj.BindImgDragable = function(jqSeleImg) {
+		jqSeleImg.css("cursor", "move")
+		jqSeleImg.attr("draggable", "false")
 		let eventDX, eventDY, startDX, startDY, dragCt
-		GSeleItem.on("mousedown", function(event){
+		jqSeleImg.on("mousedown", function(event){
 			eventDX = event.clientX
 			eventDY = event.clientY
-			startDX = parseInt(GSeleItem.css("left"))
-			startDY = parseInt(GSeleItem.css("top"))
+			startDX = parseInt(jqSeleImg.css("left"))
+			startDY = parseInt(jqSeleImg.css("top"))
 			dragCt = true 
 			if(this.setCapture){this.setCapture()}
 		}).on("mouseup", function(){
@@ -53,28 +48,28 @@ AWP.FTArea.FTElems.ImgElem = function(parentObj, imgPath) {
 			if(dragCt){
 				let lPos = startDX + (event.clientX - eventDX)
 				let tPos = startDY + (event.clientY - eventDY)
-				GSeleItem.css({left : lPos, top : tPos,})
+				jqSeleImg.css({left : lPos, top : tPos,})
 			}
 		}).on("mouseup", function(){
 			dragCt = false 
 		})
-		
-		
+	}
+	PriObj.BindImgResizeable = function(jqSeleImg) {
 		let pointsClass = ['tl', 'tc', 'tr', 'mr', 'br', 'bc', 'bl', 'ml'];
 		let resizePoints = '';
 		for(let i=0; i<pointsClass.length; i++){
 			resizePoints += '<span class="resizepoint '+pointsClass[i]+'"></span>';
 		}
-		GSeleItem.append(resizePoints)
-		let dpElements = GSeleItem.find('.resizepoint')
+		jqSeleImg.append(resizePoints)
+		let dpElements = jqSeleImg.find('.resizepoint')
 		let currentL, currentT, currentW, currentH, eventRX, eventRY, resizeCt
 		dpElements.on('mousedown', function(event){
 			eventRX = event.clientX
 			eventRY = event.clientY
-			currentW = GSeleItem.width()
-			currentH = GSeleItem.height()
-			currentL = GSeleItem.position().left 
-			currentT = GSeleItem.position().top 
+			currentW = jqSeleImg.width()
+			currentH = jqSeleImg.height()
+			currentL = jqSeleImg.position().left 
+			currentT = jqSeleImg.position().top 
 			resizeCt = $(this)[0].className.split(' ')[1];
 			if(this.setCapture){this.setCapture();}
 		}).on('mouseup', function(event){
@@ -115,7 +110,7 @@ AWP.FTArea.FTElems.ImgElem = function(parentObj, imgPath) {
 				break 
 			}
 
-			GSeleItem.css({
+			jqSeleImg.css({
 				width : w + 'px', 
 				height : h + 'px',
 				left : l + 'px',
@@ -125,104 +120,49 @@ AWP.FTArea.FTElems.ImgElem = function(parentObj, imgPath) {
 			resizeCt = false 
 		})
 	}
-	
-	PriObj.UnBindImgEditable = function() {
+	PriObj.BindImgControl = function(jqSeleImg) {
 		
-		let GSeleItem = $("#"+imgId)
-		
-		GSeleItem.css("cursor", "move")
-		GSeleItem.attr("draggable", "false")
-		let eventDX, eventDY, startDX, startDY, dragCt
-		GSeleItem.on("mousedown", function(event){
-			eventDX = event.clientX
-			eventDY = event.clientY
-			startDX = parseInt(GSeleItem.css("left"))
-			startDY = parseInt(GSeleItem.css("top"))
-			dragCt = true 
-			if(this.setCapture){this.setCapture()}
-		}).on("mouseup", function(){
-			dragCt = false 
-			if(this.releaseCapture){this.releaseCapture()}
+		$("#BTTop").on("click", function() {
+			jqSeleImg.next().after(jqSeleImg)
 		})
 		
-		$(document).on("mousemove", function(event){
-			if(dragCt){
-				let lPos = startDX + (event.clientX - eventDX)
-				let tPos = startDY + (event.clientY - eventDY)
-				GSeleItem.css({left : lPos, top : tPos,})
-			}
-		}).on("mouseup", function(){
-			dragCt = false 
+		$("#BTDown").on("click", function() {
+			jqSeleImg.prev().before(jqSeleImg)
 		})
 		
+		$("#BTDel").on("click", function() {
+			jqSeleImg.remove()
+			parentObj.SeleElemId == 0
+		})
+	}
+	PriObj.BindImgEditable = function() {
 		
-		let pointsClass = ['tl', 'tc', 'tr', 'mr', 'br', 'bc', 'bl', 'ml'];
-		let resizePoints = '';
-		for(let i=0; i<pointsClass.length; i++){
-			resizePoints += '<span class="resizepoint '+pointsClass[i]+'"></span>';
+		if(parentObj.SeleElemId != 0) {
+			$("#"+parentObj.SeleElemId).off("mouseup mousedown mousemove")
+			$("#"+parentObj.SeleElemId).children("span").remove()
+			$("#BTTop").off("click")
+			$("#BTDown").off("click")
+			$("#BTDel").off("click")
+// console.log("OKOKOK")
 		}
-		GSeleItem.append(resizePoints)
-		let dpElements = GSeleItem.find('.resizepoint')
-		let currentL, currentT, currentW, currentH, eventRX, eventRY, resizeCt
-		dpElements.on('mousedown', function(event){
-			eventRX = event.clientX
-			eventRY = event.clientY
-			currentW = GSeleItem.width()
-			currentH = GSeleItem.height()
-			currentL = GSeleItem.position().left 
-			currentT = GSeleItem.position().top 
-			resizeCt = $(this)[0].className.split(' ')[1];
-			if(this.setCapture){this.setCapture();}
-		}).on('mouseup', function(event){
-			resizeCt = false 
-			if(this.releaseCapture){this.releaseCapture();}
-		})
 		
-		$(document).on('mousemove', function(event){
-			if(!resizeCt)return 
-			let w = currentW, h = currentH, l = currentL, t = currentT, 
-				offsetX = event.clientX - eventRX, offsetY = event.clientY - eventRY 
-			switch(resizeCt){
-				case false : 
-				break 
-				case 'tl' : 
-				w = currentW - offsetX; h = currentH - offsetY; l = currentL + offsetX; t = currentT + offsetY 
-				break 
-				case 'tc' : 
-				h = currentH - offsetY; t = currentT + offsetY 
-				break 
-				case 'tr' : 
-				w = currentW + offsetX; h = currentH - offsetY; t = currentT + offsetY 
-				break 
-				case 'mr' : 
-				w = currentW + offsetX 
-				break 
-				case 'br' : 
-				w = currentW + offsetX; h = currentH + offsetY 
-				break 
-				case 'bc' : 
-				h = currentH + offsetY 
-				break 
-				case 'bl' : 
-				w = currentW - offsetX; h = currentH + offsetY; l = currentL + offsetX 
-				break 
-				case 'ml' : 
-				w = currentW - offsetX; l = currentL + offsetX 
-				break 
-			}
-
-			GSeleItem.css({
-				width : w + 'px', 
-				height : h + 'px',
-				left : l + 'px',
-				top : t + 'px'
-			})
-		}).on('mouseup', function(){
-			resizeCt = false 
-		})
+		let jqSeleImg = $("#"+pubObj.ImgId)
+		
+		PriObj.BindImgDragable(jqSeleImg)
+		PriObj.BindImgResizeable(jqSeleImg)
+		PriObj.BindImgControl(jqSeleImg)
 	}
 	
 	pubObj.test = function() {
 		
-	}
+	};
+	
+	(function() {
+		$("#"+pubObj.ImgId).on("click", function() {
+// console.log("OKOKOK")
+			PriObj.BindImgEditable()
+			
+			parentObj.SeleElemId = pubObj.ImgId
+		})
+	}())
 }
