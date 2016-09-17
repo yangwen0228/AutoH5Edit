@@ -15,21 +15,131 @@
 	float: left;
 }
 
-#theAttr,#theEffect,#theEvent {
+#TheAttr,#TheEffect,#TheEvent,#ThePage {
 	position: absolute;
 	top: 5%;
 	left: 0%;
 	width: 100%;
 	height: 95%;
-	background: #ff0000;
+	background: #def0f0;
 	margin: 0px;
 	padding: 0px 0px 0px 2px;
 }
 
-#theEffect {
+#TheEffect {
 	background: #00ceff;
 }
 
-#theEvent {
+#TheEvent {
 	background: #9dff00;
 }
+
+
+#ThePage {
+	background: #0089ff;
+}
+
+table {
+	position: absolute;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+/*	height: 50%;*/
+}
+
+table tr th {
+	position: relative;
+	padding: 0.75em 0em 0em 0em;
+	background: #00ff00;
+}
+
+table tr>td {
+	position: a;
+	top: 0%;
+	left: 0%;
+	width: 28%;
+	height: 100%;
+	display: inline-flex;
+	justify-content: flex-end;
+	align-items: center;
+	padding: 0.15em 0.25em;
+}
+
+.seleTDLR {
+	position: relative;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	margin: 0em;
+	padding: 0.2em;
+	direction: rtl;
+}
+
+.pixelInput {
+	position: relative;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	margin: 0em;
+	padding: 0.25em;
+}
+
+.percentInput {
+	position: relative;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	margin: 0em;
+	padding: 0.25em;
+}
+
+.colorInput {
+	position: relative;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 80%;
+	margin: 0.25em;
+	padding: 0em;
+}
+
+.twoCol {
+/*	background: #ff0000;*/
+	position: relative;
+	width: 60%;
+}
+
+.threeCol {
+	background: #00ffd8;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	padding: 10em 0px;
+}
+
+.otherText {
+	position: absolute;
+	top: 1%;
+	left: 1%;
+	width: 96%;
+	height: 96%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

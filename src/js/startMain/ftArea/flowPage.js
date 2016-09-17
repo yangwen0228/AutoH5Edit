@@ -9,51 +9,57 @@ AWP.FTArea.FlowPage = function(parentObj, brotherObj) {
 	let pubObj = this
 	let PriObj = {}
 
-	pubObj.SeleElemId = 0, pubObj.ImgIdArray = [], pubObj.TextIdArray = [], pubObj.Position = 0, pubObj.PageId = "0"
-	PriObj.ElemObjArray = [];
+	pubObj.SeleElemId = 0, pubObj.ElemIdArray = [], pubObj.Position = 0, pubObj.PageFlowId = "0",
+	pubObj.PageEditId = "0", pubObj.ElemObjArray = [];
 	
 	(function() {
-		let pageId = "page_1_1"
-		let pageArray = new Array()
-		while (parentObj.PageIdArray.indexOf(pageId) !== -1 ) {
-			pageArray = pageId.split("_")
-			pageArray[2] ++
-			pageId = pageArray.join("_")
+		
+		let pageArray
+		
+		let pageFlowId = "page_flow_1_1"
+		pageArray = new Array()
+		while (parentObj.PageFlowIdArray.indexOf(pageFlowId) !== -1 ) {
+			pageArray = pageFlowId.split("_")
+			pageArray[3] ++
+			pageFlowId = pageArray.join("_")
 		}
 		
-		let pageText = '\n<div class="flowPage" id="' + pageId +'">\n</div>\n'
+		let pageEditId = "page_eidt_1_1"
+		pageArray = new Array()
+		while (parentObj.PageEditIdArray.indexOf(pageEditId) !== -1 ) {
+			pageArray = pageEditId.split("_")
+			pageArray[3] ++
+			pageEditId = pageArray.join("_")
+		}
+		let pageFlowText = '\n<div class="flowPage" id="' + pageFlowId +'">\n</div>\n'
+		let pageEditText = '\n<div class="editPage" id="' + pageEditId +'">\n</div>\n'
 		if (brotherObj == "end") {
-			$("#FlowContent").append(pageText)
+			$("#FlowContent").append(pageFlowText)
+			$("#EditArea").append(pageEditText)
 			
-			parentObj.PageIdArray.push(pageId)
+			parentObj.PageFlowIdArray.push(pageFlowId)
+			parentObj.PageEditIdArray.push(pageEditId)
 			parentObj.displayHeadContent()
 			
-			pubObj.PageId = pageId
-			pubObj.Position = parentObj.PageIdArray.length
+			pubObj.PageFlowId = pageFlowId
+			pubObj.PageEditId = pageEditId
+			pubObj.Position = parentObj.PageFlowIdArray.length
 // console.log(pubObj.Position)
 		} else {
-			let brotherId = brotherObj.PageId
-			$("#"+brotherId).after(pageText)
+			let brotherId = brotherObj.PageFlowId
+			$("#"+brotherId).after(pageFlowText)
 			
-			// parentObj.PageIdArray.splice(brotherObj.Position - 1, 0, pageId)
+			// parentObj.PageFlowIdArray.splice(brotherObj.Position - 1, 0, pageFlowId)
 			// parentObj.displayHeadContent()
 			
-			// pubObj.PageId = pageId
-			// pubObj.Position = parentObj.PageIdArray.length
+			// pubObj.PageFlowId = pageFlowId
+			// pubObj.Position = parentObj.PageFlowIdArray.length
 		}
 	}())
 	
-	pubObj.syncBack = function() {
+	PriObj.DispEditPage = function() {
 		
-		if(parentObj.SelePageId == 0) { return }
-		
-		$("#EditPage").children().clone(true).appendTo("#"+parentObj.SelePageId)
-	}
-	
-	PriObj.DispInEditPage = function() {
-		
-		let htmlText = $("#"+pubObj.PageId).html()
-		$("#EditPage").empty().html(htmlText)
+		$("#"+pubObj.PageEditId).css("display", "inline")
 		
 		$("#NewPic").off("click")
 		$("#NewPic").on("click", PriObj.AddImg)
@@ -66,7 +72,7 @@ AWP.FTArea.FlowPage = function(parentObj, brotherObj) {
 	}
 	
 	PriObj.AddImg = function() {
-		
+// console.log(AWP.SelePage)
 		dialog.showOpenDialog({
 			title: "Select A File",
 			properties: ["openFile", "multiSelections"],
@@ -76,22 +82,21 @@ AWP.FTArea.FlowPage = function(parentObj, brotherObj) {
 			if(!imgPathArray) { return }
 			
 			for(let imgPath of imgPathArray) {
-// console.log(fileArray)
+// console.log(imgPath)
 				let imgObj = new AWP.FTArea.FTElems.ImgElem(pubObj, imgPath)
-				PriObj.ElemObjArray.push(imgObj)
-// console.log(PriObj.ElemObjArray)
+				pubObj.ElemObjArray.push(imgObj)
 			}
 		})
 	}
 	
 	PriObj.AddAnim = function() {
-// console.log(pubObj.PageId)
+// console.log(pubObj.PageFlowId)
 		$("#NewPicDL").dialog( "option", "buttons",[{
 			text: "确定",
 			click: function() {
 				
 				let imgObj = new AWP.FTArea.FTElems.ImgElem(pubObj)
-				PriObj.ElemObjArray.push(imgObj)
+				pubObj.ElemObjArray.push(imgObj)
 				$( this ).dialog( "close" )
 			}
 		}, {
@@ -103,10 +108,10 @@ AWP.FTArea.FlowPage = function(parentObj, brotherObj) {
 	}
 	
 	PriObj.AddText = function() {
-// console.log(pubObj.PageId)
+// console.log(pubObj.PageFlowId)
 		let textObj = new AWP.FTArea.FTElems.TextElem(pubObj)
 		
-		PriObj.ElemObjArray.push(textObj)
+		pubObj.ElemObjArray.push(textObj)
 	}
 	
 	pubObj.test = function() {
@@ -114,20 +119,21 @@ AWP.FTArea.FlowPage = function(parentObj, brotherObj) {
 	};
 	
 	(function() {
-		$("#"+pubObj.PageId).on("mousedown", function() {
+		$("#"+pubObj.PageFlowId).on("mousedown", function() {
 			
-			if (parentObj.SelePageId != "") {
-				$("#"+parentObj.SelePageId).css("outline", "#00ff00 none thick")
-			}
-// console.log(pubObj.PageId)
+			// if (parentObj.SeleFlowPageId != "") {
+			$("#"+parentObj.SeleFlowPageId).css("outline", "#00ff00 none thick")
+			$("#"+parentObj.SeleEditPageId).css("display", "none")
+			// }
+// console.log(pubObj.PageFlowId)
 			$(this).css("outline", "#00ff00 solid thick")
 			parentObj.SelePagePos = pubObj.Position
 			parentObj.displayHeadContent()
 			
-			pubObj.syncBack()
-			PriObj.DispInEditPage()
+			PriObj.DispEditPage()
 			
-			parentObj.SelePageId = pubObj.PageId
+			parentObj.SeleFlowPageId = pubObj.PageFlowId
+			parentObj.SeleEditPageId = pubObj.PageEditId
 		})
 	}())
 }

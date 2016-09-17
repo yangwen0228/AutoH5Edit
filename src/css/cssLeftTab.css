@@ -1,4 +1,4 @@
-#leftTabs ul {
+#LeftTabs ul {
 	position: absolute;
 	top: 0%;
 	left: 0%;
@@ -8,7 +8,7 @@
 	padding: 0px;
 }
 
-#leftTabs ul li {
+#LeftTabs ul li {
 	margin: 0px;
 	padding: 0px;
 }

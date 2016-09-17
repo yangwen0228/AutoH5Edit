@@ -32,17 +32,18 @@ img {
 	background: #0000ff;
 }
 
-#leftTabs {
+#LeftTabs {
 	position: absolute;
 	top: 6%;
 	left: 0%;
 	bottom: 5%;
 	width: 28%;
+	max-width: 360px;
 	background: #00ff00;
 /*	height: 80%;*/
 }
 
-#centerArea {
+#CenterArea {
 	position: absolute;
 	top: 6%;
 	bottom: 5%;
@@ -59,6 +60,7 @@ img {
 	right: 0%;
 	bottom: 5%;
 	width: 28%;
+	max-width: 360px;
 	background: #e200ff;
 /*	height: 80%;*/
 }

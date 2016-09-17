@@ -28,16 +28,18 @@
 			</div>
 			<div class="pageMenu" id="PageMenu">
 				<button class="btMenu" id="NewPic">图片</button>
+				<button class="btMenu" id="NewButton">按钮</button>
 				<button class="btMenu" id="NewText">文字</button>
 				<button class="btMenu">音乐</button>
 				<button class="btMenu" id="NewAnim">动画</button>
 				<button class="btMenu">表单</button>
 			</div>
 			<div class="rightMenu" id="rightMenu">
+				<button class="btMenu">输出</button>
 				<button class="btMenu">回收站</button>
 			</div>
 		</div>
-		<div class="leftTabs" id="leftTabs">
+		<div class="leftTabs" id="LeftTabs">
 			<ul>
 				<li><a href="#templateTabs">模板栏目</a></li>
 				<li><a href="#flowArea">缩略概览</a></li>
@@ -64,8 +66,8 @@
 				</div>
 			</div>
 		</div>
-		<div class="centerArea" id="centerArea">
-			<div class="editArea" id="editArea">
+		<div class="centerArea" id="CenterArea">
+			<div class="editArea" id="EditArea">
 				<div class="editTopBar" id="editTopBar">
 					<button class="btEditTop" id="BTDel">
 						<img src="img/close.png" alt="">
@@ -89,11 +91,6 @@
 						<img src="img/lock.png" alt="">
 					</button>
 				</div>
-				<div class="editPage" id="EditPage">
-					<div class="editImg" id="img_1" draggable="false">
-<!--						<img src="E:/FrontSide/WorkNow/0 test/22/02-01.jpg" alt="">-->
-					</div>
-				</div>
 				<div class="editLeftBar" id="EditLeftBar">
 					<button class="btEditLeft"><span>隐藏组</span></button>
 					<button class="btEditLeft"><span>锁定组</span></button>
@@ -102,22 +99,75 @@
 					<button class="btEditLeft"><span>界面属性</span></button>
 					<button class="btEditLeft"><span>文字文字</span></button>
 				</div>
+\				<div class="editPage" id="EditPage">
+					<div class="editImg" id="img_0_0" draggable="false">
+<!--						<img src="E:/FrontSide/WorkNow/0 test/22/02-01.jpg" alt="">-->
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="rightTabs" id="rightTabs">
 			<ul>
-				<li><a href="#theAttr">属性</a></li>
-				<li><a href="#theEffect">效果</a></li>
-				<li><a href="#theEvent">事件</a></li>
+				<li><a href="#TheAttr">属性</a></li>
+				<li><a href="#TheEffect">效果</a></li>
+				<li><a href="#TheEvent">事件</a></li>
+				<li><a href="#ThePage">页面</a></li>
 			</ul>
-			<div class="theAttr" id="theAttr">111111111
+			<div class="theAttr" id="TheAttr">
+<!--
+				<table border="1">
+					<tr>
+						<th>位置</th>
+					</tr>
+					<tr>
+						<td><select class="seleTDLR" name="TDSeleName" id="TDSele"><option>top</option><option>bottom</option></select>:</td>
+						<td><input class="pixelInput" id="TDPix" name="value">px</td>
+						<td><input class="percentInput" id="TDPer" name="value">%</td>
+					</tr>
+					<tr>
+						<td><select class="seleTDLR" name="LRSeleName" id="LRSele"><option>left</option><option>right</option></select>:</td>
+						<td><input class="pixelInput" id="LRPix" name="value">px</td>
+						<td><input class="percentInput" id="LRPer" name="value">%</td>
+					</tr>
+					<tr>
+						<th>尺寸</th>
+					</tr>
+					<tr>
+						<td>width:</td>
+						<td><input class="pixelInput" id="WDPix" name="value">px</td>
+						<td><input class="percentInput" id="WDPer" name="value">%</td>
+					</tr>
+					<tr>
+						<td>height:</td>
+						<td><input class="pixelInput" id="HTPix" name="value">px</td>
+						<td><input class="percentInput" id="HTPer" name="value">%</td>
+					</tr>
+					<tr>
+						<th>背景</th>
+					</tr>
+					<tr>
+						<td>background:</td>
+						<td class="twoCol"><input class="colorInput" id="BGColor" value="#556B2F"></td>
+					</tr>
+					<tr>
+						<th>其他</th>
+					</tr>
+					<tr>
+						<td class="threeCol">
+						<textarea class="otherText"></textarea>
+						</td>
+					</tr>
+				</table>
+-->
+			</div>
+			<div class="theEffect" id="TheEffect">2222222222
 
 			</div>
-			<div class="theEffect" id="theEffect">2222222222
-
+			<div class="theEvent" id="TheEvent">3333333333
+				
 			</div>
-			<div class="theEvent" id="theEvent">3333333333
-
+			<div class="thePage" id="ThePage">44444
+				
 			</div>
 		</div>
 		<div class="statusBar" id="statusBar">
@@ -129,12 +179,57 @@
 			
 			
 		</div>
+		
+		<table border="1" id="ImgAttrCard">
+			<tr>
+				<th>位置</th>
+			</tr>
+			<tr>
+				<td><select class="seleTDLR" name="ImgTDSele" id="ImgTDSele"><option>top</option><option>bottom</option></select>:</td>
+				<td><input class="pixelInput" id="ImgTDPix" name="ImgTDPix">px</td>
+				<td><input class="percentInput" id="ImgTDPer" name="ImgTDPer">%</td>
+			</tr>
+			<tr>
+				<td><select class="seleTDLR" name="ImgLRSele" id="ImgLRSele"><option>left</option><option>right</option></select>:</td>
+				<td><input class="pixelInput" id="ImgLRPix" name="ImgLRPix">px</td>
+				<td><input class="percentInput" id="ImgLRPer" name="ImgLRPer">%</td>
+			</tr>
+			<tr>
+				<th>尺寸</th>
+			</tr>
+			<tr>
+				<td>width:</td>
+				<td><input class="pixelInput" id="ImgWDPix" name="ImgWDPix">px</td>
+				<td><input class="percentInput" id="ImgWDPer" name="ImgWDPer">%</td>
+			</tr>
+			<tr>
+				<td>height:</td>
+				<td><input class="pixelInput" id="ImgHTPix" name="ImgHTPix">px</td>
+				<td><input class="percentInput" id="ImgHTPer" name="ImgHTPer">%</td>
+			</tr>
+			<tr>
+				<th>背景</th>
+			</tr>
+			<tr>
+				<td>background:</td>
+				<td class="twoCol"><input class="colorInput" id="ImgBGColor" value="#556B2F"></td>
+			</tr>
+			<tr>
+				<th>其他</th>
+			</tr>
+			<tr>
+				<td class="threeCol">
+				<textarea class="otherText"></textarea>
+				</td>
+			</tr>
+		</table>
 	</div>
 	
 	<script type="text/javascript" src="lib/swiper/js/swiper-3.3.1.min.js"></script>
 	<script type="text/javascript" src="lib/swiper/js/swiper.animate1.0.2.min.js"></script>
 	<script type="text/javascript" src="lib/jquery/jquery-2.2.3.min.js"></script>
 	<script type="text/javascript" src="lib/jqueryui/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="lib/jqueryplugin/colorpicker/jqColorPicker.min.js"></script>
 	<script type="text/javascript" src="js/startMain.js"></script>
 	<script type="text/javascript" src="js/startMain/uiFunction.js"></script>
 	<script type="text/javascript" src="js/startMain/flowAreaLT.js"></script>
@@ -144,6 +239,7 @@
 	<script type="text/javascript" src="js/startMain/ftArea/tempSlide.js"></script>
 	<script type="text/javascript" src="js/startMain/ftArea/ftElems/imgElem.js"></script>
 	<script type="text/javascript" src="js/startMain/ftArea/ftElems/textElem.js"></script>
+	<script type="text/javascript" src="js/startMain/ftArea/ftElems/imgCard/imgAttrCard.js"></script>
 	<script type="text/javascript">
 		AWP.StartMain()
 	</script>

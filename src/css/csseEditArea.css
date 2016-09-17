@@ -26,14 +26,27 @@
 	margin: 0em 0em 0em 0.25em;
 }
 
-#EditPage {
+.editPage {
 	position: absolute;
 	bottom: 0%;
 	right: 0%;
 	width: 84%;
 	height: 92%;
+/*
+	max-width: 360px;
+	max-height: 640px;
+*/
 	background: #ff8900;
 	overflow: hidden;
+	display: none;
+}
+
+#page_eidt_1_1 {
+	background: #00ff00;
+}
+
+#page_eidt_1_2 {
+	background: #0000ff;
 }
 
 #EditLeftBar {

@@ -11,7 +11,7 @@ AWP.DisplayFunc = function() {
 	
 	PriObj.DispJqueryUI = function() {
 		
-		$("#leftTabs").tabs()
+		$("#LeftTabs").tabs()
 		$("#templateTabs").tabs()
 		$("#rightTabs").tabs()
 		
@@ -27,6 +27,19 @@ AWP.DisplayFunc = function() {
 			position: { my: "top", at: "top", of: window },
 			width: 900,
 			height: 600
+		})
+		
+		// $(".seleTD").selectmenu()
+		// $(".seleLR").selectmenu()
+		
+		$(".pixelInput").spinner()
+		$(".percentInput").spinner({
+			numberFormat: "C",
+			step: 0.1,
+		})
+		
+		$(".colorInput").colorPicker({
+			// renderCallback: function() {console.log("OKOKOKOK")}
 		})
 		
 	};

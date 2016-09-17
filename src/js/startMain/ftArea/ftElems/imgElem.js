@@ -1,5 +1,5 @@
 /*
-	UI function
+	image element function
 	
 */
 var AWP = AWP || {}
@@ -10,12 +10,13 @@ AWP.FTArea.FTElems.ImgElem = function(parentObj, imgPath) {
 	let pubObj = this
 	let PriObj = {}
 	pubObj.Type = "Img", pubObj.ImgId = "0"
+	PriObj.AttrObj = {};
 	let tes;
 	
 	(function() {
 		let imgId = "img_1_1"
 		let imgArray = new Array()
-		while(parentObj.ImgIdArray.indexOf(imgId) !== -1) {
+		while(document.getElementById(imgId)) {
 			imgArray = imgId.split("_")
 			imgArray[2]++
 			imgId = imgArray.join("_")
@@ -23,9 +24,12 @@ AWP.FTArea.FTElems.ImgElem = function(parentObj, imgPath) {
 		pubObj.ImgId = imgId
 	
 		let imgText = '\n<div class="editImg" id="' + imgId + '" draggable="false">\n<img src="' + imgPath + '"></img>\n</div>\n'
-		$("#EditPage").append(imgText)
+		$("#"+parentObj.PageEditId).append(imgText)
 		
-		parentObj.ImgIdArray.push(imgId)
+		parentObj.ElemIdArray.push(imgId)
+		
+		PriObj.AttrObj = new AWP.FTArea.FTElems.ImgCard.ImgAttrCard(pubObj)
+		
 	}())
 	
 	PriObj.BindImgDragable = function(jqSeleImg) {
@@ -46,9 +50,13 @@ AWP.FTArea.FTElems.ImgElem = function(parentObj, imgPath) {
 		
 		$(document).on("mousemove", function(event){
 			if(dragCt){
-				let lPos = startDX + (event.clientX - eventDX)
-				let tPos = startDY + (event.clientY - eventDY)
-				jqSeleImg.css({left : lPos, top : tPos,})
+				let paWidth = parseInt(jqSeleImg.parent().css("width"))
+				let paHeight = parseInt(jqSeleImg.parent().css("height"))
+				let lPos = (startDX + (event.clientX - eventDX))/paWidth*100
+				let tPos = (startDY + (event.clientY - eventDY))/paHeight*100
+// console.log((startDX + (event.clientX - eventDX))/paWidth)
+				jqSeleImg.css({"left" : lPos.toFixed(2)+"%", "top" : tPos.toFixed(2)+"%",})
+				PriObj.AttrObj.setValueTDLRWH()
 			}
 		}).on("mouseup", function(){
 			dragCt = false 
@@ -109,13 +117,17 @@ AWP.FTArea.FTElems.ImgElem = function(parentObj, imgPath) {
 				w = currentW - offsetX; l = currentL + offsetX 
 				break 
 			}
-
-			jqSeleImg.css({
-				width : w + 'px', 
-				height : h + 'px',
-				left : l + 'px',
-				top : t + 'px'
-			})
+			
+			let paWidth = parseInt(jqSeleImg.parent().css("width"))
+			let paHeight = parseInt(jqSeleImg.parent().css("height"))
+			
+			let chWidth = (w/paWidth*100).toFixed(2)
+			let chHeight = (h/paHeight*100).toFixed(2)
+			let chLeft = (l/paWidth*100).toFixed(2)
+			let chTop = (t/paHeight*100).toFixed(2)
+			jqSeleImg.css({ "width" : chWidth+"%", height : chHeight+"%", left : chLeft+"%", top : chTop+"%"})
+			
+			PriObj.AttrObj.setValueTDLRWH()
 		}).on('mouseup', function(){
 			resizeCt = false 
 		})
@@ -133,18 +145,24 @@ AWP.FTArea.FTElems.ImgElem = function(parentObj, imgPath) {
 		$("#BTDel").on("click", function() {
 			jqSeleImg.remove()
 			parentObj.SeleElemId == 0
+		
+			let imgPos = parentObj.ElemIdArray.indexOf(pubObj.ImgId)
+			parentObj.ElemIdArray.splice(imgPos, 1)
+			parentObj.ElemObjArray.splice(imgPos, 1)
 		})
 	}
-	PriObj.BindImgEditable = function() {
-		
+	PriObj.UnBindImgEvent = function() {
 		if(parentObj.SeleElemId != 0) {
 			$("#"+parentObj.SeleElemId).off("mouseup mousedown mousemove")
 			$("#"+parentObj.SeleElemId).children("span").remove()
 			$("#BTTop").off("click")
 			$("#BTDown").off("click")
 			$("#BTDel").off("click")
-// console.log("OKOKOK")
 		}
+	}
+	PriObj.BindImgEditable = function() {
+		
+		PriObj.UnBindImgEvent()
 		
 		let jqSeleImg = $("#"+pubObj.ImgId)
 		
@@ -163,6 +181,34 @@ AWP.FTArea.FTElems.ImgElem = function(parentObj, imgPath) {
 			PriObj.BindImgEditable()
 			
 			parentObj.SeleElemId = pubObj.ImgId
+			
+			PriObj.AttrObj.showAttrCard()
+			PriObj.AttrObj.setValueTDLRWH()
 		})
 	}())
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

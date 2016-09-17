@@ -9,12 +9,12 @@ AWP.FlowArea = function() {
 	let pubObj = this
 	let PriObj = {}
 	
-	pubObj.SelePageId = 0,pubObj.SelePagePos = 0, pubObj.PageIdArray = [] 
+	pubObj.SeleFlowPageId = 0,pubObj.SelePagePos = 0, pubObj.PageFlowIdArray = [], pubObj.PageEditIdArray = []
 	PriObj.PageObjArray= []
 	
 	pubObj.displayHeadContent = function() {
 		
-		let dispText = "第" + pubObj.SelePagePos + "页" + "/共" + pubObj.PageIdArray.length + "页"
+		let dispText = "第" + pubObj.SelePagePos + "页" + "/共" + pubObj.PageFlowIdArray.length + "页"
 		$("#flowHead").text(dispText)
 	}
 	

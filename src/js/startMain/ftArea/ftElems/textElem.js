@@ -15,7 +15,7 @@ AWP.FTArea.FTElems.TextElem = function(parentObj) {
 	(function() {
 		let textId = "text_1_1"
 		let textArray = new Array()
-		while(parentObj.TextIdArray.indexOf(textId) !== -1) {
+		while(document.getElementById(textId)) {
 			textArray = textId.split("_")
 			textArray[2]++
 			textId = textArray.join("_")
@@ -24,7 +24,7 @@ AWP.FTArea.FTElems.TextElem = function(parentObj) {
 		let textText = '\n<div class="editText" id="' + textId + '" draggable="false">\n</div>\n'
 		$("#EditPage").append(textText)
 		
-		parentObj.TextIdArray.push(textId)
+		parentObj.ElemIdArray.push(textId)
 	}())
 	
 	pubObj.test = function() {
