@@ -14,16 +14,14 @@ AWP.FTArea.FTElems.ImgCard.ImgAttrCard = function(imgObj) {
 	
 	PriObj.test = "";
 	
-	(function() {
-		
-		
-	}())
 	
 	pubObj.showAttrCard = function() {
 		
 		$("#TheAttr").children().appendTo("#StoreArea")
 		
 		$("#ImgAttrCard").appendTo("#TheAttr")
+		
+		PriObj.RefreshAttrEvent()
 	}
 	
 	pubObj.hideAttrCard = function() {
@@ -99,7 +97,18 @@ AWP.FTArea.FTElems.ImgCard.ImgAttrCard = function(imgObj) {
 		$("#ImgHTPer").spinner("value", heightPer)
 	};
 	
-	(function() {
+	PriObj.RefreshAttrEvent = function() {
+		
+		$("#ImgTDPix").off("spinstop")
+		$("#ImgTDPer").off("spinstop")
+		$("#ImgLRPix").off("spinstop")
+		$("#ImgLRPer").off("spinstop")
+		$("#ImgWDPix").off("spinstop")
+		$("#ImgWDPer").off("spinstop")
+		$("#ImgHTPix").off("spinstop")
+		$("#ImgHTPer").off("spinstop")
+		
+		
 		$("#ImgTDPix").on("spinstop", function() {
 			
 			let pixTD = $("#ImgTDPix").spinner("value")
@@ -192,8 +201,7 @@ AWP.FTArea.FTElems.ImgCard.ImgAttrCard = function(imgObj) {
 			
 			$("#"+imgObj.ImgId).css({"height": perHT+"%"})
 		})
-	}())
-	
+	}
 }
 
 

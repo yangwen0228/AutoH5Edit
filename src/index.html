@@ -92,12 +92,12 @@
 					</button>
 				</div>
 				<div class="editLeftBar" id="EditLeftBar">
-					<button class="btEditLeft"><span>隐藏组</span></button>
-					<button class="btEditLeft"><span>锁定组</span></button>
-					<button class="btEditLeft"><span>关联界面</span></button>
-					<button class="btEditLeft"><span>调试界面</span></button>
-					<button class="btEditLeft"><span>界面属性</span></button>
-					<button class="btEditLeft"><span>文字文字</span></button>
+					<button class="btEditLeft">隐藏组</button>
+					<button class="btEditLeft">锁定组</button>
+					<button class="btEditLeft">关联界面</button>
+					<button class="btEditLeft">调试界面</button>
+					<button class="btEditLeft">界面属性</button>
+					<button class="btEditLeft">文字文字</button>
 				</div>
 \				<div class="editPage" id="EditPage">
 					<div class="editImg" id="img_0_0" draggable="false">
@@ -115,7 +115,7 @@
 			</ul>
 			<div class="theAttr" id="TheAttr">
 <!--
-				<table border="1">
+				<table border="1" id="ImgAttrCard">
 					<tr>
 						<th>位置</th>
 					</tr>
@@ -160,8 +160,87 @@
 				</table>
 -->
 			</div>
-			<div class="theEffect" id="TheEffect">2222222222
-
+			<div class="theEffect" id="TheEffect">
+<!--
+				<div id="ImgEffectCard">
+					<label class="lbImgEffect" for="ImgInEffect">进场动画
+						<input type="checkbox" class="imgEffe" name="ImgInEffect" id="ImgInEffect">
+					</label>
+					<button class="aniPreview" id="ImgInPreview">预览</button>
+					<div>
+						<div>
+							<b>延迟时间：</b>
+							<input class="aniTime" type="number" id="ImgInAniDelay" name="ImgInAniDelay" min="0" step="100">
+							<b>ms</b>
+						</div>
+						<div>
+							<b>动画名称：</b>
+							<select class="aniName" name="ImgInAniName" id="ImgInAniName">
+								<option>jkl</option>
+								<option>lml</option>
+							</select>
+						</div>
+						<div>
+							<b>速度曲线：</b>
+							<select class="aniSpeed" name="ImgInAniSpeed" id="ImgInAniSpeed">
+								<option>swing</option>
+								<option>easy</option>
+								<option>linear</option>
+							</select>
+						</div>
+						<div>
+							<b>持续时间：</b>
+							<input class="aniTime" type="number" id="ImgInAniDuring" name="ImgInAniDuring" min="0" step="100">
+							<b>ms</b>
+						</div>
+						<div>
+							<b>重复次数：</b>
+							<select class="aniCount" name="ImgInAniCount" id="ImgInAniCount">
+								<option>1</option>
+								<option>infinite</option>
+							</select>
+						</div>
+					</div>
+					<label class="lbImgEffect" for="ImgOutEffect">出场动画
+						<input type="checkbox" class="imgEffe" name="ImgOutEffect" id="ImgOutEffect">
+					</label>
+					<button class="aniPreview" id="ImgOutPreview">预览</button>
+					<div>
+						<div>
+							<b>延迟时间：</b>
+							<input class="aniTime" type="number" id="ImgOutAniDelay" name="ImgOutAniDelay" min="0" step="100">
+							<b>ms</b>
+						</div>
+						<div>
+							<b>动画名称：</b>
+							<select class="aniName" name="ImgOutAniName" id="ImgOutAniName">
+								<option>jkl</option>
+								<option>lml</option>
+							</select>
+						</div>
+						<div>
+							<b>速度曲线：</b>
+							<select class="aniSpeed" name="ImgOutAniSpeed" id="ImgOutAniSpeed">
+								<option>swing</option>
+								<option>easy</option>
+								<option>linear</option>
+							</select>
+						</div>
+						<div>
+							<b>持续时间：</b>
+							<input class="aniTime" type="number" id="ImgOutAniDuring" name="ImgOutAniDuring" min="0" step="100">
+							<b>ms</b>
+						</div>
+						<div>
+							<b>重复次数：</b>
+							<select class="aniCount" name="ImgOutAniCount" id="ImgOutAniCount">
+								<option>1</option>
+								<option>infinite</option>
+							</select>
+						</div>
+					</div>
+				</div>
+-->
 			</div>
 			<div class="theEvent" id="TheEvent">3333333333
 				
@@ -223,6 +302,288 @@
 				</td>
 			</tr>
 		</table>
+		
+		<div id="ImgEffectCard">
+			<label class="lbImgEffect" for="ImgInEffect">进场动画
+				<input type="checkbox" class="imgEffe" name="ImgInEffect" id="ImgInEffect">
+			</label>
+			<button class="aniPreview" id="ImgInPreview">预览</button>
+			<div>
+				<div>
+					<b>延迟时间：</b>
+					<input class="aniTime" type="number" id="ImgInAniDelay" name="ImgInAniDelay" min="0" step="100">
+					<b>ms</b>
+				</div>
+				<div>
+					<b>动画名称：</b>
+					<select class="aniName" name="ImgInAniName" id="ImgInAniName">
+						<optgroup label="Attention Seekers">
+							<option value="bounce">bounce</option>
+							<option value="flash">flash</option>
+							<option value="pulse">pulse</option>
+							<option value="rubberBand">rubberBand</option>
+							<option value="shake">shake</option>
+							<option value="swing">swing</option>
+							<option value="tada">tada</option>
+							<option value="wobble">wobble</option>
+						</optgroup>
+						<optgroup label="Bouncing Entrances">
+							<option value="bounceIn">bounceIn</option>
+							<option value="bounceInDown">bounceInDown</option>
+							<option value="bounceInLeft">bounceInLeft</option>
+							<option value="bounceInRight">bounceInRight</option>
+							<option value="bounceInUp">bounceInUp</option>
+						</optgroup>
+						<optgroup label="Bouncing Exits">
+							<option value="bounceOut">bounceOut</option>
+							<option value="bounceOutDown">bounceOutDown</option>
+							<option value="bounceOutLeft">bounceOutLeft</option>
+							<option value="bounceOutRight">bounceOutRight</option>
+							<option value="bounceOutUp">bounceOutUp</option>
+						</optgroup>
+						<optgroup label="Fading Entrances">
+							<option value="fadeIn">fadeIn</option>
+							<option value="fadeInDown">fadeInDown</option>
+							<option value="fadeInDownBig">fadeInDownBig</option>
+							<option value="fadeInLeft">fadeInLeft</option>
+							<option value="fadeInLeftBig">fadeInLeftBig</option>
+							<option value="fadeInRight">fadeInRight</option>
+							<option value="fadeInRightBig">fadeInRightBig</option>
+							<option value="fadeInUp">fadeInUp</option>
+							<option value="fadeInUpBig">fadeInUpBig</option>
+						</optgroup>
+						<optgroup label="Fading Exits">
+							<option value="fadeOut">fadeOut</option>
+							<option value="fadeOutDown">fadeOutDown</option>
+							<option value="fadeOutDownBig">fadeOutDownBig</option>
+							<option value="fadeOutLeft">fadeOutLeft</option>
+							<option value="fadeOutLeftBig">fadeOutLeftBig</option>
+							<option value="fadeOutRight">fadeOutRight</option>
+							<option value="fadeOutRightBig">fadeOutRightBig</option>
+							<option value="fadeOutUp">fadeOutUp</option>
+							<option value="fadeOutUpBig">fadeOutUpBig</option>
+						</optgroup>
+						<optgroup label="Flippers">
+							<option value="flip">flip</option>
+							<option value="flipInX">flipInX</option>
+							<option value="flipInY">flipInY</option>
+							<option value="flipOutX">flipOutX</option>
+							<option value="flipOutY">flipOutY</option>
+						</optgroup>
+						<optgroup label="Lightspeed">
+							<option value="lightSpeedIn">lightSpeedIn</option>
+							<option value="lightSpeedOut">lightSpeedOut</option>
+						</optgroup>
+						<optgroup label="Rotating Entrances">
+							<option value="rotateIn">rotateIn</option>
+							<option value="rotateInDownLeft">rotateInDownLeft</option>
+							<option value="rotateInDownRight">rotateInDownRight</option>
+							<option value="rotateInUpLeft">rotateInUpLeft</option>
+							<option value="rotateInUpRight">rotateInUpRight</option>
+						</optgroup>
+						<optgroup label="Rotating Exits">
+							<option value="rotateOut">rotateOut</option>
+							<option value="rotateOutDownLeft">rotateOutDownLeft</option>
+							<option value="rotateOutDownRight">rotateOutDownRight</option>
+							<option value="rotateOutUpLeft">rotateOutUpLeft</option>
+							<option value="rotateOutUpRight">rotateOutUpRight</option>
+						</optgroup>
+						<optgroup label="Sliding Entrances">
+							<option value="slideInUp">slideInUp</option>
+							<option value="slideInDown">slideInDown</option>
+							<option value="slideInLeft">slideInLeft</option>
+							<option value="slideInRight">slideInRight</option>
+						</optgroup>
+						<optgroup label="Sliding Exits">
+							<option value="slideOutUp">slideOutUp</option>
+							<option value="slideOutDown">slideOutDown</option>
+							<option value="slideOutLeft">slideOutLeft</option>
+							<option value="slideOutRight">slideOutRight</option>
+							
+						</optgroup>
+						<optgroup label="Zoom Entrances">
+							<option value="zoomIn">zoomIn</option>
+							<option value="zoomInDown">zoomInDown</option>
+							<option value="zoomInLeft">zoomInLeft</option>
+							<option value="zoomInRight">zoomInRight</option>
+							<option value="zoomInUp">zoomInUp</option>
+						</optgroup>
+						<optgroup label="Zoom Exits">
+							<option value="zoomOut">zoomOut</option>
+							<option value="zoomOutDown">zoomOutDown</option>
+							<option value="zoomOutLeft">zoomOutLeft</option>
+							<option value="zoomOutRight">zoomOutRight</option>
+							<option value="zoomOutUp">zoomOutUp</option>
+						</optgroup>
+						<optgroup label="Specials">
+							<option value="hinge">hinge</option>
+							<option value="rollIn">rollIn</option>
+							<option value="rollOut">rollOut</option>
+						</optgroup>
+					</select>
+				</div>
+				<div>
+					<b>速度曲线：</b>
+					<select class="aniSpeed" name="ImgInAniSpeed" id="ImgInAniSpeed">
+						<option>swing</option>
+						<option>easy</option>
+						<option>linear</option>
+					</select>
+				</div>
+				<div>
+					<b>持续时间：</b>
+					<input class="aniTime" type="number" id="ImgInAniDuring" name="ImgInAniDuring" min="0" step="100">
+					<b>ms</b>
+				</div>
+				<div>
+					<b>重复次数：</b>
+					<select class="aniCount" name="ImgInAniCount" id="ImgInAniCount">
+						<option>1</option>
+						<option>infinite</option>
+					</select>
+				</div>
+			</div>
+			<label class="lbImgEffect" for="ImgOutEffect">出场动画
+				<input type="checkbox" class="imgEffe" name="ImgOutEffect" id="ImgOutEffect">
+			</label>
+			<button class="aniPreview">预览</button>
+			<div>
+				<div>
+					<b>延迟时间：</b>
+					<input class="aniTime" type="number" id="ImgOutAniDelay" name="ImgOutAniDelay" min="0" step="100">
+					<b>ms</b>
+				</div>
+				<div>
+					<b>动画名称：</b>
+					<select class="aniName" name="ImgOutAniName" id="ImgOutAniName">
+						<optgroup label="Attention Seekers">
+							<option value="bounce">bounce</option>
+							<option value="flash">flash</option>
+							<option value="pulse">pulse</option>
+							<option value="rubberBand">rubberBand</option>
+							<option value="shake">shake</option>
+							<option value="swing">swing</option>
+							<option value="tada">tada</option>
+							<option value="wobble">wobble</option>
+						</optgroup>
+						<optgroup label="Bouncing Entrances">
+							<option value="bounceIn">bounceIn</option>
+							<option value="bounceInDown">bounceInDown</option>
+							<option value="bounceInLeft">bounceInLeft</option>
+							<option value="bounceInRight">bounceInRight</option>
+							<option value="bounceInUp">bounceInUp</option>
+						</optgroup>
+						<optgroup label="Bouncing Exits">
+							<option value="bounceOut">bounceOut</option>
+							<option value="bounceOutDown">bounceOutDown</option>
+							<option value="bounceOutLeft">bounceOutLeft</option>
+							<option value="bounceOutRight">bounceOutRight</option>
+							<option value="bounceOutUp">bounceOutUp</option>
+						</optgroup>
+						<optgroup label="Fading Entrances">
+							<option value="fadeIn">fadeIn</option>
+							<option value="fadeInDown">fadeInDown</option>
+							<option value="fadeInDownBig">fadeInDownBig</option>
+							<option value="fadeInLeft">fadeInLeft</option>
+							<option value="fadeInLeftBig">fadeInLeftBig</option>
+							<option value="fadeInRight">fadeInRight</option>
+							<option value="fadeInRightBig">fadeInRightBig</option>
+							<option value="fadeInUp">fadeInUp</option>
+							<option value="fadeInUpBig">fadeInUpBig</option>
+						</optgroup>
+						<optgroup label="Fading Exits">
+							<option value="fadeOut">fadeOut</option>
+							<option value="fadeOutDown">fadeOutDown</option>
+							<option value="fadeOutDownBig">fadeOutDownBig</option>
+							<option value="fadeOutLeft">fadeOutLeft</option>
+							<option value="fadeOutLeftBig">fadeOutLeftBig</option>
+							<option value="fadeOutRight">fadeOutRight</option>
+							<option value="fadeOutRightBig">fadeOutRightBig</option>
+							<option value="fadeOutUp">fadeOutUp</option>
+							<option value="fadeOutUpBig">fadeOutUpBig</option>
+						</optgroup>
+						<optgroup label="Flippers">
+							<option value="flip">flip</option>
+							<option value="flipInX">flipInX</option>
+							<option value="flipInY">flipInY</option>
+							<option value="flipOutX">flipOutX</option>
+							<option value="flipOutY">flipOutY</option>
+						</optgroup>
+						<optgroup label="Lightspeed">
+							<option value="lightSpeedIn">lightSpeedIn</option>
+							<option value="lightSpeedOut">lightSpeedOut</option>
+						</optgroup>
+						<optgroup label="Rotating Entrances">
+							<option value="rotateIn">rotateIn</option>
+							<option value="rotateInDownLeft">rotateInDownLeft</option>
+							<option value="rotateInDownRight">rotateInDownRight</option>
+							<option value="rotateInUpLeft">rotateInUpLeft</option>
+							<option value="rotateInUpRight">rotateInUpRight</option>
+						</optgroup>
+						<optgroup label="Rotating Exits">
+							<option value="rotateOut">rotateOut</option>
+							<option value="rotateOutDownLeft">rotateOutDownLeft</option>
+							<option value="rotateOutDownRight">rotateOutDownRight</option>
+							<option value="rotateOutUpLeft">rotateOutUpLeft</option>
+							<option value="rotateOutUpRight">rotateOutUpRight</option>
+						</optgroup>
+						<optgroup label="Sliding Entrances">
+							<option value="slideInUp">slideInUp</option>
+							<option value="slideInDown">slideInDown</option>
+							<option value="slideInLeft">slideInLeft</option>
+							<option value="slideInRight">slideInRight</option>
+						</optgroup>
+						<optgroup label="Sliding Exits">
+							<option value="slideOutUp">slideOutUp</option>
+							<option value="slideOutDown">slideOutDown</option>
+							<option value="slideOutLeft">slideOutLeft</option>
+							<option value="slideOutRight">slideOutRight</option>
+							
+						</optgroup>
+						<optgroup label="Zoom Entrances">
+							<option value="zoomIn">zoomIn</option>
+							<option value="zoomInDown">zoomInDown</option>
+							<option value="zoomInLeft">zoomInLeft</option>
+							<option value="zoomInRight">zoomInRight</option>
+							<option value="zoomInUp">zoomInUp</option>
+						</optgroup>
+						<optgroup label="Zoom Exits">
+							<option value="zoomOut">zoomOut</option>
+							<option value="zoomOutDown">zoomOutDown</option>
+							<option value="zoomOutLeft">zoomOutLeft</option>
+							<option value="zoomOutRight">zoomOutRight</option>
+							<option value="zoomOutUp">zoomOutUp</option>
+						</optgroup>
+						<optgroup label="Specials">
+							<option value="hinge">hinge</option>
+							<option value="rollIn">rollIn</option>
+							<option value="rollOut">rollOut</option>
+						</optgroup>
+					</select>
+				</div>
+				<div>
+					<b>速度曲线：</b>
+					<select class="aniSpeed" name="ImgOutAniSpeed" id="ImgOutAniSpeed">
+						<option>swing</option>
+						<option>easy</option>
+						<option>linear</option>
+					</select>
+				</div>
+				<div>
+					<b>持续时间：</b>
+					<input class="aniTime" type="number" id="ImgOutAniDuring" name="ImgOutAniDuring" min="0" step="100">
+					<b>ms</b>
+				</div>
+				<div>
+					<b>重复次数：</b>
+					<select class="aniCount" name="ImgOutAniCount" id="ImgOutAniCount">
+						<option>1</option>
+						<option>infinite</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		
 	</div>
 	
 	<script type="text/javascript" src="lib/swiper/js/swiper-3.3.1.min.js"></script>
@@ -240,6 +601,8 @@
 	<script type="text/javascript" src="js/startMain/ftArea/ftElems/imgElem.js"></script>
 	<script type="text/javascript" src="js/startMain/ftArea/ftElems/textElem.js"></script>
 	<script type="text/javascript" src="js/startMain/ftArea/ftElems/imgCard/imgAttrCard.js"></script>
+	<script type="text/javascript" src="js/startMain/ftArea/ftElems/imgCard/imgEffectCard.js"></script>
+	<script type="text/javascript" src="js/startMain/ftArea/ftElems/imgCard/imgEventCard.js"></script>
 	<script type="text/javascript">
 		AWP.StartMain()
 	</script>

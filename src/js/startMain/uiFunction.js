@@ -29,9 +29,6 @@ AWP.DisplayFunc = function() {
 			height: 600
 		})
 		
-		// $(".seleTD").selectmenu()
-		// $(".seleLR").selectmenu()
-		
 		$(".pixelInput").spinner()
 		$(".percentInput").spinner({
 			numberFormat: "C",
@@ -41,6 +38,14 @@ AWP.DisplayFunc = function() {
 		$(".colorInput").colorPicker({
 			// renderCallback: function() {console.log("OKOKOKOK")}
 		})
+		
+		
+		// $(".imgEffe").checkboxradio()
+		// $(".aniPreview").button()
+		// $(".aniTime").spinner({step: 100,})
+		// $(".aniName").selectmenu()
+		// $(".aniSpeed").selectmenu()
+		// $(".aniCount").selectmenu()
 		
 	};
 	

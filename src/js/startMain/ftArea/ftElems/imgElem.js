@@ -10,7 +10,7 @@ AWP.FTArea.FTElems.ImgElem = function(parentObj, imgPath) {
 	let pubObj = this
 	let PriObj = {}
 	pubObj.Type = "Img", pubObj.ImgId = "0"
-	PriObj.AttrObj = {};
+	PriObj.AttrObj = {}, PriObj.EffectObj = {};
 	let tes;
 	
 	(function() {
@@ -29,6 +29,7 @@ AWP.FTArea.FTElems.ImgElem = function(parentObj, imgPath) {
 		parentObj.ElemIdArray.push(imgId)
 		
 		PriObj.AttrObj = new AWP.FTArea.FTElems.ImgCard.ImgAttrCard(pubObj)
+		PriObj.EffectObj = new AWP.FTArea.FTElems.ImgCard.ImgEffectCard(pubObj)
 		
 	}())
 	
@@ -184,6 +185,9 @@ AWP.FTArea.FTElems.ImgElem = function(parentObj, imgPath) {
 			
 			PriObj.AttrObj.showAttrCard()
 			PriObj.AttrObj.setValueTDLRWH()
+			
+			PriObj.EffectObj.showEffectCard()
+			PriObj.EffectObj.setValueInOut()
 		})
 	}())
 }
