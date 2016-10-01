@@ -8,7 +8,7 @@ AWP.FTArea.FTElems = AWP.FTArea.FTElems || {}
 AWP.FTArea.FTElems.TextElem = function(parentObj) {
 	
 	let pubObj = this
-	let PriObj = {}
+	
 	pubObj.Type = "Text"
 	let tes;
 	

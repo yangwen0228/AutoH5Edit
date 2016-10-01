@@ -10,10 +10,6 @@ AWP.FTArea.FTElems.ImgCard = AWP.FTArea.FTElems.ImgCard || {}
 AWP.FTArea.FTElems.ImgCard.ImgAttrCard = function(imgObj) {
 	
 	let pubObj = this
-	let PriObj = {}
-	
-	PriObj.test = "";
-	
 	
 	pubObj.showAttrCard = function() {
 		
@@ -21,7 +17,7 @@ AWP.FTArea.FTElems.ImgCard.ImgAttrCard = function(imgObj) {
 		
 		$("#ImgAttrCard").appendTo("#TheAttr")
 		
-		PriObj.RefreshAttrEvent()
+		RefreshAttrEvent()
 	}
 	
 	pubObj.hideAttrCard = function() {
@@ -97,7 +93,7 @@ AWP.FTArea.FTElems.ImgCard.ImgAttrCard = function(imgObj) {
 		$("#ImgHTPer").spinner("value", heightPer)
 	};
 	
-	PriObj.RefreshAttrEvent = function() {
+	let RefreshAttrEvent = function() {
 		
 		$("#ImgTDPix").off("spinstop")
 		$("#ImgTDPer").off("spinstop")

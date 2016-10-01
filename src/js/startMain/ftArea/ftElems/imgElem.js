@@ -57,7 +57,9 @@ AWP.FTArea.FTElems.ImgElem = function(parentObj, imgPath) {
 				let tPos = (startDY + (event.clientY - eventDY))/paHeight*100
 // console.log((startDX + (event.clientX - eventDX))/paWidth)
 				jqSeleImg.css({"left" : lPos.toFixed(2)+"%", "top" : tPos.toFixed(2)+"%",})
+				
 				PriObj.AttrObj.setValueTDLRWH()
+				PriObj.EffectObj.stopPreview()
 			}
 		}).on("mouseup", function(){
 			dragCt = false 
@@ -129,6 +131,7 @@ AWP.FTArea.FTElems.ImgElem = function(parentObj, imgPath) {
 			jqSeleImg.css({ "width" : chWidth+"%", height : chHeight+"%", left : chLeft+"%", top : chTop+"%"})
 			
 			PriObj.AttrObj.setValueTDLRWH()
+			PriObj.EffectObj.stopPreview()
 		}).on('mouseup', function(){
 			resizeCt = false 
 		})

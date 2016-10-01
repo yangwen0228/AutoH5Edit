@@ -10,11 +10,12 @@ AWP.FTArea.FTElems.ImgCard = AWP.FTArea.FTElems.ImgCard || {}
 AWP.FTArea.FTElems.ImgCard.ImgEffectCard = function(imgObj) {
 	
 	let pubObj = this
-	let PriObj = {}
 	
 	pubObj.ImgInControl = false, pubObj.ImgInArray = ["0", "bounce", "swing", "0", "1"]
 	pubObj.ImgOutControl = false, pubObj.ImgOutArray = ["0", "bounce", "swing", "0", "1"]
-	PriObj.test = "";
+	
+	let OriginClass, OriginStyle
+	let HasAnimation = false
 	
 	pubObj.showEffectCard = function() {
 		
@@ -22,7 +23,7 @@ AWP.FTArea.FTElems.ImgCard.ImgEffectCard = function(imgObj) {
 		
 		$("#ImgEffectCard").appendTo("#TheEffect")
 		
-		PriObj.RefreshEffectEvent()
+		RefreshEffectEvent()
 	}
 	
 	pubObj.hideEffectCard = function() {
@@ -47,29 +48,66 @@ AWP.FTArea.FTElems.ImgCard.ImgEffectCard = function(imgObj) {
 		$("#ImgOutAniCount").val(pubObj.ImgOutArray[4])
 	}
 	
-	PriObj.StoreValue = function() {
+	pubObj.stopPreview = function(type) {
 		
-		pubObj.ImgInControl = $("#ImgInEffect").prop("checked")
-		pubObj.ImgInArray[0] = $("#ImgInAniDelay").val()
-		pubObj.ImgInArray[1] = $("#ImgInAniName").val()
-		pubObj.ImgInArray[2] = $("#ImgInAniSpeed").val()
-		pubObj.ImgInArray[3] = $("#ImgInAniDuring").val()
-		pubObj.ImgInArray[4] = $("#ImgInAniCount").val()
-
-		pubObj.ImgOutControl = $("#ImgOutEffect").prop("checked")
-		pubObj.ImgOutArray[0] = $("#ImgOutAniDelay").val()
-		pubObj.ImgOutArray[1] = $("#ImgOutAniName").val()
-		pubObj.ImgOutArray[2] = $("#ImgOutAniSpeed").val()
-		pubObj.ImgOutArray[3] = $("#ImgOutAniDuring").val()
-		pubObj.ImgOutArray[4] = $("#ImgOutAniCount").val()
+		if(HasAnimation) {
+			$("#"+imgObj.ImgId).attr("class", OriginClass)
+			$("#"+imgObj.ImgId).attr("style", OriginStyle)
+			
+			HasAnimation = false
+		}
 	}
 	
-	PriObj.CleanPreview = function() {
+	let StartPreviewIn = function() {
 		
+		if(!pubObj.ImgInControl) { return }
 		
+		OriginClass = $("#"+imgObj.ImgId).attr("class")
+		
+		let classNew = OriginClass + " " + pubObj.ImgInArray[1]
+		
+		OriginStyle = $("#"+imgObj.ImgId).attr("style")
+// console.log(OriginStyle)
+		let styleNew = OriginStyle + "animation-duration:" + (parseInt(pubObj.ImgInArray[3])/1000+'s') + "; "
+		styleNew += "-webkit-animation-duration:" + (parseInt(pubObj.ImgInArray[3])/1000+'s') + "; "
+		styleNew += "animation-delay:" + (parseInt(pubObj.ImgInArray[0])/1000+'s') + "; "
+		styleNew += "-webkit-animation-delay:" + (parseInt(pubObj.ImgInArray[0])/1000+'s') + "; "
+		styleNew += "transition-timing-function:" + pubObj.ImgInArray[2] + "; "
+		styleNew += "-webkit-transition-timing-function:" + pubObj.ImgInArray[2] + "; "
+		styleNew += "animation-iteration-count:" + pubObj.ImgInArray[4] + "; "
+		styleNew += "-webkit-animation-iteration-count:" + pubObj.ImgInArray[4] + "; "
+		
+		$("#"+imgObj.ImgId).attr("class", classNew)
+		$("#"+imgObj.ImgId).attr("style", styleNew)
+		
+		HasAnimation = true
 	}
 	
-	PriObj.RefreshEffectEvent = function () {
+	let StartPreviewOut = function() {
+		if(!pubObj.ImgOutControl) { return }
+		
+		OriginClass = $("#"+imgObj.ImgId).attr("class")
+		
+		let classNew = OriginClass + " " + pubObj.ImgOutArray[1]
+		
+		OriginStyle = $("#"+imgObj.ImgId).attr("style")
+// console.log(OriginStyle)
+		let styleNew = OriginStyle + "animation-duration:" + (parseInt(pubObj.ImgOutArray[3])/1000+'s') + "; "
+		styleNew += "-webkit-animation-duration:" + (parseInt(pubObj.ImgOutArray[3])/1000+'s') + "; "
+		styleNew += "animation-delay:" + (parseInt(pubObj.ImgOutArray[0])/1000+'s') + "; "
+		styleNew += "-webkit-animation-delay:" + (parseInt(pubObj.ImgOutArray[0])/1000+'s') + "; "
+		styleNew += "transition-timing-function:" + pubObj.ImgOutArray[2] + "; "
+		styleNew += "-webkit-transition-timing-function:" + pubObj.ImgOutArray[2] + "; "
+		styleNew += "animation-iteration-count:" + pubObj.ImgOutArray[4] + "; "
+		styleNew += "-webkit-animation-iteration-count:" + pubObj.ImgOutArray[4] + "; "
+		
+		$("#"+imgObj.ImgId).attr("class", classNew)
+		$("#"+imgObj.ImgId).attr("style", styleNew)
+		
+		HasAnimation = true
+	}
+	
+	let RefreshEffectEvent = function () {
 		
 		$("#ImgInPreview").off("click")
 		$("#ImgInEffect").off("change")
@@ -88,11 +126,15 @@ AWP.FTArea.FTElems.ImgCard.ImgEffectCard = function(imgObj) {
 		$("#ImgOutAniCount").off("change")
 		
 		$("#ImgInPreview").on("click", function() {
-console.log(pubObj.ImgInArray)
-console.log(pubObj.ImgOutArray)
+// console.log(pubObj.ImgInArray)
+// console.log(pubObj.ImgOutArray)
+			pubObj.stopPreview()
+			StartPreviewIn()
 		})
 		$("#ImgOutPreview").on("click", function() {
-			
+// console.log(1233456)
+			pubObj.stopPreview()
+			StartPreviewOut()
 		})
 		
 		$("#ImgInEffect").on("change", function() {
