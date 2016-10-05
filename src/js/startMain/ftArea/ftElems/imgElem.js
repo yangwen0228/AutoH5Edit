@@ -9,31 +9,70 @@ AWP.FTArea.FTElems.ImgElem = function(parentObj, imgPath) {
 	
 	let pubObj = this
 	let PriObj = {}
-	pubObj.Type = "Img", pubObj.ImgId = "0"
+	pubObj.Type = "Img", pubObj.ImgId = "0", pubObj.ShadowId = "0"
 	PriObj.AttrObj = {}, PriObj.EffectObj = {};
-	let tes;
 	
-	(function() {
-		let imgId = "img_1_1"
+	pubObj.getId = function () { return pubObj.ImgId }
+	pubObj.getShadow = function () { return pubObj.ShadowId }
+	
+	let ImgObjIni = function() {
+		
+		let imgId = "img_edit_1_1"
 		let imgArray = new Array()
 		while(document.getElementById(imgId)) {
 			imgArray = imgId.split("_")
-			imgArray[2]++
+			imgArray[3]++
 			imgId = imgArray.join("_")
 		}
+		
+		let shadowId = "img_shadow_1_1"
+		let shadowAry = new Array()
+		while(document.getElementById(shadowId)) {
+			shadowAry = shadowId.split("_")
+			shadowAry[3]++
+			shadowId = shadowAry.join("_")
+		}
+		
 		pubObj.ImgId = imgId
+		pubObj.ShadowId = shadowId
 	
 		let imgText = '\n<div class="editImg" id="' + imgId + '" draggable="false">\n<img src="' + imgPath + '"></img>\n</div>\n'
 		$("#"+parentObj.PageEditId).append(imgText)
 		
-		parentObj.ElemIdArray.push(imgId)
+		let shadowText = '\n<div class="flowImg" id="' + shadowId + '" draggable="false">\n<img src="' + imgPath + '"></img>\n</div>\n'
+		$("#"+parentObj.PageFlowId).append(shadowText)
+		
+		pubObj.syncShadowFromImg()
 		
 		PriObj.AttrObj = new AWP.FTArea.FTElems.ImgCard.ImgAttrCard(pubObj)
 		PriObj.EffectObj = new AWP.FTArea.FTElems.ImgCard.ImgEffectCard(pubObj)
-		
-	}())
+	}
 	
-	PriObj.BindImgDragable = function(jqSeleImg) {
+	pubObj.syncShadowFromImg = function() {
+		
+		let jqImgObj = $("#"+pubObj.ImgId)
+		
+		let imgCssAry1 = ["top", "height"]
+		for(let imgCss of imgCssAry1) {
+
+			let valueCss = ((parseInt(jqImgObj.css(imgCss))/parseInt(jqImgObj.parent().css("height")))*100).toFixed(2)
+			$("#"+pubObj.ShadowId).css(imgCss, valueCss + "%")
+		}
+		
+		let imgCssAry2 = ["left", "width"]
+		for(let imgCss of imgCssAry2) {
+
+			let valueCss = ((parseInt(jqImgObj.css(imgCss))/parseInt(jqImgObj.parent().css("width")))*100).toFixed(2)
+			$("#"+pubObj.ShadowId).css(imgCss, valueCss + "%")
+		}
+		
+		let imgCssAry3 = ["background"]
+		for(let imgCss of imgCssAry3) {
+			$("#"+pubObj.ShadowId).css(imgCss, jqImgObj.css(imgCss))
+		}
+	}
+	
+	let BindImgDragable = function(jqSeleImg) {
 		jqSeleImg.css("cursor", "move")
 		jqSeleImg.attr("draggable", "false")
 		let eventDX, eventDY, startDX, startDY, dragCt
@@ -65,7 +104,7 @@ AWP.FTArea.FTElems.ImgElem = function(parentObj, imgPath) {
 			dragCt = false 
 		})
 	}
-	PriObj.BindImgResizeable = function(jqSeleImg) {
+	let BindImgResizeable = function(jqSeleImg) {
 		let pointsClass = ['tl', 'tc', 'tr', 'mr', 'br', 'bc', 'bl', 'ml'];
 		let resizePoints = '';
 		for(let i=0; i<pointsClass.length; i++){
@@ -136,26 +175,30 @@ AWP.FTArea.FTElems.ImgElem = function(parentObj, imgPath) {
 			resizeCt = false 
 		})
 	}
-	PriObj.BindImgControl = function(jqSeleImg) {
+	let BindImgControl = function(jqSeleImg, jqShadowImg) {
 		
 		$("#BTTop").on("click", function() {
 			jqSeleImg.next().after(jqSeleImg)
+			jqShadowImg.next().after(jqShadowImg)
 		})
 		
 		$("#BTDown").on("click", function() {
 			jqSeleImg.prev().before(jqSeleImg)
+			jqShadowImg.prev().before(jqShadowImg)
 		})
 		
 		$("#BTDel").on("click", function() {
 			jqSeleImg.remove()
+			jqShadowImg.remove()
 			parentObj.SeleElemId == 0
 		
-			let imgPos = parentObj.ElemIdArray.indexOf(pubObj.ImgId)
-			parentObj.ElemIdArray.splice(imgPos, 1)
-			parentObj.ElemObjArray.splice(imgPos, 1)
+			let imgPos = parentObj.ElemObjArray.indexOf(pubObj)
+			if(imgPos > -1) {
+				parentObj.ElemObjArray.splice(imgPos, 1)
+			}
 		})
 	}
-	PriObj.UnBindImgEvent = function() {
+	let UnBindImgEvent = function() {
 		if(parentObj.SeleElemId != 0) {
 			$("#"+parentObj.SeleElemId).off("mouseup mousedown mousemove")
 			$("#"+parentObj.SeleElemId).children("span").remove()
@@ -164,25 +207,25 @@ AWP.FTArea.FTElems.ImgElem = function(parentObj, imgPath) {
 			$("#BTDel").off("click")
 		}
 	}
-	PriObj.BindImgEditable = function() {
+	let BindImgEditable = function() {
 		
-		PriObj.UnBindImgEvent()
+		UnBindImgEvent()
 		
 		let jqSeleImg = $("#"+pubObj.ImgId)
+		let jqShadowImg = $("#"+pubObj.ShadowId)
 		
-		PriObj.BindImgDragable(jqSeleImg)
-		PriObj.BindImgResizeable(jqSeleImg)
-		PriObj.BindImgControl(jqSeleImg)
+		BindImgDragable(jqSeleImg)
+		BindImgResizeable(jqSeleImg)
+		BindImgControl(jqSeleImg, jqShadowImg)
 	}
-	
-	pubObj.test = function() {
+
+	;(function() {
 		
-	};
-	
-	(function() {
+		ImgObjIni()
+		
 		$("#"+pubObj.ImgId).on("click", function() {
 // console.log("OKOKOK")
-			PriObj.BindImgEditable()
+			BindImgEditable()
 			
 			parentObj.SeleElemId = pubObj.ImgId
 			

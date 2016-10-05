@@ -1,3 +1,3 @@
-E:
-cd E:\FrontSide\WorkNow\workspace\AutoWebpage
+F:
+cd F:\WorkNow\workspace\AutoWebPage
 electron .

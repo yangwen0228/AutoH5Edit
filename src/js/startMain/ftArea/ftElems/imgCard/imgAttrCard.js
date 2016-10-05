@@ -31,6 +31,8 @@ AWP.FTArea.FTElems.ImgCard.ImgAttrCard = function(imgObj) {
 		pubObj.setValueLeftRight()
 		pubObj.setValueWidth()
 		pubObj.setValueHeight()
+		
+		imgObj.syncShadowFromImg()
 	}
 	
 	pubObj.setValueTopDown = function() {
@@ -196,6 +198,11 @@ AWP.FTArea.FTElems.ImgCard.ImgAttrCard = function(imgObj) {
 			$("#ImgHTPix").spinner("value", pixHT)
 			
 			$("#"+imgObj.ImgId).css({"height": perHT+"%"})
+		})
+		
+		$("#ImgTDPix, #ImgTDPer, #ImgLRPix, #ImgLRPer, #ImgWDPix, #ImgWDPer, #ImgHTPix, #ImgHTPer")
+		.on("spinstop", function() { 
+			imgObj.syncShadowFromImg() 
 		})
 	}
 }

@@ -9,10 +9,10 @@ AWP.FTArea.FlowPage = function(parentObj, brotherObj) {
 	let pubObj = this
 	let PriObj = {}
 
-	pubObj.SeleElemId = 0, pubObj.ElemIdArray = [], pubObj.Position = 0, pubObj.PageFlowId = "0",
-	pubObj.PageEditId = "0", pubObj.ElemObjArray = [];
+	pubObj.SeleElemId = 0, pubObj.Position = 0, pubObj.PageFlowId = "0",
+	pubObj.PageEditId = "0", pubObj.ElemObjArray = []
 	
-	(function() {
+	;(function() {
 		
 		let pageArray
 		
@@ -57,7 +57,7 @@ AWP.FTArea.FlowPage = function(parentObj, brotherObj) {
 		}
 	}())
 	
-	PriObj.DispEditPage = function() {
+	let DispEditPage = function() {
 		
 		$("#"+pubObj.PageEditId).css("display", "inline")
 		
@@ -88,6 +88,13 @@ AWP.FTArea.FlowPage = function(parentObj, brotherObj) {
 			}
 		})
 	}
+
+	PriObj.AddText = function() {
+// console.log(pubObj.PageFlowId)
+		let textObj = new AWP.FTArea.FTElems.TextElem(pubObj)
+		
+		pubObj.ElemObjArray.push(textObj)
+	}
 	
 	PriObj.AddAnim = function() {
 // console.log(pubObj.PageFlowId)
@@ -107,18 +114,7 @@ AWP.FTArea.FlowPage = function(parentObj, brotherObj) {
 		}]).dialog("open")
 	}
 	
-	PriObj.AddText = function() {
-// console.log(pubObj.PageFlowId)
-		let textObj = new AWP.FTArea.FTElems.TextElem(pubObj)
-		
-		pubObj.ElemObjArray.push(textObj)
-	}
-	
-	pubObj.test = function() {
-		
-	};
-	
-	(function() {
+	;(function() {
 		$("#"+pubObj.PageFlowId).on("mousedown", function() {
 			
 			// if (parentObj.SeleFlowPageId != "") {
@@ -130,7 +126,7 @@ AWP.FTArea.FlowPage = function(parentObj, brotherObj) {
 			parentObj.SelePagePos = pubObj.Position
 			parentObj.displayHeadContent()
 			
-			PriObj.DispEditPage()
+			DispEditPage()
 			
 			parentObj.SeleFlowPageId = pubObj.PageFlowId
 			parentObj.SeleEditPageId = pubObj.PageEditId

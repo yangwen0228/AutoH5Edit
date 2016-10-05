@@ -65,19 +65,20 @@
 	top: 5%;
 	bottom: 6%;
 	left: 0%;
-	right: 0%;
+	right: 60%;
 	overflow-y: auto;
 /*	padding: 20px 0px 20px 0px;*/
 }
 
 .flowPage {
 	position: relative;
-	left: 10%;
+	left: 5%;
 	top: 0px;
-	width: 80%;
-	height: 60%;
+	width: 90%;
+	padding-top: 150%;
+/*	height: 60%;*/
 	background: #0000ff;
-	margin: 20px 0px;
+	margin: 10px 0px;
 }
 
 /*
@@ -85,6 +86,16 @@
 	outline: #00ff00 solid thick
 }
 */
+
+#FlowTree {
+	position: absolute;
+	top: 5%;
+	bottom: 6%;
+	left: 40%;
+	right: 0%;
+	overflow-y: auto;
+	background: #00ff89;
+}
 
 #flowFoot {
 	position: absolute;
@@ -104,4 +115,6 @@
 /*	background: #00ffff;*/
 }
 
-
+.flowImg {
+	position: absolute;
+}
