@@ -87,7 +87,7 @@
 }
 */
 
-#FlowTree {
+#TreeContent {
 	position: absolute;
 	top: 5%;
 	bottom: 6%;
@@ -96,6 +96,27 @@
 	overflow-y: auto;
 	background: #00ff89;
 }
+
+.treePage {
+	position: absolute;
+	top: 0%;
+	left: 0%;
+	bottom: 0%;
+	right: 0%;
+	display: none;
+/*	width: 200%;*/
+/*	height: 200%;*/
+	background: #ebff00;
+}
+
+.treePage:nth-child(1) {
+	background: #00ff00;
+}
+
+.treePage:nth-child(2) {
+	background: #ff0000;
+}
+
 
 #flowFoot {
 	position: absolute;

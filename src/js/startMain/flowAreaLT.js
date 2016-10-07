@@ -7,10 +7,12 @@ var AWP = AWP || {}
 AWP.FlowArea = function() {
 	
 	let pubObj = this
-	let PriObj = {}
 	
-	pubObj.SeleFlowPageId = 0,pubObj.SelePagePos = 0, pubObj.PageFlowIdArray = [], pubObj.PageEditIdArray = []
-	PriObj.PageObjArray= []
+	pubObj.SeleFlowPageId = "0", pubObj.SeleEditPageId = "0", pubObj.SeleTreePageId = "0"
+	pubObj.PageFlowIdArray = [], pubObj.PageEditIdArray = [], pubObj.PageTreeIdArray = []
+	pubObj.SelePagePos = 0
+	
+	let PageObjArray= []
 	
 	pubObj.displayHeadContent = function() {
 		
@@ -18,11 +20,11 @@ AWP.FlowArea = function() {
 		$("#flowHead").text(dispText)
 	}
 	
-	PriObj.AddPage = function() {
+	let AddPage = function() {
 		
 		let pageObj = new AWP.FTArea.FlowPage(pubObj, "end")
 		
-		PriObj.PageObjArray.push(pageObj)
+		PageObjArray.push(pageObj)
 	}
 	
 	pubObj.copyPage = function(pageObj) {
@@ -46,12 +48,8 @@ AWP.FlowArea = function() {
 		
 	}
 
-	pubObj.test = function(pageObj) {
-		
-	};
-	
-	(function() {
-		$("#AddPage").on("click", PriObj.AddPage)
+	;(function() {
+		$("#AddPage").on("click", AddPage)
 		pubObj.displayHeadContent()
 	}())
 }
