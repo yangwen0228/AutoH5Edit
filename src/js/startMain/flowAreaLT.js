@@ -9,10 +9,14 @@ AWP.FlowArea = function() {
 	let pubObj = this
 	
 	pubObj.SeleFlowPageId = "0", pubObj.SeleEditPageId = "0", pubObj.SeleTreePageId = "0"
-	pubObj.PageFlowIdArray = [], pubObj.PageEditIdArray = [], pubObj.PageTreeIdArray = []
+	pubObj.PageFlowIdArray = [];// pubObj.PageEditIdArray = [], pubObj.PageTreeIdArray = []
 	pubObj.SelePagePos = 0
 	
-	let PageObjArray= []
+	let PageObjArray = [], UniquePageIndex = 0
+	
+	pubObj.getUniquePageIndex = function() {
+		return ++ UniquePageIndex
+	}
 	
 	pubObj.displayHeadContent = function() {
 		

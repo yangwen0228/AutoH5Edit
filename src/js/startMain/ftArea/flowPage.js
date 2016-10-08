@@ -7,56 +7,74 @@ AWP.FTArea = AWP.FTArea || {}
 AWP.FTArea.FlowPage = function(parentObj, brotherObj) {
 	
 	let pubObj = this
-	let PriObj = {}
 
 	pubObj.SeleElemId = 0, pubObj.Position = 0, pubObj.PageFlowId = "0", pubObj.PageTreeId = "0",
 	pubObj.PageEditId = "0", pubObj.ElemObjArray = []
 	
+	let UniquePageIndex, UniqueElemIndex = 0
+	
+	pubObj.getUniqueElemStr = function() {
+		UniqueElemIndex ++
+		return UniquePageIndex + "_" + UniqueElemIndex
+	}
+	
 	let PageObjIni = function() {
 		
-		let pageArray
+		let uIndex = parentObj.getUniquePageIndex()
 		
-		let pageFlowId = "page_flow_1_1"
-		pageArray = new Array()
-		while (parentObj.PageFlowIdArray.indexOf(pageFlowId) !== -1 ) {
-			pageArray = pageFlowId.split("_")
-			pageArray[3] ++
-			pageFlowId = pageArray.join("_")
-		}
-		
-		let pageEditId = "page_eidt_1_1"
-		pageArray = new Array()
-		while (parentObj.PageEditIdArray.indexOf(pageEditId) !== -1 ) {
-			pageArray = pageEditId.split("_")
-			pageArray[3] ++
-			pageEditId = pageArray.join("_")
-		}
-		
-		let pageTreeId = "page_tree_1_1"
-		pageArray = new Array()
-		while (parentObj.PageTreeIdArray.indexOf(pageTreeId) !== -1 ) {
-			pageArray = pageTreeId.split("_")
-			pageArray[3] ++
-			pageTreeId = pageArray.join("_")
-		}
+		UniquePageIndex = uIndex
+		// let pageArray
+		let pageFlowId = "page_flow_"+uIndex
+		let pageEditId = "page_eidt_"+uIndex
+		let pageTreeId = "page_tree_"+uIndex
 		
 		let pageFlowText = '\n<div class="flowPage" id="' + pageFlowId +'">\n</div>\n'
 		let pageEditText = '\n<div class="editPage" id="' + pageEditId +'">\n</div>\n'
 		let pageTreeText = '\n<div class="treePage" id="' + pageTreeId +'">\n</div>\n'
+		
 		if (brotherObj == "end") {
 			$("#FlowContent").append(pageFlowText)
 			$("#TreeContent").append(pageTreeText)
 			$("#EditArea").append(pageEditText)
 			
 			parentObj.PageFlowIdArray.push(pageFlowId)
-			parentObj.PageEditIdArray.push(pageEditId)
-			parentObj.PageTreeIdArray.push(pageTreeId)
 			parentObj.displayHeadContent()
 			
 			pubObj.PageFlowId = pageFlowId
 			pubObj.PageEditId = pageEditId
 			pubObj.PageTreeId = pageTreeId
 			pubObj.Position = parentObj.PageFlowIdArray.length
+			
+			$("#"+pageTreeId).jstree({
+				"core" : {
+					"check_callback" : true,
+					"data" : [
+					{"id": "Root"+uIndex, "parent": "#", "text": "Root", "type": "root"}, 
+					{"id": "ajson2", "parent": "Root"+uIndex, "text": "folder1", "type": "folder"}, 
+					{"id": "ajson3", "parent": "ajson2", "text": "folder2", "type": "folder"}, 
+					{"id": "ajson4", "parent": "Root"+uIndex, "text": "img1", "type": "imgfile"}]
+				},
+				"types" : {
+					"#" : {
+						"max_children" : 1,
+						"valid_children" : ["root"]
+					},
+					"root" : {
+						"valid_children" : ["folder", "imgfile", "textfile"]
+					},
+					"folder" : {
+						"valid_children" : ["folder", "imgfile", "textfile"]
+					},
+					"imgfile" : {
+						"valid_children" : []
+					},
+					"textfile" : {
+						"valid_children" : []
+					}
+				},
+				"plugins" : ["wholerow", "contextmenu", "dnd", "types"]
+			})
+			
 // console.log(pubObj.Position)
 		} else {
 			let brotherId = brotherObj.PageFlowId
@@ -79,16 +97,16 @@ AWP.FTArea.FlowPage = function(parentObj, brotherObj) {
 		$("#"+pubObj.PageTreeId).css("display", "block")
 		
 		$("#NewPic").off("click")
-		$("#NewPic").on("click", PriObj.AddImg)
+		$("#NewPic").on("click", AddImg)
 		
 		$("#NewText").off("click")
-		$("#NewText").on("click", PriObj.AddText)
+		$("#NewText").on("click", AddText)
 		
 		$("#NewAnim").off("click")
-		$("#NewAnim").on("click", PriObj.AddAnim)
+		$("#NewAnim").on("click", AddAnim)
 	}
 	
-	PriObj.AddImg = function() {
+	let AddImg = function() {
 		dialog.showOpenDialog({
 			title: "Select A File",
 			properties: ["openFile", "multiSelections"],
@@ -103,14 +121,14 @@ AWP.FTArea.FlowPage = function(parentObj, brotherObj) {
 		})
 	}
 
-	PriObj.AddText = function() {
+	let AddText = function() {
 // console.log(pubObj.PageFlowId)
 		let textObj = new AWP.FTArea.FTElems.TextElem(pubObj)
 		
 		pubObj.ElemObjArray.push(textObj)
 	}
 	
-	PriObj.AddAnim = function() {
+	let AddAnim = function() {
 // console.log(pubObj.PageFlowId)
 		$("#NewPicDL").dialog( "option", "buttons",[{
 			text: "确定",

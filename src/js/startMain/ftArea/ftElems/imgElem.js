@@ -17,21 +17,22 @@ AWP.FTArea.FTElems.ImgElem = function(parentObj, imgPath) {
 	
 	let ImgObjIni = function() {
 		
-		let imgId = "img_edit_1_1"
-		let imgArray = new Array()
-		while(document.getElementById(imgId)) {
-			imgArray = imgId.split("_")
-			imgArray[3]++
-			imgId = imgArray.join("_")
-		}
+		let uStr = parentObj.getUniqueElemStr()
 		
-		let shadowId = "img_shadow_1_1"
-		let shadowAry = new Array()
-		while(document.getElementById(shadowId)) {
-			shadowAry = shadowId.split("_")
-			shadowAry[3]++
-			shadowId = shadowAry.join("_")
-		}
+		let imgId = "img_edit_"+uStr
+		// let imgArray = new Array()
+		// while(document.getElementById(imgId)) {
+			// imgArray = imgId.split("_")
+			// imgArray[3]++
+			// imgId = imgArray.join("_")
+		// }
+		let shadowId = "img_shadow_"+uStr
+		// let shadowAry = new Array()
+		// while(document.getElementById(shadowId)) {
+			// shadowAry = shadowId.split("_")
+			// shadowAry[3]++
+			// shadowId = shadowAry.join("_")
+		// }
 		
 		pubObj.ImgId = imgId
 		pubObj.ShadowId = shadowId
