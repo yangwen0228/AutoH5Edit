@@ -79,6 +79,7 @@
 /*	height: 60%;*/
 	background: #0000ff;
 	margin: 10px 0px;
+	overflow: hidden;
 }
 
 /*
@@ -93,7 +94,7 @@
 	bottom: 6%;
 	left: 40%;
 	right: 0%;
-	overflow-y: auto;
+	overflow: auto;
 	background: #00ff89;
 }
 

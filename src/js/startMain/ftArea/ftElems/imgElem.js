@@ -5,11 +5,12 @@
 var AWP = AWP || {}
 AWP.FTArea = AWP.FTArea || {}
 AWP.FTArea.FTElems = AWP.FTArea.FTElems || {}
-AWP.FTArea.FTElems.ImgElem = function(parentObj, imgPath) {
+AWP.FTArea.FTElems.ImgElem = function(pageObj, imgPath) {
 	
 	let pubObj = this
 	let PriObj = {}
-	pubObj.Type = "Img", pubObj.ImgId = "0", pubObj.ShadowId = "0"
+	pubObj.Type = "0", pubObj.ImgId = "0", pubObj.ShadowId = "0", pubObj.NodeId = "0"
+	// pubObj.parentId = divId || 
 	PriObj.AttrObj = {}, PriObj.EffectObj = {};
 	
 	pubObj.getId = function () { return pubObj.ImgId }
@@ -17,31 +18,31 @@ AWP.FTArea.FTElems.ImgElem = function(parentObj, imgPath) {
 	
 	let ImgObjIni = function() {
 		
-		let uStr = parentObj.getUniqueElemStr()
+		let uStr = pageObj.getUniqueElemStr()
 		
-		let imgId = "img_edit_"+uStr
-		// let imgArray = new Array()
-		// while(document.getElementById(imgId)) {
-			// imgArray = imgId.split("_")
-			// imgArray[3]++
-			// imgId = imgArray.join("_")
+		let imgId = "img_edit_"+uStr, shadowId = "img_shadow_"+uStr
+		
+		pubObj.ImgId = imgId, pubObj.ShadowId = shadowId, pubObj.NodeId = "img_node_"+uStr
+		
+		let imgText, shadowText
+		if(imgPath == "none") {
+			
+			pubObj.Type = "Div"
+			imgText = '\n<div class="editImg" id="' + imgId + '" draggable="false">\n</div>\n'
+			shadowText = '\n<div class="flowImg" id="' + shadowId + '" draggable="false">\n</div>\n'
+		} else {
+			pubObj.Type = "Img"
+			imgText = '\n<div class="editImg" id="' + imgId + '" draggable="false">\n<img src="' + imgPath + '"></img>\n</div>\n'
+			shadowText = '\n<div class="flowImg" id="' + shadowId + '" draggable="false">\n<img src="' + imgPath + '"></img>\n</div>\n'
+		}
+		
+		// if(divId == "none") {
+			$("#"+pageObj.PageEditId).append(imgText)
+			$("#"+pageObj.PageFlowId).append(shadowText)
+		// } else {
+			// $("#"+divId).append(imgText)
+			// $("#"+divId).append(shadowText)
 		// }
-		let shadowId = "img_shadow_"+uStr
-		// let shadowAry = new Array()
-		// while(document.getElementById(shadowId)) {
-			// shadowAry = shadowId.split("_")
-			// shadowAry[3]++
-			// shadowId = shadowAry.join("_")
-		// }
-		
-		pubObj.ImgId = imgId
-		pubObj.ShadowId = shadowId
-	
-		let imgText = '\n<div class="editImg" id="' + imgId + '" draggable="false">\n<img src="' + imgPath + '"></img>\n</div>\n'
-		$("#"+parentObj.PageEditId).append(imgText)
-		
-		let shadowText = '\n<div class="flowImg" id="' + shadowId + '" draggable="false">\n<img src="' + imgPath + '"></img>\n</div>\n'
-		$("#"+parentObj.PageFlowId).append(shadowText)
 		
 		pubObj.syncShadowFromImg()
 		
@@ -191,18 +192,18 @@ AWP.FTArea.FTElems.ImgElem = function(parentObj, imgPath) {
 		$("#BTDel").on("click", function() {
 			jqSeleImg.remove()
 			jqShadowImg.remove()
-			parentObj.SeleElemId == 0
+			pageObj.SeleElemId == 0
 		
-			let imgPos = parentObj.ElemObjArray.indexOf(pubObj)
+			let imgPos = pageObj.ElemObjArray.indexOf(pubObj)
 			if(imgPos > -1) {
-				parentObj.ElemObjArray.splice(imgPos, 1)
+				pageObj.ElemObjArray.splice(imgPos, 1)
 			}
 		})
 	}
 	let UnBindImgEvent = function() {
-		if(parentObj.SeleElemId != 0) {
-			$("#"+parentObj.SeleElemId).off("mouseup mousedown mousemove")
-			$("#"+parentObj.SeleElemId).children("span").remove()
+		if(pageObj.SeleElemId != 0) {
+			$("#"+pageObj.SeleElemId).off("mouseup mousedown mousemove")
+			$("#"+pageObj.SeleElemId).children("span").remove()
 			$("#BTTop").off("click")
 			$("#BTDown").off("click")
 			$("#BTDel").off("click")
@@ -228,7 +229,7 @@ AWP.FTArea.FTElems.ImgElem = function(parentObj, imgPath) {
 // console.log("OKOKOK")
 			BindImgEditable()
 			
-			parentObj.SeleElemId = pubObj.ImgId
+			pageObj.SeleElemId = pubObj.ImgId
 			
 			PriObj.AttrObj.showAttrCard()
 			PriObj.AttrObj.setValueTDLRWH()

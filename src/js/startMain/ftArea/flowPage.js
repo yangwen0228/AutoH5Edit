@@ -11,22 +11,29 @@ AWP.FTArea.FlowPage = function(parentObj, brotherObj) {
 	pubObj.SeleElemId = 0, pubObj.Position = 0, pubObj.PageFlowId = "0", pubObj.PageTreeId = "0",
 	pubObj.PageEditId = "0", pubObj.ElemObjArray = []
 	
-	let UniquePageIndex, UniqueElemIndex = 0
+	let UPageIndex, UElemIndex = 0, TreeObj, NodeIdArray, AttrObj
 	
 	pubObj.getUniqueElemStr = function() {
-		UniqueElemIndex ++
-		return UniquePageIndex + "_" + UniqueElemIndex
+		UElemIndex ++
+		return UPageIndex + "_" + UElemIndex
+	}
+	
+	pubObj.getElemObjByNodeId = function(nodeId) {
+		for(let elemObj of pubObj.ElemObjArray) {
+			
+		}
+		return pubObj.PageEditId
 	}
 	
 	let PageObjIni = function() {
 		
-		let uIndex = parentObj.getUniquePageIndex()
+		AttrObj = new AWP.FTArea.PageCard.PageAttrCard(pubObj)
 		
-		UniquePageIndex = uIndex
+		UPageIndex = parentObj.getUniquePageIndex()
 		// let pageArray
-		let pageFlowId = "page_flow_"+uIndex
-		let pageEditId = "page_eidt_"+uIndex
-		let pageTreeId = "page_tree_"+uIndex
+		let pageFlowId = "page_flow_"+UPageIndex
+		let pageEditId = "page_eidt_"+UPageIndex
+		let pageTreeId = "page_tree_"+UPageIndex
 		
 		let pageFlowText = '\n<div class="flowPage" id="' + pageFlowId +'">\n</div>\n'
 		let pageEditText = '\n<div class="editPage" id="' + pageEditId +'">\n</div>\n'
@@ -40,41 +47,22 @@ AWP.FTArea.FlowPage = function(parentObj, brotherObj) {
 			parentObj.PageFlowIdArray.push(pageFlowId)
 			parentObj.displayHeadContent()
 			
-			pubObj.PageFlowId = pageFlowId
-			pubObj.PageEditId = pageEditId
-			pubObj.PageTreeId = pageTreeId
+			pubObj.PageFlowId = pageFlowId, pubObj.PageEditId = pageEditId, pubObj.PageTreeId = pageTreeId
 			pubObj.Position = parentObj.PageFlowIdArray.length
 			
-			$("#"+pageTreeId).jstree({
+			TreeObj = $("#"+pageTreeId).jstree({
 				"core" : {
 					"check_callback" : true,
-					"data" : [
-					{"id": "Root"+uIndex, "parent": "#", "text": "Root", "type": "root"}, 
-					{"id": "ajson2", "parent": "Root"+uIndex, "text": "folder1", "type": "folder"}, 
-					{"id": "ajson3", "parent": "ajson2", "text": "folder2", "type": "folder"}, 
-					{"id": "ajson4", "parent": "Root"+uIndex, "text": "img1", "type": "imgfile"}]
+					"data" : [{"id": "Root"+UPageIndex, "parent": "#", "text": "Root", "type": "root"}]
 				},
-				"types" : {
-					"#" : {
-						"max_children" : 1,
-						"valid_children" : ["root"]
-					},
-					"root" : {
-						"valid_children" : ["folder", "imgfile", "textfile"]
-					},
-					"folder" : {
-						"valid_children" : ["folder", "imgfile", "textfile"]
-					},
-					"imgfile" : {
-						"valid_children" : []
-					},
-					"textfile" : {
-						"valid_children" : []
-					}
+				"types" : AttrObj.defineTreeTypes(),
+				"contextmenu" : {
+					select_node : true,
+					show_at_node : true,
+					items : function(obj, cb) { return AttrObj.defineTreeMenu(obj, cb) }
 				},
 				"plugins" : ["wholerow", "contextmenu", "dnd", "types"]
-			})
-			
+			}).jstree(true)
 // console.log(pubObj.Position)
 		} else {
 			let brotherId = brotherObj.PageFlowId
@@ -115,8 +103,26 @@ AWP.FTArea.FlowPage = function(parentObj, brotherObj) {
 			if(!imgPathArray) { return }
 			
 			for(let imgPath of imgPathArray) {
+				
 				let imgObj = new AWP.FTArea.FTElems.ImgElem(pubObj, imgPath)
 				pubObj.ElemObjArray.push(imgObj)
+// console.log("Root"+UPageIndex)
+				let sNode = TreeObj.get_selected()
+				let sNodeType = TreeObj.get_type(sNode)
+				let pNode = TreeObj.get_node({"id": "Root"+UPageIndex})
+				if(sNodeType == false || (sNodeType != "root" && sNodeType != "div")) {
+					
+					// let imgObj = new AWP.FTArea.FTElems.ImgElem(pubObj, pubObj, imgPath)
+					// pubObj.ElemObjArray.push(imgObj)
+					// NodeIdArray.push(imgObj.NodeId)
+					TreeObj.create_node(pNode, {"id": imgObj.NodeId, "text": imgPath, "type": "imgfile"})
+				} else {
+					// let elemObj = pubObj.getElemObjByNodeId(sNode.id)
+					// let imgObj = new AWP.FTArea.FTElems.ImgElem(pubObj, elemObj, imgPath)
+					// pubObj.ElemObjArray.push(imgObj)
+					// NodeIdArray.push(imgObj.NodeId)
+					TreeObj.create_node(sNode, {"id": imgObj.NodeId, "text": imgPath, "type": "imgfile"})
+				}
 			}
 		})
 	}
