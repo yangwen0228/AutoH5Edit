@@ -5,12 +5,11 @@
 var AWP = AWP || {}
 AWP.FTArea = AWP.FTArea || {}
 AWP.FTArea.FTElems = AWP.FTArea.FTElems || {}
-AWP.FTArea.FTElems.ImgElem = function(pageObj, imgPath) {
+AWP.FTArea.FTElems.ImgElem = function(pageObj, parentObj, imgPath) {
 	
 	let pubObj = this
 	let PriObj = {}
 	pubObj.Type = "0", pubObj.ImgId = "0", pubObj.ShadowId = "0", pubObj.NodeId = "0"
-	// pubObj.parentId = divId || 
 	PriObj.AttrObj = {}, PriObj.EffectObj = {};
 	
 	pubObj.getId = function () { return pubObj.ImgId }
@@ -19,14 +18,12 @@ AWP.FTArea.FTElems.ImgElem = function(pageObj, imgPath) {
 	let ImgObjIni = function() {
 		
 		let uStr = pageObj.getUniqueElemStr()
-		
 		let imgId = "img_edit_"+uStr, shadowId = "img_shadow_"+uStr
 		
 		pubObj.ImgId = imgId, pubObj.ShadowId = shadowId, pubObj.NodeId = "img_node_"+uStr
 		
 		let imgText, shadowText
 		if(imgPath == "none") {
-			
 			pubObj.Type = "Div"
 			imgText = '\n<div class="editImg" id="' + imgId + '" draggable="false">\n</div>\n'
 			shadowText = '\n<div class="flowImg" id="' + shadowId + '" draggable="false">\n</div>\n'
@@ -36,18 +33,22 @@ AWP.FTArea.FTElems.ImgElem = function(pageObj, imgPath) {
 			shadowText = '\n<div class="flowImg" id="' + shadowId + '" draggable="false">\n<img src="' + imgPath + '"></img>\n</div>\n'
 		}
 		
-		// if(divId == "none") {
+		if(parentObj == "none") {
 			$("#"+pageObj.PageEditId).append(imgText)
-			$("#"+pageObj.PageFlowId).append(shadowText)
-		// } else {
-			// $("#"+divId).append(imgText)
-			// $("#"+divId).append(shadowText)
-		// }
+		} else {
+			$("#"+pageObj.PageEditId).append(imgText)
+			// $("#"+parentObj.getId()).append(imgText)
+		}
 		
+		$("#"+pageObj.PageFlowId).append(shadowText)
+	
 		pubObj.syncShadowFromImg()
 		
 		PriObj.AttrObj = new AWP.FTArea.FTElems.ImgCard.ImgAttrCard(pubObj)
 		PriObj.EffectObj = new AWP.FTArea.FTElems.ImgCard.ImgEffectCard(pubObj)
+		
+		pageObj.NodeIdArray.push(pubObj.NodeId)
+		pageObj.ElemObjArray.push(pubObj)
 	}
 	
 	pubObj.syncShadowFromImg = function() {

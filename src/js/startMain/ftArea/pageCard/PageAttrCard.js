@@ -33,7 +33,7 @@ AWP.FTArea.PageCard.PageAttrCard = function(pageObj) {
 	}
 	
 	pubObj.defineTreeMenu = function (obj, cb) { //right click invoke
-console.log(obj)
+// console.log(obj)
 		return {
 			"create" : DTMCreate(),
 			"rename" : DTMRename(),
@@ -64,10 +64,36 @@ console.log(obj)
 				
 				let sNode = inst.get_selected()
 				let sNodeType = inst.get_type(sNode)
-				if(sNodeType == false || (sNodeType != "root" && sNodeType != "div")) { return }
 				
-				let divObj = new AWP.FTArea.FTElems.ImgElem(pageObj, "none")
+				let divObj
+				switch(sNodeType) {
+					case false: { 
+						return 
+					}
+					case "root": {
+						divObj = new AWP.FTArea.FTElems.ImgElem(pageObj, "none", "none")
+						break 
+					}
+					case "div": {
+						let elemObj = pageObj.getElemObjByNodeId(sNode[0])
+						divObj = new AWP.FTArea.FTElems.ImgElem(pageObj, elemObj, "none")
+						break 
+					}
+					default: {
+						return 
+					}
+				}
 				inst.create_node(sNode, {"id": divObj.NodeId, "text": "divFolder", "type": "div"})
+				// if(sNodeType == false || (sNodeType != "root" && sNodeType != "div")) { return }
+				
+				// let divObj
+				// if(sNodeType == "root") {
+					// divObj = new AWP.FTArea.FTElems.ImgElem(pageObj, "none", "none")
+				// } else {
+					// let elemObj = pageObj.getElemObjByNodeId(sNode.id)
+					// divObj = new AWP.FTArea.FTElems.ImgElem(pageObj, elemObj, "none")
+				// }
+				// inst.create_node(sNode, {"id": divObj.NodeId, "text": "divFolder", "type": "div"})
 			}
 		}
 	}

@@ -4,14 +4,14 @@
 */
 var AWP = AWP || {}
 AWP.FTArea = AWP.FTArea || {}
-AWP.FTArea.FlowPage = function(parentObj, brotherObj) {
+AWP.FTArea.FlowPage = function(flowObj, brotherObj) {
 	
 	let pubObj = this
 
-	pubObj.SeleElemId = 0, pubObj.Position = 0, pubObj.PageFlowId = "0", pubObj.PageTreeId = "0",
+	pubObj.SeleElemId = 0, pubObj.Position = 0, pubObj.PageFlowId = "0", pubObj.PageTreeId = "0", pubObj.NodeIdArray = [],
 	pubObj.PageEditId = "0", pubObj.ElemObjArray = []
 	
-	let UPageIndex, UElemIndex = 0, TreeObj, NodeIdArray, AttrObj
+	let UPageIndex, UElemIndex = 0, TreeObj, AttrObj
 	
 	pubObj.getUniqueElemStr = function() {
 		UElemIndex ++
@@ -19,17 +19,15 @@ AWP.FTArea.FlowPage = function(parentObj, brotherObj) {
 	}
 	
 	pubObj.getElemObjByNodeId = function(nodeId) {
-		for(let elemObj of pubObj.ElemObjArray) {
-			
-		}
-		return pubObj.PageEditId
+		let idIndex = pubObj.NodeIdArray.indexOf(nodeId)
+		return pubObj.ElemObjArray[idIndex]
 	}
 	
 	let PageObjIni = function() {
 		
 		AttrObj = new AWP.FTArea.PageCard.PageAttrCard(pubObj)
 		
-		UPageIndex = parentObj.getUniquePageIndex()
+		UPageIndex = flowObj.getUniquePageIndex()
 		// let pageArray
 		let pageFlowId = "page_flow_"+UPageIndex
 		let pageEditId = "page_eidt_"+UPageIndex
@@ -44,11 +42,11 @@ AWP.FTArea.FlowPage = function(parentObj, brotherObj) {
 			$("#TreeContent").append(pageTreeText)
 			$("#EditArea").append(pageEditText)
 			
-			parentObj.PageFlowIdArray.push(pageFlowId)
-			parentObj.displayHeadContent()
+			flowObj.PageFlowIdArray.push(pageFlowId)
+			flowObj.displayHeadContent()
 			
 			pubObj.PageFlowId = pageFlowId, pubObj.PageEditId = pageEditId, pubObj.PageTreeId = pageTreeId
-			pubObj.Position = parentObj.PageFlowIdArray.length
+			pubObj.Position = flowObj.PageFlowIdArray.length
 			
 			TreeObj = $("#"+pageTreeId).jstree({
 				"core" : {
@@ -68,20 +66,20 @@ AWP.FTArea.FlowPage = function(parentObj, brotherObj) {
 			let brotherId = brotherObj.PageFlowId
 			$("#"+brotherId).after(pageFlowText)
 			
-			// parentObj.PageFlowIdArray.splice(brotherObj.Position - 1, 0, pageFlowId)
-			// parentObj.displayHeadContent()
+			// flowObj.PageFlowIdArray.splice(brotherObj.Position - 1, 0, pageFlowId)
+			// flowObj.displayHeadContent()
 			
 			// pubObj.PageFlowId = pageFlowId
-			// pubObj.Position = parentObj.PageFlowIdArray.length
+			// pubObj.Position = flowObj.PageFlowIdArray.length
 		}
 	}
 	
 	let DispTreeAndEdit = function() {
 		
-		$("#"+parentObj.SeleEditPageId).css("display", "none")
+		$("#"+flowObj.SeleEditPageId).css("display", "none")
 		$("#"+pubObj.PageEditId).css("display", "inline")
 		
-		$("#"+parentObj.SeleTreePageId).css("display", "none")
+		$("#"+flowObj.SeleTreePageId).css("display", "none")
 		$("#"+pubObj.PageTreeId).css("display", "block")
 		
 		$("#NewPic").off("click")
@@ -103,25 +101,22 @@ AWP.FTArea.FlowPage = function(parentObj, brotherObj) {
 			if(!imgPathArray) { return }
 			
 			for(let imgPath of imgPathArray) {
-				
-				let imgObj = new AWP.FTArea.FTElems.ImgElem(pubObj, imgPath)
-				pubObj.ElemObjArray.push(imgObj)
 // console.log("Root"+UPageIndex)
 				let sNode = TreeObj.get_selected()
 				let sNodeType = TreeObj.get_type(sNode)
-				let pNode = TreeObj.get_node({"id": "Root"+UPageIndex})
-				if(sNodeType == false || (sNodeType != "root" && sNodeType != "div")) {
-					
-					// let imgObj = new AWP.FTArea.FTElems.ImgElem(pubObj, pubObj, imgPath)
+				let pNode = ["Root"+UPageIndex]
+				
+				let imgName = path.basename(imgPath)
+				if(sNodeType != "div") {
+					let imgObj = new AWP.FTArea.FTElems.ImgElem(pubObj, "none", imgPath)
 					// pubObj.ElemObjArray.push(imgObj)
-					// NodeIdArray.push(imgObj.NodeId)
-					TreeObj.create_node(pNode, {"id": imgObj.NodeId, "text": imgPath, "type": "imgfile"})
+					TreeObj.create_node(pNode, {"id": imgObj.NodeId, "text": imgName, "type": "imgfile"})
 				} else {
-					// let elemObj = pubObj.getElemObjByNodeId(sNode.id)
-					// let imgObj = new AWP.FTArea.FTElems.ImgElem(pubObj, elemObj, imgPath)
+					let elemObj = pubObj.getElemObjByNodeId(sNode[0])
+					let imgObj = new AWP.FTArea.FTElems.ImgElem(pubObj, elemObj, imgPath)
 					// pubObj.ElemObjArray.push(imgObj)
 					// NodeIdArray.push(imgObj.NodeId)
-					TreeObj.create_node(sNode, {"id": imgObj.NodeId, "text": imgPath, "type": "imgfile"})
+					TreeObj.create_node(sNode, {"id": imgObj.NodeId, "text": imgName, "type": "imgfile"})
 				}
 			}
 		})
@@ -158,20 +153,20 @@ AWP.FTArea.FlowPage = function(parentObj, brotherObj) {
 		
 		$("#"+pubObj.PageFlowId).on("mousedown", function() {
 			
-			// if (parentObj.SeleFlowPageId != "") {
+			// if (flowObj.SeleFlowPageId != "") {
 			
 			// }
-			$("#"+parentObj.SeleFlowPageId).css("outline", "#00ff00 none thick")
+			$("#"+flowObj.SeleFlowPageId).css("outline", "#00ff00 none thick")
 			$(this).css("outline", "#00ff00 solid thick")
 			
-			parentObj.SelePagePos = pubObj.Position
-			parentObj.displayHeadContent()
+			flowObj.SelePagePos = pubObj.Position
+			flowObj.displayHeadContent()
 			
 			DispTreeAndEdit()
 			
-			parentObj.SeleFlowPageId = pubObj.PageFlowId
-			parentObj.SeleEditPageId = pubObj.PageEditId
-			parentObj.SeleTreePageId = pubObj.PageTreeId
+			flowObj.SeleFlowPageId = pubObj.PageFlowId
+			flowObj.SeleEditPageId = pubObj.PageEditId
+			flowObj.SeleTreePageId = pubObj.PageTreeId
 		})
 	}())
 }
