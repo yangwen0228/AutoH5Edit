@@ -9,8 +9,8 @@ AWP.FTArea.FTElems.ImgElem = function(pageObj, parentObj, imgPath) {
 	
 	let pubObj = this
 	let PriObj = {}
-	pubObj.Type = "0", pubObj.ImgId = "0", pubObj.ShadowId = "0", pubObj.NodeId = "0"
-	PriObj.AttrObj = {}, PriObj.EffectObj = {};
+	pubObj.Type = "0", pubObj.ImgPath = imgPath, pubObj.ImgId = "0", pubObj.ShadowId = "0", pubObj.NodeId = "0"
+	pubObj.AttrObj = {}, pubObj.EffectObj = {};
 	
 	pubObj.getId = function () { return pubObj.ImgId }
 	pubObj.getShadow = function () { return pubObj.ShadowId }
@@ -18,19 +18,20 @@ AWP.FTArea.FTElems.ImgElem = function(pageObj, parentObj, imgPath) {
 	let ImgObjIni = function() {
 		
 		let uStr = pageObj.getUniqueElemStr()
-		let imgId = "img_edit_"+uStr, shadowId = "img_shadow_"+uStr
-		
-		pubObj.ImgId = imgId, pubObj.ShadowId = shadowId, pubObj.NodeId = "img_node_"+uStr
 		
 		let imgText, shadowText
 		if(imgPath == "none") {
 			pubObj.Type = "Div"
-			imgText = '\n<div class="editImg" id="' + imgId + '" draggable="false">\n</div>\n'
-			shadowText = '\n<div class="flowImg" id="' + shadowId + '" draggable="false">\n</div>\n'
+			pubObj.ImgId = "div_edit_"+uStr, pubObj.ShadowId = "div_shadow_"+uStr, pubObj.NodeId = "div_node_"+uStr
+			
+			imgText = '\n<div class="editImg" id="' + pubObj.ImgId + '" draggable="false">\n</div>\n'
+			shadowText = '\n<div class="flowImg" id="' + pubObj.ShadowId + '" draggable="false">\n</div>\n'
 		} else {
-			pubObj.Type = "Img"
-			imgText = '\n<div class="editImg" id="' + imgId + '" draggable="false">\n<img src="' + imgPath + '"></img>\n</div>\n'
-			shadowText = '\n<div class="flowImg" id="' + shadowId + '" draggable="false">\n<img src="' + imgPath + '"></img>\n</div>\n'
+			pubObj.Type = "Img",
+			pubObj.ImgId = "img_edit_"+uStr, pubObj.ShadowId = "img_shadow_"+uStr, pubObj.NodeId = "img_node_"+uStr
+			
+			imgText = '\n<div class="editImg" id="' + pubObj.ImgId + '" draggable="false">\n<img src="' + imgPath + '"></img>\n</div>\n'
+			shadowText = '\n<div class="flowImg" id="' + pubObj.ShadowId + '" draggable="false">\n<img src="' + imgPath + '"></img>\n</div>\n'
 		}
 		
 		if(parentObj == "none") {
@@ -44,8 +45,8 @@ AWP.FTArea.FTElems.ImgElem = function(pageObj, parentObj, imgPath) {
 	
 		pubObj.syncShadowFromImg()
 		
-		PriObj.AttrObj = new AWP.FTArea.FTElems.ImgCard.ImgAttrCard(pubObj)
-		PriObj.EffectObj = new AWP.FTArea.FTElems.ImgCard.ImgEffectCard(pubObj)
+		pubObj.AttrObj = new AWP.FTArea.FTElems.ImgCard.ImgAttrCard(pubObj)
+		pubObj.EffectObj = new AWP.FTArea.FTElems.ImgCard.ImgEffectCard(pubObj)
 		
 		pageObj.NodeIdArray.push(pubObj.NodeId)
 		pageObj.ElemObjArray.push(pubObj)
@@ -100,8 +101,8 @@ AWP.FTArea.FTElems.ImgElem = function(pageObj, parentObj, imgPath) {
 // console.log((startDX + (event.clientX - eventDX))/paWidth)
 				jqSeleImg.css({"left" : lPos.toFixed(2)+"%", "top" : tPos.toFixed(2)+"%",})
 				
-				PriObj.AttrObj.setValueTDLRWH()
-				PriObj.EffectObj.stopPreview()
+				pubObj.AttrObj.setValueTDLRWH()
+				pubObj.EffectObj.stopPreview()
 			}
 		}).on("mouseup", function(){
 			dragCt = false 
@@ -172,8 +173,8 @@ AWP.FTArea.FTElems.ImgElem = function(pageObj, parentObj, imgPath) {
 			let chTop = (t/paHeight*100).toFixed(2)
 			jqSeleImg.css({ "width" : chWidth+"%", height : chHeight+"%", left : chLeft+"%", top : chTop+"%"})
 			
-			PriObj.AttrObj.setValueTDLRWH()
-			PriObj.EffectObj.stopPreview()
+			pubObj.AttrObj.setValueTDLRWH()
+			pubObj.EffectObj.stopPreview()
 		}).on('mouseup', function(){
 			resizeCt = false 
 		})
@@ -232,11 +233,11 @@ AWP.FTArea.FTElems.ImgElem = function(pageObj, parentObj, imgPath) {
 			
 			pageObj.SeleElemId = pubObj.ImgId
 			
-			PriObj.AttrObj.showAttrCard()
-			PriObj.AttrObj.setValueTDLRWH()
+			pubObj.AttrObj.showAttrCard()
+			pubObj.AttrObj.setValueTDLRWH()
 			
-			PriObj.EffectObj.showEffectCard()
-			PriObj.EffectObj.setValueInOut()
+			pubObj.EffectObj.showEffectCard()
+			pubObj.EffectObj.setValueInOut()
 		})
 	}())
 }

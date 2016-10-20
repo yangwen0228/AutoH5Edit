@@ -29,6 +29,16 @@ AWP.DisplayFunc = function() {
 			height: 600
 		})
 		
+		$("#ExportDL").dialog({
+			title: "导出项目",
+			modal: true,
+			autoOpen: false,
+			position: { my: "top", at: "top", of: window },
+			width: 600,
+			height: 350
+		})
+		$("#ExportFolderSele").button()
+		
 		$(".pixelInput").spinner()
 		$(".percentInput").spinner({
 			numberFormat: "C",

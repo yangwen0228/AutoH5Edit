@@ -10,6 +10,7 @@ AWP.FTArea.FTElems.ImgCard = AWP.FTArea.FTElems.ImgCard || {}
 AWP.FTArea.FTElems.ImgCard.ImgAttrCard = function(imgObj) {
 	
 	let pubObj = this
+	pubObj.Position = "absolute", pubObj.Top, pubObj.Left, pubObj.Width, pubObj.Height, pubObj.BackGround
 	
 	pubObj.showAttrCard = function() {
 		
@@ -45,6 +46,8 @@ AWP.FTArea.FTElems.ImgCard.ImgAttrCard = function(imgObj) {
 			let paHeight = $("#"+imgObj.ImgId).parent().height()
 			let topPer = (topPix/paHeight*100).toFixed(2)
 			$("#ImgTDPer").spinner("value", topPer)
+			
+			pubObj.Top = topPer
 		} else {
 			let botPix = parseInt($("#"+imgObj.ImgId).css("bottom"))
 			$("#ImgTDPix").spinner("value", botPix)
@@ -65,6 +68,8 @@ AWP.FTArea.FTElems.ImgCard.ImgAttrCard = function(imgObj) {
 			let paWidth = $("#"+imgObj.ImgId).parent().width()
 			let leftPer = (leftPix/paWidth*100).toFixed(2)
 			$("#ImgLRPer").spinner("value", leftPer)
+			
+			pubObj.Left = leftPer
 		} else {
 			let rightPix = parseInt($("#"+imgObj.ImgId).css("right"))
 			$("#ImgLRPix").spinner("value", rightPix)
@@ -83,6 +88,8 @@ AWP.FTArea.FTElems.ImgCard.ImgAttrCard = function(imgObj) {
 		let paWidth = $("#"+imgObj.ImgId).parent().width()
 		let widthPer = (widthPix/paWidth*100).toFixed(2)
 		$("#ImgWDPer").spinner("value", widthPer)
+		
+		pubObj.Width = widthPer
 	}
 	
 	pubObj.setValueHeight = function() {
@@ -93,19 +100,12 @@ AWP.FTArea.FTElems.ImgCard.ImgAttrCard = function(imgObj) {
 		let paHeight = $("#"+imgObj.ImgId).parent().height()
 		let heightPer = (heightPix/paHeight*100).toFixed(2)
 		$("#ImgHTPer").spinner("value", heightPer)
-	};
+		
+		pubObj.Height = heightPer
+	}
 	
 	let RefreshAttrEvent = function() {
-		
-		$("#ImgTDPix").off("spinstop")
-		$("#ImgTDPer").off("spinstop")
-		$("#ImgLRPix").off("spinstop")
-		$("#ImgLRPer").off("spinstop")
-		$("#ImgWDPix").off("spinstop")
-		$("#ImgWDPer").off("spinstop")
-		$("#ImgHTPix").off("spinstop")
-		$("#ImgHTPer").off("spinstop")
-		
+		$("#ImgTDPix, #ImgTDPer, #ImgLRPix, #ImgLRPer, #ImgWDPix, #ImgWDPer, #ImgHTPix, #ImgHTPer").off("spinstop")
 		
 		$("#ImgTDPix").on("spinstop", function() {
 			
@@ -113,6 +113,8 @@ AWP.FTArea.FTElems.ImgCard.ImgAttrCard = function(imgObj) {
 			let paHeight = $("#"+imgObj.ImgId).parent().height()
 			let perTD = (pixTD/paHeight*100).toFixed(2)
 			$("#ImgTDPer").spinner("value", perTD)
+console.log(1234)
+			pubObj.Top = perTD 
 			
 			let seleTD = $("#ImgTDSele").val()
 			if(seleTD === "top") {
@@ -128,6 +130,8 @@ AWP.FTArea.FTElems.ImgCard.ImgAttrCard = function(imgObj) {
 			let pixTD = perTD/100*paHeight
 			$("#ImgTDPix").spinner("value", pixTD)
 			
+			pubObj.Top = perTD 
+			
 			let seleTD = $("#ImgTDSele").val()
 			if(seleTD === "top") {
 				$("#"+imgObj.ImgId).css({"top": perTD+"%", "bottom": "initial"})
@@ -141,6 +145,8 @@ AWP.FTArea.FTElems.ImgCard.ImgAttrCard = function(imgObj) {
 			let paWidth = $("#"+imgObj.ImgId).parent().width()
 			let perLR = (pixLR/paWidth*100).toFixed(2)
 			$("#ImgLRPer").spinner("value", perLR)
+			
+			pubObj.Left = perLR
 			
 			let seleLR = $("#ImgLRSele").val()
 			if(seleLR === "left") {
@@ -156,6 +162,8 @@ AWP.FTArea.FTElems.ImgCard.ImgAttrCard = function(imgObj) {
 			let pixLR = perLR/100*paWidth
 			$("#ImgLRPix").spinner("value", pixLR)
 			
+			pubObj.Left = perLR
+			
 			let seleLR = $("#ImgLRSele").val()
 			if(seleLR === "left") {
 				$("#"+imgObj.ImgId).css({"left": perLR+"%", "right": "auto"})
@@ -170,6 +178,8 @@ AWP.FTArea.FTElems.ImgCard.ImgAttrCard = function(imgObj) {
 			let perWD = (pixWD/paWidth*100).toFixed(2)
 			$("#ImgWDPer").spinner("value", perWD)
 			
+			pubObj.Width = perWD
+			
 			$("#"+imgObj.ImgId).css({"width": perWD+"%"})
 		})
 		$("#ImgWDPer").on("spinstop", function() {
@@ -178,6 +188,8 @@ AWP.FTArea.FTElems.ImgCard.ImgAttrCard = function(imgObj) {
 			let paWidth = $("#"+imgObj.ImgId).parent().width()
 			let pixWD = perWD/100*paWidth
 			$("#ImgWDPix").spinner("value", pixWD)
+			
+			pubObj.Width = perWD
 			
 			$("#"+imgObj.ImgId).css({"width": perWD+"%"})
 		})
@@ -188,6 +200,8 @@ AWP.FTArea.FTElems.ImgCard.ImgAttrCard = function(imgObj) {
 			let perHT = (pixHT/paHeight*100).toFixed(2)
 			$("#ImgHTPer").spinner("value", perHT)
 			
+			pubObj.Height = perHT
+			
 			$("#"+imgObj.ImgId).css({"height": perHT+"%"})
 		})
 		$("#ImgHTPer").on("spinstop", function() {
@@ -197,6 +211,8 @@ AWP.FTArea.FTElems.ImgCard.ImgAttrCard = function(imgObj) {
 			let pixHT = perHT/100*paHeight
 			$("#ImgHTPix").spinner("value", pixHT)
 			
+			pubObj.Height = perHT
+			
 			$("#"+imgObj.ImgId).css({"height": perHT+"%"})
 		})
 		
@@ -205,6 +221,10 @@ AWP.FTArea.FTElems.ImgCard.ImgAttrCard = function(imgObj) {
 			imgObj.syncShadowFromImg() 
 		})
 	}
+	
+	;(function() {
+		pubObj.setValueTDLRWH()
+	}())
 }
 
 

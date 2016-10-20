@@ -1,0 +1,60 @@
+
+
+#RankBoard {
+	position: absolute;
+	top: 23%;
+	left: 12.5%;
+	width: 100%;
+	height: 100%;	
+}
+
+.rankItem {
+	position: relative;
+	top: 0%;
+	left: 0%;
+	margin: 1.5% 0%;
+	width: 75%;
+	height: 7.5%;
+}
+
+.rankItem span{
+	position: absolute;
+	font:160% arial,sans-serif;
+	top: 0%;
+	left: 5%;
+	width: 90%;
+	height: 100%;
+	display: block;
+/*
+	-webkit-display: flex;
+	justify-content: space-between;
+	align-items: center;
+*/
+}
+
+.rankItem span b:nth-child(1){
+	position: absolute;
+	left: 1%;
+	top: 13%;
+	width: 20%;
+	height: 74%;
+}
+
+.rankItem span b:nth-child(2){
+	position: absolute;
+	font:70% arial,sans-serif;
+	font-weight: bold;
+	left: 18%;
+	top: 25%;
+	width: 64%;
+	height: 50%;
+}
+
+.rankItem span b:nth-child(3){
+	position: absolute;
+	right: 1%;
+	top: 13%;
+	width: 30%;
+	height: 74%;
+	direction: rtl;
+}

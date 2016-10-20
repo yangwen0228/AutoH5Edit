@@ -10,8 +10,9 @@ AWP.FTArea.FlowPage = function(flowObj, brotherObj) {
 
 	pubObj.SeleElemId = 0, pubObj.Position = 0, pubObj.PageFlowId = "0", pubObj.PageTreeId = "0", pubObj.NodeIdArray = [],
 	pubObj.PageEditId = "0", pubObj.ElemObjArray = []
+	pubObj.TreeObj = {}, pubObj.AttrObj
 	
-	let UPageIndex, UElemIndex = 0, TreeObj, AttrObj
+	let UPageIndex, UElemIndex = 0
 	
 	pubObj.getUniqueElemStr = function() {
 		UElemIndex ++
@@ -25,7 +26,7 @@ AWP.FTArea.FlowPage = function(flowObj, brotherObj) {
 	
 	let PageObjIni = function() {
 		
-		AttrObj = new AWP.FTArea.PageCard.PageAttrCard(pubObj)
+		pubObj.AttrObj = new AWP.FTArea.PageCard.PageAttrCard(pubObj)
 		
 		UPageIndex = flowObj.getUniquePageIndex()
 		// let pageArray
@@ -48,16 +49,16 @@ AWP.FTArea.FlowPage = function(flowObj, brotherObj) {
 			pubObj.PageFlowId = pageFlowId, pubObj.PageEditId = pageEditId, pubObj.PageTreeId = pageTreeId
 			pubObj.Position = flowObj.PageFlowIdArray.length
 			
-			TreeObj = $("#"+pageTreeId).jstree({
+			pubObj.TreeObj = $("#"+pageTreeId).jstree({
 				"core" : {
 					"check_callback" : true,
 					"data" : [{"id": "Root"+UPageIndex, "parent": "#", "text": "Root", "type": "root"}]
 				},
-				"types" : AttrObj.defineTreeTypes(),
+				"types" : pubObj.AttrObj.defineTreeTypes(),
 				"contextmenu" : {
 					select_node : true,
 					show_at_node : true,
-					items : function(obj, cb) { return AttrObj.defineTreeMenu(obj, cb) }
+					items : function(obj, cb) { return pubObj.AttrObj.defineTreeMenu(obj, cb) }
 				},
 				"plugins" : ["wholerow", "contextmenu", "dnd", "types"]
 			}).jstree(true)
@@ -102,21 +103,21 @@ AWP.FTArea.FlowPage = function(flowObj, brotherObj) {
 			
 			for(let imgPath of imgPathArray) {
 // console.log("Root"+UPageIndex)
-				let sNode = TreeObj.get_selected()
-				let sNodeType = TreeObj.get_type(sNode)
+				let sNode = pubObj.TreeObj.get_selected()
+				let sNodeType = pubObj.TreeObj.get_type(sNode)
 				let pNode = ["Root"+UPageIndex]
 				
 				let imgName = path.basename(imgPath)
 				if(sNodeType != "div") {
 					let imgObj = new AWP.FTArea.FTElems.ImgElem(pubObj, "none", imgPath)
 					// pubObj.ElemObjArray.push(imgObj)
-					TreeObj.create_node(pNode, {"id": imgObj.NodeId, "text": imgName, "type": "imgfile"})
+					pubObj.TreeObj.create_node(pNode, {"id": imgObj.NodeId, "text": imgName, "type": "imgfile"})
 				} else {
 					let elemObj = pubObj.getElemObjByNodeId(sNode[0])
 					let imgObj = new AWP.FTArea.FTElems.ImgElem(pubObj, elemObj, imgPath)
 					// pubObj.ElemObjArray.push(imgObj)
 					// NodeIdArray.push(imgObj.NodeId)
-					TreeObj.create_node(sNode, {"id": imgObj.NodeId, "text": imgName, "type": "imgfile"})
+					pubObj.TreeObj.create_node(sNode, {"id": imgObj.NodeId, "text": imgName, "type": "imgfile"})
 				}
 			}
 		})

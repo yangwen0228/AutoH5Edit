@@ -8,11 +8,11 @@ AWP.FlowArea = function() {
 	
 	let pubObj = this
 	
-	pubObj.SeleFlowPageId = "0", pubObj.SeleEditPageId = "0", pubObj.SeleTreePageId = "0"
-	pubObj.PageFlowIdArray = [];// pubObj.PageEditIdArray = [], pubObj.PageTreeIdArray = []
-	pubObj.SelePagePos = 0
+	pubObj.SeleFlowPageId = "0", pubObj.SeleEditPageId = "0", pubObj.SeleTreePageId = "0",
+	pubObj.PageFlowIdArray = [], pubObj.SelePagePos = 0
+	pubObj.PageObjArray = [] 
 	
-	let PageObjArray = [], UniquePageIndex = 0
+	let UniquePageIndex = 0
 	
 	pubObj.getUniquePageIndex = function() {
 		return ++ UniquePageIndex
@@ -28,7 +28,7 @@ AWP.FlowArea = function() {
 		
 		let pageObj = new AWP.FTArea.FlowPage(pubObj, "end")
 		
-		PageObjArray.push(pageObj)
+		pubObj.PageObjArray.push(pageObj)
 	}
 	
 	pubObj.copyPage = function(pageObj) {

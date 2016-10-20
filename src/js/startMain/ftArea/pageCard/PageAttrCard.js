@@ -13,7 +13,7 @@ AWP.FTArea.PageCard.PageAttrCard = function(pageObj) {
 	pubObj.defineTreeTypes = function() {
 		return {
 			"#" : {
-				"max_children" : 10,
+				"max_children" : 1,
 				"valid_children" : ["root"]
 			},
 			"root" : {
@@ -84,16 +84,6 @@ AWP.FTArea.PageCard.PageAttrCard = function(pageObj) {
 					}
 				}
 				inst.create_node(sNode, {"id": divObj.NodeId, "text": "divFolder", "type": "div"})
-				// if(sNodeType == false || (sNodeType != "root" && sNodeType != "div")) { return }
-				
-				// let divObj
-				// if(sNodeType == "root") {
-					// divObj = new AWP.FTArea.FTElems.ImgElem(pageObj, "none", "none")
-				// } else {
-					// let elemObj = pageObj.getElemObjByNodeId(sNode.id)
-					// divObj = new AWP.FTArea.FTElems.ImgElem(pageObj, elemObj, "none")
-				// }
-				// inst.create_node(sNode, {"id": divObj.NodeId, "text": "divFolder", "type": "div"})
 			}
 		}
 	}

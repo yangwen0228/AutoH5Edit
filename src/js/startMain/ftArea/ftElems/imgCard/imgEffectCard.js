@@ -109,21 +109,9 @@ AWP.FTArea.FTElems.ImgCard.ImgEffectCard = function(imgObj) {
 	
 	let RefreshEffectEvent = function () {
 		
-		$("#ImgInPreview").off("click")
-		$("#ImgInEffect").off("change")
-		$("#ImgInAniDelay").off("change")
-		$("#ImgInAniName").off("change")
-		$("#ImgInAniSpeed").off("change")
-		$("#ImgInAniDuring").off("change")
-		$("#ImgInAniCount").off("change")
-		
-		$("#ImgOutPreview").off("click")
-		$("#ImgOutEffect").off("change")
-		$("#ImgOutAniDelay").off("change")
-		$("#ImgOutAniName").off("change")
-		$("#ImgOutAniSpeed").off("change")
-		$("#ImgOutAniDuring").off("change")
-		$("#ImgOutAniCount").off("change")
+		$("#ImgInPreview, #ImgOutPreview").off("click")
+		$("#ImgInEffect, #ImgInAniDelay, #ImgInAniName, #ImgInAniSpeed, #ImgInAniDuring, #ImgInAniCount").off("change")
+		$("#ImgOutEffect, #ImgOutAniDelay, #ImgOutAniName, #ImgOutAniSpeed, #ImgOutAniDuring, #ImgOutAniCount").off("change")
 		
 		$("#ImgInPreview").on("click", function() {
 // console.log(pubObj.ImgInArray)

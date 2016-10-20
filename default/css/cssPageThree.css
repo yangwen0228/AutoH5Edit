@@ -1,0 +1,386 @@
+
+#p3 .stBar {
+	position: absolute;
+	top: 19%;
+	left: 62%;
+	width: 90%;
+	height: 7%;
+	transform: translate(-50%,-50%);
+	-webkit-transform: translate(-50%,-50%);
+/*	display: flex;*/
+/*	display: -webkit-flex;*/
+/*    justify-content: center;*/
+/*	align-items: center;*/
+}
+
+#p3 .stBar {
+	display: none;
+}
+
+#p3Clock {
+	position: absolute;
+	top: 80%;
+	left: 5%;
+	width: 38%;
+	height: 9%;
+}
+
+#p3Clock {
+	display: block;
+}
+
+#p3Clock img {
+	position: absolute;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+}
+
+#p3Clock span {
+	position: absolute;
+	top: 35%;
+	left: 40%;
+	width: 100%;
+	height: 100%;
+	display: block;
+	font:160% arial,sans-serif;
+}
+
+#p3ClockText {
+	min-width: 0;
+}
+
+#threeFailure, #threeSuccess {
+	display: none;
+}
+
+#p3RT {
+	position: absolute;
+	top: 80%;
+	left: 5%;
+	width: 90%;
+	height: 20%;
+}
+
+
+
+
+#q300BG, #q311, #q312, #q313, #q314, #q315, #q321, #q322, #q323, #q324, #q325, #q331, #q332, #q333, #q334, #q335, #q341, #q342, #q343, #q344, #q345 {
+	display: none;
+}
+
+/*
+#q335 {
+	display: block;
+}
+*/
+
+#q311 .bta {
+	top: 47.5%;
+	left: 9.8%;
+}
+
+#q311 .btb {
+	top: 55.6%;
+	left: 9.8%;
+}
+
+#q311 .btc {
+	top: 63.7%;
+	left: 9.8%;
+}
+
+#q312 .bta {
+	top: 40.6%;
+	left: 5.2%;
+}
+
+#q312 .btb {
+	top: 49.2%;
+	left: 5.2%;
+}
+
+#q312 .btc {
+	top: 57.6%;
+	left: 5.2%;
+}
+
+#q313 .bta {
+	top: 62.5%;
+	left: 14.3%;
+}
+
+#q313 .btb {
+	top: 62.6%;
+	left: 43%;
+}
+
+#q313 .btc {
+	top: 62.6%;
+	left: 74%;
+}
+
+#q314 .bta {
+	top: 58.3%;
+	left: 8.8%;
+}
+
+#q314 .btb {
+	top: 66%;
+	left: 8.8%;
+}
+
+#q314 .btc {
+	top: 73.1%;
+	left: 8.8%;
+}
+
+#q315 .bta {
+	top: 44.9%;
+	left: 8.2%;
+}
+
+#q315 .btb {
+	top: 54.2%;
+	left: 8.2%;
+}
+
+#q315 .btc {
+	top: 62.9%;
+	left: 8.2%;
+}
+
+/*
+#q321 {
+	display: none;
+}
+*/
+
+#q321 .bta {
+	top: 50.6%;
+	left: 7.9%;
+}
+
+#q321 .btb {
+	top: 59.4%;
+	left: 7.9%;
+}
+
+#q321 .btc {
+	top: 67.7%;
+	left: 7.9%;
+}
+
+
+#q322 .bta {
+	top: 50.9%;
+	left: 5.9%;
+}
+
+#q322 .btb {
+	top: 59.2%;
+	left: 5.9%;
+}
+
+#q322 .btc {
+	top: 67.7%;
+	left: 5.9%;
+}
+
+#q323 .bta {
+	top: 47.5%;
+	left: 17.6%;
+}
+
+#q323 .btb {
+	top: 47.5%;
+	left: 49.6%;
+}
+
+#q323 .btc {
+	top: 47.5%;
+	left: 80.5%;
+}
+
+#q324 .bta {
+	top: 43%;
+	left: 5.2%;
+}
+
+#q324 .btb {
+	top: 53.4%;
+	left: 5.2%;
+}
+
+#q324 .btc {
+	top: 63.7%;
+	left: 5.2%;
+}
+
+#q325 .bta {
+	top: 46%;
+	left: 7.9%;
+}
+
+#q325 .btb {
+	top: 54.4%;
+	left: 7.9%;
+}
+
+#q325 .btc {
+	top: 62.7%;
+	left: 7.9%;
+}
+
+
+
+#q331 .bta {
+	top: 63.4%;
+	left: 12.1%;
+}
+
+#q331 .btb {
+	top: 63.4%;
+	left: 36.9%;
+}
+
+#q331 .btc {
+	top: 63.4%;
+	left: 70.5%;
+}
+
+#q332 .bta {
+	top: 50.8%;
+	left: 5%;
+}
+
+#q332 .btb {
+	top: 59.4%;
+	left: 5%;
+}
+
+#q332 .btc {
+	top: 67.5%;
+	left: 5%;
+}
+
+#q333 .bta {
+	top: 42.5%;
+	left: 7.5%;
+}
+
+#q333 .btb {
+	top: 51.1%;
+	left: 7.5%;
+}
+
+#q333 .btc {
+	top: 59.5%;
+	left: 7.5%;
+}
+
+#q334 .bta {
+	top: 42.5%;
+	left: 7.5%;
+}
+
+#q334 .btb {
+	top: 51.1%;
+	left: 7.5%;
+}
+
+#q334 .btc {
+	top: 59.5%;
+	left: 7.5%;
+}
+
+#q335 .bta {
+	top: 46%;
+	left: 7.9%;
+}
+
+#q335 .btb {
+	top: 54.4%;
+	left: 7.9%;
+}
+
+#q335 .btc {
+	top: 62.7%;
+	left: 7.9%;
+}
+
+#q341 .bta {
+	top: 59.5%;
+	left: 16.5%;
+}
+
+#q341 .btb {
+	top: 59.5%;
+	left: 49.9%;
+}
+
+#q341 .btc {
+	top: 59.5%;
+	left: 76.5%;
+}
+
+#q342 .bta {
+	top: 50.4%;
+	left: 5.2%;
+}
+
+#q342 .btb {
+	top: 57.2%;
+	left: 5.2%;
+}
+
+#q342 .btc {
+	top: 64.2%;
+	left: 5.2%;
+}
+
+#q343 .bta {
+	top: 49%;
+	left: 4.5%;
+}
+
+#q343 .btb {
+	top: 49%;
+	left: 36.5%;
+}
+
+#q343 .btc {
+	top: 49%;
+	left: 66.5%;
+}
+
+#q344 .bta {
+	top: 50.5%;
+	left: 8.5%;
+}
+
+#q344 .btb {
+	top: 57.2%;
+	left: 8.5%;
+}
+
+#q344 .btc {
+	top: 64.0%;
+	left: 8.5%;
+}
+
+#q345 .bta {
+	top: 52.5%;
+	left: 7.5%;
+}
+
+#q345 .btb {
+	top: 59.0%;
+	left: 7.5%;
+}
+
+#q345 .btc {
+	top: 65.5%;
+	left: 7.5%;
+}

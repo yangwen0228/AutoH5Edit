@@ -26,6 +26,7 @@
 				<button class="btMenu">新建</button>
 				<button class="btMenu">打开</button>
 				<button class="btMenu">保存</button>
+				<button class="btMenu">设置</button>
 			</div>
 			<div class="pageMenu" id="PageMenu">
 				<button class="btMenu" id="NewPic">图片</button>
@@ -36,7 +37,7 @@
 				<button class="btMenu">表单</button>
 			</div>
 			<div class="rightMenu" id="rightMenu">
-				<button class="btMenu">输出</button>
+				<button class="btMenu" id="Export">输出</button>
 				<button class="btMenu">回收站</button>
 			</div>
 		</div>
@@ -278,8 +279,18 @@
 	</div>
 	<div class="storeArea" id="StoreArea">
 		<div id="NewPicDL" title="NewPic Dialog">
-			
-			
+		</div>
+		
+		<div id="ExportDL" title="Export Dialog">
+			<div id="ExportFolderLabel"><b>选择导出文件夹:</b></div>
+			<div id="ExportFolder">
+				<span id="ExportFolderPath">没有选择任何文件夹</span>
+				<button id="ExportFolderSele">选择...</button>
+			</div>
+			<div id="ExportNameLabel"><b>输入导出名称:</b></div>
+			<div id="ExportName">
+				<input type="text" id="ExportNameEnter">
+			</div>
 		</div>
 		
 		<table border="1" id="ImgAttrCard">
@@ -628,6 +639,8 @@
 	
 	<script type="text/javascript" src="js/startMain.js"></script>
 	<script type="text/javascript" src="js/startMain/uiFunction.js"></script>
+	<script type="text/javascript" src="js/startMain/menuBar.js"></script>
+	<script type="text/javascript" src="js/startMain/menuArea/exportFunc.js"></script>
 	<script type="text/javascript" src="js/startMain/flowAreaLT.js"></script>
 	<script type="text/javascript" src="js/startMain/tempAreaLT.js"></script>
 <!--	<script type="text/javascript" src="js/startMain/editMenuTM.js"></script>-->
