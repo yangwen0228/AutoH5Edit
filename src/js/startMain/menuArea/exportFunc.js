@@ -25,15 +25,22 @@ AWP.MenuArea.ExportFunc = function(flowObj) {
 		'	</head>',
 		'',
 		'	<body id="Wm">',
-		''
+		'',
+		'		<div class="swiper-container">',
+		'			<div class="swiper-wrapper">'
 	].join("\n")
 	
 	let ExportFoot = [
+		'			</div>',
+		'		</div>',
 		'',
 		'		<script type="text/javascript" src="lib/swiper/js/swiper-3.3.1.min.js"></script>',
 		'		<script type="text/javascript" src="lib/swiper/js/swiper.animate.min.js"></script>',
 		'		<script type="text/javascript" src="lib/jquery/jquery-2.2.3.min.js"></script>',
-		'		<script type="text/javascript" src="js/allTest.min.js"></script>',
+		'',
+        '		<script type="text/javascript" src="js/startMain/dispFunc.js"></script>',
+        '		<script type="text/javascript" src="js/startMain/ctrlFunc.js"></script>',
+		'		<script type="text/javascript" src="js/startMain.js"></script>',
 		'	</body>',
 		'</html>'
 	].join("\n")
@@ -79,11 +86,11 @@ AWP.MenuArea.ExportFunc = function(flowObj) {
 			
 			let treeObj = pageObj.TreeObj
 // AWP.TestObj = treeObj
-			let pageText = GetFileIteration(pageObj, treeObj, "#", 1)
+			let pageText = GetFileIteration(pageObj, treeObj, "#", 3)
 			pageArray.push(pageText)
 		}
 		
-		let exportText = ExportHead + pageArray.join("") + ExportFoot
+		let exportText = ExportHead + "\n" + pageArray.join("\n")  + "\n" + ExportFoot
 		fs.writeFile(path.join(ExportFolder, ExportName, IndexName), exportText)
 		
 		CopyFolder(path.join(MainPath, "default"), path.join(ExportFolder, ExportName))
@@ -105,18 +112,19 @@ AWP.MenuArea.ExportFunc = function(flowObj) {
 	
 	let GetFileIteration = function(pageObj, treeObj, preId, spaceCtrl) {
 		
-		let leftSpace = "", preArray
+		let leftSpace = "", preArray = new Array()
 		for(let i1 = 0; i1 < spaceCtrl; i1 ++) { leftSpace += "\t" }
 		
-		if(preId === "#") {
-			preArray = new Array(leftSpace, leftSpace)
-		} else {
-			preArray = new Array((leftSpace + "<div>"), (leftSpace + "</div>"))
+		let elemDivObj = pageObj.getElemObjByNodeId(preId)
+		let preObj = treeObj.get_node(preId)
+		
+		if(preId !== "#") {
+			preArray = new Array((leftSpace + '<div>'), (leftSpace + '</div>'))
+		}
+		if(preObj.type === "root") {
+			preArray = new Array((leftSpace + '<div class="swiper-slide">'), (leftSpace + '</div>'))
 		}
 		
-		let elemDivObj = pageObj.getElemObjByNodeId(preId)
-		
-		let preObj = treeObj.get_node(preId)
 		for(let nextId of preObj.children) {
 			
 			let nodeText, nextObj = treeObj.get_node(nextId)
@@ -129,23 +137,34 @@ AWP.MenuArea.ExportFunc = function(flowObj) {
 				default: {
 					let elemObj = pageObj.getElemObjByNodeId(nextId)
 					let imgFrPath = elemObj.ImgPath
-					let imgExPath = path.join(ExportFolder, ExportName, "img", path.basename(imgFrPath))
-					fs.createReadStream(imgFrPath).pipe(fs.createWriteStream(imgExPath))
+					let imgToPath = path.join(ExportFolder, ExportName, "img", path.basename(imgFrPath))
+					fs.createReadStream(imgFrPath).pipe(fs.createWriteStream(imgToPath))
 					
-					let styleText = GetElemAttr(elemObj)
-					let effectText = GetElemEffect(elemObj)
-					nodeText = leftSpace + '\t' + '<img src="img/' + path.basename(imgFrPath) + '"'  + styleText + effectText + '>'
+					let classText = GetElemClass(elemObj), styleText = GetElemAttr(elemObj), effectText = GetElemEffect(elemObj)
+					nodeText = leftSpace + '\t' + '<img src="img/' + path.basename(imgFrPath) + '"' + classText + styleText + effectText + '>'
 				}
 			}
 			preArray.splice(-1, 0, nodeText)
 		}
+// console.log(preArray)
 		return preArray.join("\n")
+	}
+	let GetElemClass = function(elemObj) {
+		
+		let classText = ' class="'
+		if(elemObj.EffectObj.ImgInControl) {
+			classText += 'ani'
+			if(elemObj.EffectObj.ImgOutArray[4] === "infinite"){
+				classText += ' infinite'
+			}
+		}
+		classText += '"'
+		return classText
 	}
 	let GetElemAttr = function(elemObj) {
 		
 		return [
-			' style="',
-			'position:' + elemObj.AttrObj.Position,
+			' style="position:' + elemObj.AttrObj.Position,
 			'top:' + elemObj.AttrObj.Top + '%',
 			'left:' + elemObj.AttrObj.Left + '%',
 			'width:' + elemObj.AttrObj.Width + '%',
@@ -157,7 +176,7 @@ AWP.MenuArea.ExportFunc = function(flowObj) {
 		let dataInText = ""
 		if(elemObj.EffectObj.ImgInControl) {
 			dataInText = [
-				' data-slide-in = "at ' + elemObj.EffectObj.ImgInArray[0],
+				' data-slide-in="at ' + elemObj.EffectObj.ImgInArray[0],
 				' from ' + elemObj.EffectObj.ImgInArray[1],
 				' use ' + elemObj.EffectObj.ImgInArray[2],
 				' during ' + elemObj.EffectObj.ImgInArray[3] + '"'
@@ -167,13 +186,12 @@ AWP.MenuArea.ExportFunc = function(flowObj) {
 		let dataOutText = ""
 		if(elemObj.EffectObj.ImgOutControl) {
 			dataOutText = [
-				' data-slide-out = "at ' + elemObj.EffectObj.ImgOutArray[0],
+				' data-slide-out="at ' + elemObj.EffectObj.ImgOutArray[0],
 				' to ' + elemObj.EffectObj.ImgOutArray[1],
 				' use ' + elemObj.EffectObj.ImgOutArray[2],
-				' during ' + elemObj.EffectObj.ImgOutArray[3] + ' force" '
+				' during ' + elemObj.EffectObj.ImgOutArray[3] + ' force"'
 			].join("")
 		}
-		
 		return dataInText + dataOutText
 	}
 	

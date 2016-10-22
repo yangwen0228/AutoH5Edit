@@ -30,9 +30,7 @@ AWP.FTArea.FlowPage = function(flowObj, brotherObj) {
 		
 		UPageIndex = flowObj.getUniquePageIndex()
 		// let pageArray
-		let pageFlowId = "page_flow_"+UPageIndex
-		let pageEditId = "page_eidt_"+UPageIndex
-		let pageTreeId = "page_tree_"+UPageIndex
+		let pageFlowId = "page_flow_"+UPageIndex, pageEditId = "page_eidt_"+UPageIndex, pageTreeId = "page_tree_"+UPageIndex
 		
 		let pageFlowText = '\n<div class="flowPage" id="' + pageFlowId +'">\n</div>\n'
 		let pageEditText = '\n<div class="editPage" id="' + pageEditId +'">\n</div>\n'
