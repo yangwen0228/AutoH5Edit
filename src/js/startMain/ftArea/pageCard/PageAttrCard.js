@@ -115,11 +115,18 @@ AWP.FTArea.PageCard.PageAttrCard = function(pageObj) {
 			"action"			: function (data) {
 				let inst = $.jstree.reference(data.reference)
 				let obj = inst.get_node(data.reference)
-				if(inst.is_selected(obj)) {
-					inst.delete_node(inst.get_selected())
-				}
-				else {
-					inst.delete_node(obj)
+				
+				let sNode = inst.get_selected()
+				let sNodeType = inst.get_type(sNode)
+// console.log(sNode);return
+				switch(sNodeType) {
+					case false:
+					case "root": { return }
+					default: {
+						inst.delete_node(sNode)
+						pageObj.removeElemByNodeId(sNode[0])
+						break 
+					}
 				}
 			}
 		}

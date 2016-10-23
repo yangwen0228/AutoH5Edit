@@ -10,7 +10,7 @@ AWP.FTArea.FlowPage = function(flowObj, brotherObj) {
 
 	pubObj.SeleElemId = 0, pubObj.Position = 0, pubObj.PageFlowId = "0", pubObj.PageTreeId = "0", pubObj.NodeIdArray = [],
 	pubObj.PageEditId = "0", pubObj.ElemObjArray = []
-	pubObj.TreeObj = {}, pubObj.AttrObj
+	pubObj.TreeObj = {}, pubObj.AttrObj = {}
 	
 	let UPageIndex, UElemIndex = 0
 	
@@ -22,6 +22,16 @@ AWP.FTArea.FlowPage = function(flowObj, brotherObj) {
 	pubObj.getElemObjByNodeId = function(nodeId) {
 		let idIndex = pubObj.NodeIdArray.indexOf(nodeId)
 		return pubObj.ElemObjArray[idIndex]
+	}
+	
+	pubObj.removeElemByNodeId = function(nodeId) {
+		
+		let idIndex = pubObj.NodeIdArray.indexOf(nodeId)
+		let elemObj = pubObj.ElemObjArray[idIndex]
+		
+		$("#"+elemObj.ImgId+","+"#"+elemObj.ShadowId).remove()
+		pubObj.NodeIdArray.splice(idIndex, 1), pubObj.ElemObjArray.splice(idIndex, 1)
+		elemObj = {}
 	}
 	
 	let PageObjIni = function() {
@@ -90,7 +100,6 @@ AWP.FTArea.FlowPage = function(flowObj, brotherObj) {
 		$("#NewAnim").off("click")
 		$("#NewAnim").on("click", AddAnim)
 	}
-	
 	let AddImg = function() {
 		dialog.showOpenDialog({
 			title: "Select A File",
@@ -104,30 +113,27 @@ AWP.FTArea.FlowPage = function(flowObj, brotherObj) {
 				let sNode = pubObj.TreeObj.get_selected()
 				let sNodeType = pubObj.TreeObj.get_type(sNode)
 				let pNode = ["Root"+UPageIndex]
-				
+// console.log(sNode)
 				let imgName = path.basename(imgPath)
 				if(sNodeType != "div") {
 					let imgObj = new AWP.FTArea.FTElems.ImgElem(pubObj, "none", imgPath)
-					// pubObj.ElemObjArray.push(imgObj)
+					
 					pubObj.TreeObj.create_node(pNode, {"id": imgObj.NodeId, "text": imgName, "type": "imgfile"})
 				} else {
 					let elemObj = pubObj.getElemObjByNodeId(sNode[0])
 					let imgObj = new AWP.FTArea.FTElems.ImgElem(pubObj, elemObj, imgPath)
-					// pubObj.ElemObjArray.push(imgObj)
-					// NodeIdArray.push(imgObj.NodeId)
+					
 					pubObj.TreeObj.create_node(sNode, {"id": imgObj.NodeId, "text": imgName, "type": "imgfile"})
 				}
 			}
 		})
 	}
-
 	let AddText = function() {
 // console.log(pubObj.PageFlowId)
 		let textObj = new AWP.FTArea.FTElems.TextElem(pubObj)
 		
 		pubObj.ElemObjArray.push(textObj)
 	}
-	
 	let AddAnim = function() {
 // console.log(pubObj.PageFlowId)
 		$("#NewPicDL").dialog( "option", "buttons",[{
@@ -151,9 +157,7 @@ AWP.FTArea.FlowPage = function(flowObj, brotherObj) {
 		PageObjIni()
 		
 		$("#"+pubObj.PageFlowId).on("mousedown", function() {
-			
 			// if (flowObj.SeleFlowPageId != "") {
-			
 			// }
 			$("#"+flowObj.SeleFlowPageId).css("outline", "#00ff00 none thick")
 			$(this).css("outline", "#00ff00 solid thick")
@@ -164,8 +168,18 @@ AWP.FTArea.FlowPage = function(flowObj, brotherObj) {
 			DispTreeAndEdit()
 			
 			flowObj.SeleFlowPageId = pubObj.PageFlowId
-			flowObj.SeleEditPageId = pubObj.PageEditId
 			flowObj.SeleTreePageId = pubObj.PageTreeId
+			flowObj.SeleEditPageId = pubObj.PageEditId
+		})
+		
+		$("#"+pubObj.PageTreeId).on("select_node.jstree", function(ev, data) {
+// console.log(ev)
+// console.log(data.node)
+			let sNode = data.node
+			if(sNode.type === "root") { return }
+			
+			let elemObj = pubObj.getElemObjByNodeId(sNode.id)
+			elemObj.setElemEditable()
 		})
 	}())
 }

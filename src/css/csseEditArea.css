@@ -75,6 +75,8 @@
 	width: 50%;
 	height: 50%;
 	background: #00ff00;
+	
+	pointer-events: none;
 /*	opacity: 0.5;*/
 /*
 	border-radius: 20px;
@@ -84,6 +86,17 @@
 	-ms-transform: rotate(30deg);
 	-webkit-transform: rotate(30deg);
 */
+}
+
+.editDiv {
+	position: absolute;
+	top: 25%;
+	left: 25%;
+	width: 50%;
+	height: 50%;
+	background: #00ff00;
+	
+	pointer-events: none;
 }
 
 .editText {

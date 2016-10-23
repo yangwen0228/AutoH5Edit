@@ -113,7 +113,7 @@ AWP.FTArea.FTElems.ImgCard.ImgAttrCard = function(imgObj) {
 			let paHeight = $("#"+imgObj.ImgId).parent().height()
 			let perTD = (pixTD/paHeight*100).toFixed(2)
 			$("#ImgTDPer").spinner("value", perTD)
-console.log(1234)
+// console.log(1234)
 			pubObj.Top = perTD 
 			
 			let seleTD = $("#ImgTDSele").val()

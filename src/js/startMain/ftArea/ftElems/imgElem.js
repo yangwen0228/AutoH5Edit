@@ -15,41 +15,24 @@ AWP.FTArea.FTElems.ImgElem = function(pageObj, parentObj, imgPath) {
 	pubObj.getId = function () { return pubObj.ImgId }
 	pubObj.getShadow = function () { return pubObj.ShadowId }
 	
-	let ImgObjIni = function() {
+	pubObj.setElemEditable = function() {
 		
-		let uStr = pageObj.getUniqueElemStr()
+		UnBindImgEvent()
 		
-		let imgText, shadowText
-		if(imgPath == "none") {
-			pubObj.Type = "Div"
-			pubObj.ImgId = "div_edit_"+uStr, pubObj.ShadowId = "div_shadow_"+uStr, pubObj.NodeId = "div_node_"+uStr
-			
-			imgText = '\n<div class="editImg" id="' + pubObj.ImgId + '" draggable="false">\n</div>\n'
-			shadowText = '\n<div class="flowImg" id="' + pubObj.ShadowId + '" draggable="false">\n</div>\n'
-		} else {
-			pubObj.Type = "Img",
-			pubObj.ImgId = "img_edit_"+uStr, pubObj.ShadowId = "img_shadow_"+uStr, pubObj.NodeId = "img_node_"+uStr
-			
-			imgText = '\n<div class="editImg" id="' + pubObj.ImgId + '" draggable="false">\n<img src="' + imgPath + '"></img>\n</div>\n'
-			shadowText = '\n<div class="flowImg" id="' + pubObj.ShadowId + '" draggable="false">\n<img src="' + imgPath + '"></img>\n</div>\n'
-		}
+		let jqSeleImg = $("#"+pubObj.ImgId), jqShadowImg = $("#"+pubObj.ShadowId)
 		
-		if(parentObj == "none") {
-			$("#"+pageObj.PageEditId).append(imgText)
-		} else {
-			$("#"+pageObj.PageEditId).append(imgText)
-			// $("#"+parentObj.getId()).append(imgText)
-		}
+		jqSeleImg.css("pointer-events","auto")
 		
-		$("#"+pageObj.PageFlowId).append(shadowText)
+		BindImgDragable(jqSeleImg)
+		BindImgResizeable(jqSeleImg)
+		BindImgControl(jqSeleImg, jqShadowImg)
+		
+		pageObj.SeleElemId = pubObj.ImgId
 	
-		pubObj.syncShadowFromImg()
-		
-		pubObj.AttrObj = new AWP.FTArea.FTElems.ImgCard.ImgAttrCard(pubObj)
-		pubObj.EffectObj = new AWP.FTArea.FTElems.ImgCard.ImgEffectCard(pubObj)
-		
-		pageObj.NodeIdArray.push(pubObj.NodeId)
-		pageObj.ElemObjArray.push(pubObj)
+		pubObj.AttrObj.showAttrCard()
+		pubObj.AttrObj.setValueTDLRWH()
+		pubObj.EffectObj.showEffectCard()
+		pubObj.EffectObj.setValueInOut()
 	}
 	
 	pubObj.syncShadowFromImg = function() {
@@ -74,6 +57,43 @@ AWP.FTArea.FTElems.ImgElem = function(pageObj, parentObj, imgPath) {
 		for(let imgCss of imgCssAry3) {
 			$("#"+pubObj.ShadowId).css(imgCss, jqImgObj.css(imgCss))
 		}
+	}
+	
+	let ImgObjIni = function() {
+		
+		let uStr = pageObj.getUniqueElemStr()
+		
+		let imgText, shadowText
+		if(imgPath == "none") {
+			pubObj.Type = "Div"
+			pubObj.ImgId = "div_edit_"+uStr, pubObj.ShadowId = "div_shadow_"+uStr, pubObj.NodeId = "div_node_"+uStr
+			
+			imgText = '\n<div class="editDiv" id="' + pubObj.ImgId + '" draggable="false">\n</div>\n'
+			shadowText = '\n<div class="flowDiv" id="' + pubObj.ShadowId + '" draggable="false">\n</div>\n'
+		} else {
+			pubObj.Type = "Img",
+			pubObj.ImgId = "img_edit_"+uStr, pubObj.ShadowId = "img_shadow_"+uStr, pubObj.NodeId = "img_node_"+uStr
+			
+			imgText = '\n<div class="editImg" id="' + pubObj.ImgId + '" draggable="false">\n<img src="' + imgPath + '"></img>\n</div>\n'
+			shadowText = '\n<div class="flowImg" id="' + pubObj.ShadowId + '" draggable="false">\n<img src="' + imgPath + '"></img>\n</div>\n'
+		}
+		
+		if(parentObj == "none") {
+			$("#"+pageObj.PageEditId).append(imgText)
+			$("#"+pageObj.PageFlowId).append(shadowText)
+		} else {
+			// $("#"+pageObj.PageEditId).append(imgText)
+			$("#"+parentObj.ImgId).append(imgText)
+			$("#"+parentObj.ShadowId).append(shadowText)
+		}
+		// $("#"+pageObj.PageFlowId).append(shadowText)
+		pubObj.syncShadowFromImg()
+		
+		pubObj.AttrObj = new AWP.FTArea.FTElems.ImgCard.ImgAttrCard(pubObj)
+		pubObj.EffectObj = new AWP.FTArea.FTElems.ImgCard.ImgEffectCard(pubObj)
+		
+		pageObj.NodeIdArray.push(pubObj.NodeId)
+		pageObj.ElemObjArray.push(pubObj)
 	}
 	
 	let BindImgDragable = function(jqSeleImg) {
@@ -206,39 +226,40 @@ AWP.FTArea.FTElems.ImgElem = function(pageObj, parentObj, imgPath) {
 		if(pageObj.SeleElemId != 0) {
 			$("#"+pageObj.SeleElemId).off("mouseup mousedown mousemove")
 			$("#"+pageObj.SeleElemId).children("span").remove()
+			$("#"+pageObj.SeleElemId).css("pointer-events","none")
 			$("#BTTop").off("click")
 			$("#BTDown").off("click")
 			$("#BTDel").off("click")
 		}
 	}
-	let BindImgEditable = function() {
+	// let BindImgEditable = function() {
 		
-		UnBindImgEvent()
+		// UnBindImgEvent()
 		
-		let jqSeleImg = $("#"+pubObj.ImgId)
-		let jqShadowImg = $("#"+pubObj.ShadowId)
+		// let jqSeleImg = $("#"+pubObj.ImgId), jqShadowImg = $("#"+pubObj.ShadowId)
 		
-		BindImgDragable(jqSeleImg)
-		BindImgResizeable(jqSeleImg)
-		BindImgControl(jqSeleImg, jqShadowImg)
-	}
+		// BindImgDragable(jqSeleImg)
+		// BindImgResizeable(jqSeleImg)
+		// BindImgControl(jqSeleImg, jqShadowImg)
+	// }
 
 	;(function() {
 		
 		ImgObjIni()
+		// $("#"+pubObj.ImgId).on("click", function() {
+
+			// BindImgEditable()
+			
+			// pageObj.SeleElemId = pubObj.ImgId
+			
+			// pubObj.AttrObj.showAttrCard()
+			// pubObj.AttrObj.setValueTDLRWH()
+			
+			// pubObj.EffectObj.showEffectCard()
+			// pubObj.EffectObj.setValueInOut()
+		// })
 		
-		$("#"+pubObj.ImgId).on("click", function() {
-// console.log("OKOKOK")
-			BindImgEditable()
-			
-			pageObj.SeleElemId = pubObj.ImgId
-			
-			pubObj.AttrObj.showAttrCard()
-			pubObj.AttrObj.setValueTDLRWH()
-			
-			pubObj.EffectObj.showEffectCard()
-			pubObj.EffectObj.setValueInOut()
-		})
+		// pubObj.setElemEditable()
 	}())
 }
 
