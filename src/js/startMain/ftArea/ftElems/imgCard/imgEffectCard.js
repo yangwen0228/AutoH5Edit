@@ -51,8 +51,8 @@ AWP.FTArea.FTElems.ImgCard.ImgEffectCard = function(imgObj) {
 	pubObj.stopPreview = function(type) {
 		
 		if(HasAnimation) {
-			$("#"+imgObj.ImgId).attr("class", OriginClass)
-			$("#"+imgObj.ImgId).attr("style", OriginStyle)
+			$("#"+imgObj.ElemId).attr("class", OriginClass)
+			$("#"+imgObj.ElemId).attr("style", OriginStyle)
 			
 			HasAnimation = false
 		}
@@ -62,11 +62,11 @@ AWP.FTArea.FTElems.ImgCard.ImgEffectCard = function(imgObj) {
 		
 		if(!pubObj.ImgInControl) { return }
 		
-		OriginClass = $("#"+imgObj.ImgId).attr("class")
+		OriginClass = $("#"+imgObj.ElemId).attr("class")
 		
 		let classNew = OriginClass + " " + pubObj.ImgInArray[1]
 		
-		OriginStyle = $("#"+imgObj.ImgId).attr("style")
+		OriginStyle = $("#"+imgObj.ElemId).attr("style")
 // console.log(OriginStyle)
 		let styleNew = OriginStyle + "animation-duration:" + (parseInt(pubObj.ImgInArray[3])/1000+'s') + "; "
 		styleNew += "-webkit-animation-duration:" + (parseInt(pubObj.ImgInArray[3])/1000+'s') + "; "
@@ -77,8 +77,8 @@ AWP.FTArea.FTElems.ImgCard.ImgEffectCard = function(imgObj) {
 		styleNew += "animation-iteration-count:" + pubObj.ImgInArray[4] + "; "
 		styleNew += "-webkit-animation-iteration-count:" + pubObj.ImgInArray[4] + "; "
 		
-		$("#"+imgObj.ImgId).attr("class", classNew)
-		$("#"+imgObj.ImgId).attr("style", styleNew)
+		$("#"+imgObj.ElemId).attr("class", classNew)
+		$("#"+imgObj.ElemId).attr("style", styleNew)
 		
 		HasAnimation = true
 	}
@@ -86,11 +86,11 @@ AWP.FTArea.FTElems.ImgCard.ImgEffectCard = function(imgObj) {
 	let StartPreviewOut = function() {
 		if(!pubObj.ImgOutControl) { return }
 		
-		OriginClass = $("#"+imgObj.ImgId).attr("class")
+		OriginClass = $("#"+imgObj.ElemId).attr("class")
 		
 		let classNew = OriginClass + " " + pubObj.ImgOutArray[1]
 		
-		OriginStyle = $("#"+imgObj.ImgId).attr("style")
+		OriginStyle = $("#"+imgObj.ElemId).attr("style")
 // console.log(OriginStyle)
 		let styleNew = OriginStyle + "animation-duration:" + (parseInt(pubObj.ImgOutArray[3])/1000+'s') + "; "
 		styleNew += "-webkit-animation-duration:" + (parseInt(pubObj.ImgOutArray[3])/1000+'s') + "; "
@@ -101,8 +101,8 @@ AWP.FTArea.FTElems.ImgCard.ImgEffectCard = function(imgObj) {
 		styleNew += "animation-iteration-count:" + pubObj.ImgOutArray[4] + "; "
 		styleNew += "-webkit-animation-iteration-count:" + pubObj.ImgOutArray[4] + "; "
 		
-		$("#"+imgObj.ImgId).attr("class", classNew)
-		$("#"+imgObj.ImgId).attr("style", styleNew)
+		$("#"+imgObj.ElemId).attr("class", classNew)
+		$("#"+imgObj.ElemId).attr("style", styleNew)
 		
 		HasAnimation = true
 	}

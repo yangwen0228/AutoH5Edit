@@ -8,8 +8,8 @@ AWP.FTArea.FlowPage = function(flowObj, brotherObj) {
 	
 	let pubObj = this
 
-	pubObj.SeleElemId = 0, pubObj.Position = 0, pubObj.PageFlowId = "0", pubObj.PageTreeId = "0", pubObj.NodeIdArray = [],
-	pubObj.PageEditId = "0", pubObj.ElemObjArray = []
+	pubObj.SeleElemId = 0, pubObj.Position = 0, pubObj.PageFlowId = "0", pubObj.PageTreeId = "0", pubObj.PageEditId = "0",
+	pubObj.NodeIdArray = [], pubObj.ElemObjArray = []
 	pubObj.TreeObj = {}, pubObj.AttrObj = {}
 	
 	let UPageIndex, UElemIndex = 0
@@ -29,7 +29,7 @@ AWP.FTArea.FlowPage = function(flowObj, brotherObj) {
 		let idIndex = pubObj.NodeIdArray.indexOf(nodeId)
 		let elemObj = pubObj.ElemObjArray[idIndex]
 		
-		$("#"+elemObj.ImgId+","+"#"+elemObj.ShadowId).remove()
+		$("#"+elemObj.ElemId+","+"#"+elemObj.ShadowId).remove()
 		pubObj.NodeIdArray.splice(idIndex, 1), pubObj.ElemObjArray.splice(idIndex, 1)
 		elemObj = {}
 	}
@@ -181,8 +181,69 @@ AWP.FTArea.FlowPage = function(flowObj, brotherObj) {
 			let elemObj = pubObj.getElemObjByNodeId(sNode.id)
 			elemObj.setElemEditable()
 		})
+		
+		$("#"+pubObj.PageTreeId).on("move_node.jstree", function(ev, data) {
+// console.log(data)
+			let newEditParentId, dragEditId, newEditPos = data.position
+			
+			let newNodeId = data.parent, dragNode = data.node
+			let newNode = pubObj.TreeObj.get_node(newNodeId)
+// console.log(newNode)
+			if(newNode.type == "root") {
+				newEditParentId = pubObj.PageEditId
+			} else {
+				newEditParentId = pubObj.getElemObjByNodeId(newNodeId).ElemId
+			}
+
+			dragEditId = pubObj.getElemObjByNodeId(dragNode.id).ElemId
+			
+			if(newEditPos == 0) {
+				$("#"+newEditParentId).prepend($("#"+dragEditId))
+			} else {
+				let broNodeId = newNode.children[newEditPos-1]
+				let broEditId = pubObj.getElemObjByNodeId(broNodeId).ElemId
+				$("#"+broEditId).after($("#"+dragEditId))
+			}
+		})
 	}())
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

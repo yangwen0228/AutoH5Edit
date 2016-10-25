@@ -40,19 +40,19 @@ AWP.FTArea.FTElems.ImgCard.ImgAttrCard = function(imgObj) {
 		
 		let seleTD = $("#ImgTDSele").val()
 		if(seleTD === "top") {
-			let topPix = parseInt($("#"+imgObj.ImgId).css("top"))
+			let topPix = parseInt($("#"+imgObj.ElemId).css("top"))
 			$("#ImgTDPix").spinner("value", topPix)
 			
-			let paHeight = $("#"+imgObj.ImgId).parent().height()
+			let paHeight = $("#"+imgObj.ElemId).parent().height()
 			let topPer = (topPix/paHeight*100).toFixed(2)
 			$("#ImgTDPer").spinner("value", topPer)
 			
 			pubObj.Top = topPer
 		} else {
-			let botPix = parseInt($("#"+imgObj.ImgId).css("bottom"))
+			let botPix = parseInt($("#"+imgObj.ElemId).css("bottom"))
 			$("#ImgTDPix").spinner("value", botPix)
 			
-			let paHeight = $("#"+imgObj.ImgId).parent().height()
+			let paHeight = $("#"+imgObj.ElemId).parent().height()
 			let botPer = (botPix/paHeight*100).toFixed(2)
 			$("#ImgTDPer").spinner("value", botPer)
 		}
@@ -62,19 +62,19 @@ AWP.FTArea.FTElems.ImgCard.ImgAttrCard = function(imgObj) {
 		
 		let seleTD = $("#ImgLRSele").val()
 		if(seleTD === "left") {
-			let leftPix = parseInt($("#"+imgObj.ImgId).css("left"))
+			let leftPix = parseInt($("#"+imgObj.ElemId).css("left"))
 			$("#ImgLRPix").spinner("value", leftPix)
 			
-			let paWidth = $("#"+imgObj.ImgId).parent().width()
+			let paWidth = $("#"+imgObj.ElemId).parent().width()
 			let leftPer = (leftPix/paWidth*100).toFixed(2)
 			$("#ImgLRPer").spinner("value", leftPer)
 			
 			pubObj.Left = leftPer
 		} else {
-			let rightPix = parseInt($("#"+imgObj.ImgId).css("right"))
+			let rightPix = parseInt($("#"+imgObj.ElemId).css("right"))
 			$("#ImgLRPix").spinner("value", rightPix)
 			
-			let paWidth = $("#"+imgObj.ImgId).parent().width()
+			let paWidth = $("#"+imgObj.ElemId).parent().width()
 			let rightPer = (rightPix/paWidth*100).toFixed(2)
 			$("#ImgLRPer").spinner("value", rightPer)
 		}
@@ -82,10 +82,10 @@ AWP.FTArea.FTElems.ImgCard.ImgAttrCard = function(imgObj) {
 	
 	pubObj.setValueWidth = function() {
 		
-		let widthPix = parseInt($("#"+imgObj.ImgId).css("width"))
+		let widthPix = parseInt($("#"+imgObj.ElemId).css("width"))
 		$("#ImgWDPix").spinner("value", widthPix)
 		
-		let paWidth = $("#"+imgObj.ImgId).parent().width()
+		let paWidth = $("#"+imgObj.ElemId).parent().width()
 		let widthPer = (widthPix/paWidth*100).toFixed(2)
 		$("#ImgWDPer").spinner("value", widthPer)
 		
@@ -94,10 +94,10 @@ AWP.FTArea.FTElems.ImgCard.ImgAttrCard = function(imgObj) {
 	
 	pubObj.setValueHeight = function() {
 		
-		let heightPix = parseInt($("#"+imgObj.ImgId).css("height"))
+		let heightPix = parseInt($("#"+imgObj.ElemId).css("height"))
 		$("#ImgHTPix").spinner("value", heightPix)
 		
-		let paHeight = $("#"+imgObj.ImgId).parent().height()
+		let paHeight = $("#"+imgObj.ElemId).parent().height()
 		let heightPer = (heightPix/paHeight*100).toFixed(2)
 		$("#ImgHTPer").spinner("value", heightPer)
 		
@@ -110,7 +110,7 @@ AWP.FTArea.FTElems.ImgCard.ImgAttrCard = function(imgObj) {
 		$("#ImgTDPix").on("spinstop", function() {
 			
 			let pixTD = $("#ImgTDPix").spinner("value")
-			let paHeight = $("#"+imgObj.ImgId).parent().height()
+			let paHeight = $("#"+imgObj.ElemId).parent().height()
 			let perTD = (pixTD/paHeight*100).toFixed(2)
 			$("#ImgTDPer").spinner("value", perTD)
 // console.log(1234)
@@ -118,15 +118,15 @@ AWP.FTArea.FTElems.ImgCard.ImgAttrCard = function(imgObj) {
 			
 			let seleTD = $("#ImgTDSele").val()
 			if(seleTD === "top") {
-				$("#"+imgObj.ImgId).css({"top": perTD+"%", "bottom": "initial"})
+				$("#"+imgObj.ElemId).css({"top": perTD+"%", "bottom": "initial"})
 			} else {
-				$("#"+imgObj.ImgId).css({"top": "initial", "bottom": perTD+"%"})
+				$("#"+imgObj.ElemId).css({"top": "initial", "bottom": perTD+"%"})
 			}
 		})
 		$("#ImgTDPer").on("spinstop", function() {
 			
 			let perTD = $("#ImgTDPer").spinner("value")
-			let paHeight = $("#"+imgObj.ImgId).parent().height()
+			let paHeight = $("#"+imgObj.ElemId).parent().height()
 			let pixTD = perTD/100*paHeight
 			$("#ImgTDPix").spinner("value", pixTD)
 			
@@ -134,15 +134,15 @@ AWP.FTArea.FTElems.ImgCard.ImgAttrCard = function(imgObj) {
 			
 			let seleTD = $("#ImgTDSele").val()
 			if(seleTD === "top") {
-				$("#"+imgObj.ImgId).css({"top": perTD+"%", "bottom": "initial"})
+				$("#"+imgObj.ElemId).css({"top": perTD+"%", "bottom": "initial"})
 			} else {
-				$("#"+imgObj.ImgId).css({"top": "initial", "bottom": perTD+"%"})
+				$("#"+imgObj.ElemId).css({"top": "initial", "bottom": perTD+"%"})
 			}
 		})
 		$("#ImgLRPix").on("spinstop", function() {
 			
 			let pixLR = $("#ImgLRPix").spinner("value")
-			let paWidth = $("#"+imgObj.ImgId).parent().width()
+			let paWidth = $("#"+imgObj.ElemId).parent().width()
 			let perLR = (pixLR/paWidth*100).toFixed(2)
 			$("#ImgLRPer").spinner("value", perLR)
 			
@@ -150,15 +150,15 @@ AWP.FTArea.FTElems.ImgCard.ImgAttrCard = function(imgObj) {
 			
 			let seleLR = $("#ImgLRSele").val()
 			if(seleLR === "left") {
-				$("#"+imgObj.ImgId).css({"left": perLR+"%", "right": "auto"})
+				$("#"+imgObj.ElemId).css({"left": perLR+"%", "right": "auto"})
 			} else {
-				$("#"+imgObj.ImgId).css({"left": "auto", "right": perLR+"%"})
+				$("#"+imgObj.ElemId).css({"left": "auto", "right": perLR+"%"})
 			}
 		})
 		$("#ImgLRPer").on("spinstop", function() {
 			
 			let perLR = $("#ImgLRPer").spinner("value")
-			let paWidth = $("#"+imgObj.ImgId).parent().width()
+			let paWidth = $("#"+imgObj.ElemId).parent().width()
 			let pixLR = perLR/100*paWidth
 			$("#ImgLRPix").spinner("value", pixLR)
 			
@@ -166,54 +166,54 @@ AWP.FTArea.FTElems.ImgCard.ImgAttrCard = function(imgObj) {
 			
 			let seleLR = $("#ImgLRSele").val()
 			if(seleLR === "left") {
-				$("#"+imgObj.ImgId).css({"left": perLR+"%", "right": "auto"})
+				$("#"+imgObj.ElemId).css({"left": perLR+"%", "right": "auto"})
 			} else {
-				$("#"+imgObj.ImgId).css({"left": "auto", "right": perLR+"%"})
+				$("#"+imgObj.ElemId).css({"left": "auto", "right": perLR+"%"})
 			}
 		})
 		$("#ImgWDPix").on("spinstop", function() {
 			
 			let pixWD = $("#ImgWDPix").spinner("value")
-			let paWidth = $("#"+imgObj.ImgId).parent().width()
+			let paWidth = $("#"+imgObj.ElemId).parent().width()
 			let perWD = (pixWD/paWidth*100).toFixed(2)
 			$("#ImgWDPer").spinner("value", perWD)
 			
 			pubObj.Width = perWD
 			
-			$("#"+imgObj.ImgId).css({"width": perWD+"%"})
+			$("#"+imgObj.ElemId).css({"width": perWD+"%"})
 		})
 		$("#ImgWDPer").on("spinstop", function() {
 			
 			let perWD = $("#ImgWDPer").spinner("value")
-			let paWidth = $("#"+imgObj.ImgId).parent().width()
+			let paWidth = $("#"+imgObj.ElemId).parent().width()
 			let pixWD = perWD/100*paWidth
 			$("#ImgWDPix").spinner("value", pixWD)
 			
 			pubObj.Width = perWD
 			
-			$("#"+imgObj.ImgId).css({"width": perWD+"%"})
+			$("#"+imgObj.ElemId).css({"width": perWD+"%"})
 		})
 		$("#ImgHTPix").on("spinstop", function() {
 			
 			let pixHT = $("#ImgHTPix").spinner("value")
-			let paHeight = $("#"+imgObj.ImgId).parent().height()
+			let paHeight = $("#"+imgObj.ElemId).parent().height()
 			let perHT = (pixHT/paHeight*100).toFixed(2)
 			$("#ImgHTPer").spinner("value", perHT)
 			
 			pubObj.Height = perHT
 			
-			$("#"+imgObj.ImgId).css({"height": perHT+"%"})
+			$("#"+imgObj.ElemId).css({"height": perHT+"%"})
 		})
 		$("#ImgHTPer").on("spinstop", function() {
 			
 			let perHT = $("#ImgHTPer").spinner("value")
-			let paHeight = $("#"+imgObj.ImgId).parent().height()
+			let paHeight = $("#"+imgObj.ElemId).parent().height()
 			let pixHT = perHT/100*paHeight
 			$("#ImgHTPix").spinner("value", pixHT)
 			
 			pubObj.Height = perHT
 			
-			$("#"+imgObj.ImgId).css({"height": perHT+"%"})
+			$("#"+imgObj.ElemId).css({"height": perHT+"%"})
 		})
 		
 		$("#ImgTDPix, #ImgTDPer, #ImgLRPix, #ImgLRPer, #ImgWDPix, #ImgWDPer, #ImgHTPix, #ImgHTPer")
