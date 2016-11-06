@@ -9,6 +9,7 @@ AWP.MenuBar = function(flowObj) {
 	let pubObj = this
 	
 	let menuExport = new AWP.MenuArea.ExportFunc(flowObj)
+	let menuNewFile = new AWP.MenuArea.NewFileFunc(flowObj)
 }
 
 

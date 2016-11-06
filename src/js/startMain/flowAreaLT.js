@@ -9,8 +9,7 @@ AWP.FlowArea = function() {
 	let pubObj = this
 	
 	pubObj.SeleFlowPageId = "0", pubObj.SeleEditPageId = "0", pubObj.SeleTreePageId = "0",
-	pubObj.PageFlowIdArray = [], pubObj.SelePagePos = 0
-	pubObj.PageObjArray = [] 
+	pubObj.SelePagePos = 0, pubObj.PageObjArray = [] 
 	
 	let UniquePageIndex = 0
 	
@@ -20,29 +19,45 @@ AWP.FlowArea = function() {
 	
 	pubObj.displayHeadContent = function() {
 		
-		let dispText = "第" + pubObj.SelePagePos + "页" + "/共" + pubObj.PageFlowIdArray.length + "页"
+		let dispText = "第" + pubObj.SelePagePos + "页" + "/共" + pubObj.PageObjArray.length + "页"
 		$("#flowHead").text(dispText)
 	}
 	
-	let AddPage = function() {
+	pubObj.clear = function() {
 		
-		let pageObj = new AWP.FTArea.FlowPage(pubObj, "end")
+		for(let pageObj of pubObj.PageObjArray) {
+			pageObj.destroy()
+		}
 		
-		pubObj.PageObjArray.push(pageObj)
+		UniquePageIndex = 0
+		pubObj.SelePagePos = 0, pubObj.PageObjArray = []
+		pubObj.displayHeadContent()
+		// pubObj = {} 主界面，不能去掉，还要用
 	}
 	
 	pubObj.copyPage = function(pageObj) {
 		
-		
 	}
 	pubObj.cutPage = function(pageObj) {
 		
-		
 	}
+	
 	pubObj.deletePage = function(pageObj) {
 		
+		let pageIndex = pageObj.Position
+		pubObj.PageObjArray.splice(pageIndex, 1)
 		
+		for(let otherObj of pubObj.PageObjArray) {
+			if(otherObj.Position > pageIndex) {
+				otherObj.Position -=1
+			}
+		}
+		
+		pubObj.SelePagePos = 0
+		pubObj.displayHeadContent()
+		pageObj.destroy()
 	}
+	
 	pubObj.beforePage = function(pageObj) {
 		
 		
@@ -51,9 +66,17 @@ AWP.FlowArea = function() {
 		
 		
 	}
+	
+	let FlowAreaIni = function() {
+		
+		$("#AddPage").on("click", function() {
+			let pageObj = new AWP.FTArea.FlowPage(pubObj, "end")
+			pubObj.displayHeadContent()
+		})
+	}
 
 	;(function() {
-		$("#AddPage").on("click", AddPage)
+		FlowAreaIni()
 		pubObj.displayHeadContent()
 	}())
 }

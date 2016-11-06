@@ -27,12 +27,24 @@ AWP.FTArea.FlowPage = function(flowObj, brotherObj) {
 	pubObj.removeElemByNodeId = function(nodeId) {
 		
 		let idIndex = pubObj.NodeIdArray.indexOf(nodeId)
-		let elemObj = pubObj.ElemObjArray[idIndex]
+		pubObj.ElemObjArray[idIndex].destroy()
 		
-		$("#"+elemObj.ElemId+","+"#"+elemObj.ShadowId).remove()
-		pubObj.NodeIdArray.splice(idIndex, 1), pubObj.ElemObjArray.splice(idIndex, 1)
-		elemObj = {}
+		pubObj.NodeIdArray.splice(idIndex, 1)
+		pubObj.ElemObjArray.splice(idIndex, 1)
 	}
+	
+	pubObj.destroy = function() {
+		
+		for(let elemObj of pubObj.ElemObjArray) {
+			elemObj.destroy()
+		}
+		pubObj.TreeObj.destroy()
+
+		$("#"+pubObj.PageFlowId+",#"+pubObj.PageTreeId+",#"+pubObj.PageEditId).remove()
+		
+		pubObj={}
+	}
+	
 	
 	let PageObjIni = function() {
 		
@@ -51,11 +63,10 @@ AWP.FTArea.FlowPage = function(flowObj, brotherObj) {
 			$("#TreeContent").append(pageTreeText)
 			$("#EditArea").append(pageEditText)
 			
-			flowObj.PageFlowIdArray.push(pageFlowId)
-			flowObj.displayHeadContent()
+			flowObj.PageObjArray.push(pubObj)
+			pubObj.Position = flowObj.PageObjArray.length
 			
 			pubObj.PageFlowId = pageFlowId, pubObj.PageEditId = pageEditId, pubObj.PageTreeId = pageTreeId
-			pubObj.Position = flowObj.PageFlowIdArray.length
 			
 			pubObj.TreeObj = $("#"+pageTreeId).jstree({
 				"core" : {
@@ -75,11 +86,10 @@ AWP.FTArea.FlowPage = function(flowObj, brotherObj) {
 			let brotherId = brotherObj.PageFlowId
 			$("#"+brotherId).after(pageFlowText)
 			
-			// flowObj.PageFlowIdArray.splice(brotherObj.Position - 1, 0, pageFlowId)
-			// flowObj.displayHeadContent()
+			// flowObj.PageObjArray.push(pubObj)
+			// pubObj.Position = flowObj.PageObjArray.length
 			
 			// pubObj.PageFlowId = pageFlowId
-			// pubObj.Position = flowObj.PageFlowIdArray.length
 		}
 	}
 	
@@ -116,9 +126,9 @@ AWP.FTArea.FlowPage = function(flowObj, brotherObj) {
 // console.log(sNode)
 				let imgName = path.basename(imgPath)
 				if(sNodeType != "div") {
-					let imgObj = new AWP.FTArea.FTElems.ImgElem(pubObj, "none", imgPath)
+					let divObj = new AWP.FTArea.FTElems.ImgElem(pubObj, "none", imgPath)
 					
-					pubObj.TreeObj.create_node(pNode, {"id": imgObj.NodeId, "text": imgName, "type": "imgfile"})
+					pubObj.TreeObj.create_node(pNode, {"id": divObj.NodeId, "text": imgName, "type": "imgfile"})
 				} else {
 					let elemObj = pubObj.getElemObjByNodeId(sNode[0])
 					let imgObj = new AWP.FTArea.FTElems.ImgElem(pubObj, elemObj, imgPath)
@@ -132,7 +142,7 @@ AWP.FTArea.FlowPage = function(flowObj, brotherObj) {
 // console.log(pubObj.PageFlowId)
 		let textObj = new AWP.FTArea.FTElems.TextElem(pubObj)
 		
-		pubObj.ElemObjArray.push(textObj)
+		// pubObj.ElemObjArray.push(textObj)
 	}
 	let AddAnim = function() {
 // console.log(pubObj.PageFlowId)

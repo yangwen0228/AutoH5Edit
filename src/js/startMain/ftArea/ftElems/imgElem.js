@@ -59,6 +59,15 @@ AWP.FTArea.FTElems.ImgElem = function(pageObj, parentObj, imgPath) {
 		}
 	}
 	
+	pubObj.destroy = function() {
+		
+		$("#"+pubObj.ElemId+",#"+pubObj.ShadowId).remove()
+		
+		pubObj.AttrObj.hideAttrCard()
+		pubObj.EffectObj.hideEffectCard()
+		pubObj = {}
+	}
+	
 	let ImgObjIni = function() {
 		
 		let uStr = pageObj.getUniqueElemStr()
