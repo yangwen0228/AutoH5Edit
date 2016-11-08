@@ -1,0 +1,42 @@
+<NotepadPlus>
+    <Project name="AWP">
+        <Folder name="OLD">
+            <File name="src\js\OLD\divElem.js" />
+            <File name="src\js\OLD\editArea_editPage.js" />
+            <File name="src\js\OLD\editMenuTM.js" />
+            <File name="src\js\OLD\globalVariable.js" />
+            <File name="src\js\OLD\leftTab_flowArea.js" />
+            <File name="src\js\OLD\new 1.html" />
+            <File name="src\js\OLD\new 1.js" />
+            <File name="src\js\OLD\new 2.js" />
+        </Folder>
+        <Folder name="startMain">
+            <Folder name="ftArea">
+                <Folder name="ftElems">
+                    <Folder name="imgCard">
+                        <File name="src\js\startMain\ftArea\ftElems\imgCard\imgAttrCard.js" />
+                        <File name="src\js\startMain\ftArea\ftElems\imgCard\imgEffectCard.js" />
+                        <File name="src\js\startMain\ftArea\ftElems\imgCard\imgEventCard.js" />
+                    </Folder>
+                    <File name="src\js\startMain\ftArea\ftElems\imgElem.js" />
+                    <File name="src\js\startMain\ftArea\ftElems\textElem.js" />
+                </Folder>
+                <Folder name="pageCard">
+                    <File name="src\js\startMain\ftArea\pageCard\pageAttrCard.js" />
+                </Folder>
+                <File name="src\js\startMain\ftArea\flowPage.js" />
+                <File name="src\js\startMain\ftArea\tempSlide.js" />
+            </Folder>
+            <Folder name="menuArea">
+                <File name="src\js\startMain\menuArea\exportFunc.js" />
+                <File name="src\js\startMain\menuArea\newFileFunc.js" />
+                <File name="src\js\startMain\menuArea\settingFunc.js" />
+            </Folder>
+            <File name="src\js\startMain\flowAreaLT.js" />
+            <File name="src\js\startMain\menuBar.js" />
+            <File name="src\js\startMain\tempAreaLT.js" />
+            <File name="src\js\startMain\uiFunction.js" />
+        </Folder>
+        <File name="src\js\startMain.js" />
+    </Project>
+</NotepadPlus>
